@@ -10,6 +10,7 @@ interface Props {
 }
 
 const Header: FC<Props> = (props) => {
+  const a = 123;
   return (
     <header className={styles.header}>
       <h1 className={styles.title}>Люди</h1>

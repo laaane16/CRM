@@ -19,7 +19,10 @@
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": "npm run lint:write",
-    "*.{css,scss}": "npm run lint:style:write",
+    "*.{css,scss}": [
+      "prettier --write",
+      "stylelint"
+    ],
     "*.json": "prettier --write"
   },
   "keywords": [],
