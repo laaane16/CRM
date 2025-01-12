@@ -6,8 +6,8 @@
   "scripts": {
     "lint": "eslint --debug ./",
     "lint:write": "eslint --debug ./ --fix",
-    "lint:style": "stylelint **/*.{css,scss}",
-    "lint:style:write": "stylelint **/*.{css,scss} --fix",
+    "lint:style": "stylelint \"**/*.{css,scss}\"",
+    "lint:style:write": "stylelint \"**/*.{css,scss}\" --fix",
     "dev": "webpack server --env port=3000",
     "build:prod": "webpack --env mode=production",
     "build:dev": "webpack --env mode=development",
@@ -15,7 +15,7 @@
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": "npm run lint:write",
-    "*.{css,scss}": "npm run lint:style:write",
+    "*.{css,scss}": "npm run lint:style",
     "*.json": "prettier --write"
   },
   "keywords": [],
