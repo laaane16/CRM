@@ -10,8 +10,12 @@
     "lint:style:write": "stylelint \"**/*.{css,scss}\" --fix",
     "dev": "webpack server --env port=3000",
     "build:prod": "webpack --env mode=production",
-    "build:dev": "webpack --env mode=development",
-    "prepare": "husky"
+    "build:dev": "webpack --env mode=development"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": "npm run lint:write",
