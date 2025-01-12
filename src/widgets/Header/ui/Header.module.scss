@@ -1,0 +1,14 @@
+.header {
+  padding-left: 24px;
+  padding-right: var(--base-window-padding);
+  height: var(--header-height);
+  background-color: var(--light-gray-color);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  grid-area: header;
+}
+
+.title {
+  flex-grow: 1;
+}

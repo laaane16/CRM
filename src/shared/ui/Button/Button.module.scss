@@ -1,0 +1,60 @@
+.btn {
+  cursor: pointer;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: var(--font-bebas-size-s);
+}
+
+//sizes
+.large {
+  padding: 14px 20px;
+  min-width: 180px;
+}
+
+.small {
+  padding: 7px 10px;
+  min-width: 80px;
+}
+
+//theme
+.primary {
+  background-color: var(--primary-color);
+
+  :disabled {
+    background-color: var(--disabled-color);
+    color: var(--disabled-font-color);
+  }
+}
+
+.secondary {
+  background-color: var(--secondary-color);
+
+  :disabled {
+    background-color: var(--disabled-color);
+    color: var(--disabled-font-color);
+  }
+
+  :active {
+    background-color: var(--secondary-active-color);
+  }
+}
+
+.ghost {
+  background-color: var(--ghost-color);
+  border: 2px solid var(--secondary-color);
+
+  :disabled {
+    border-color: var(--disabled-color);
+    color: var(--disabled-color);
+  }
+
+  :active {
+    border-color: var(--secondary-active-color);
+    color: var(--secondary-active-color);
+  }
+}
