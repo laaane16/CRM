@@ -4,8 +4,8 @@
   "description": "",
   "private": true,
   "scripts": {
-    "lint": "eslint --debug ./",
-    "lint:write": "eslint --debug ./ --fix",
+    "lint": "eslint ./",
+    "lint:write": "eslint ./ --fix",
     "lint:style": "stylelint \"**/*.{css,scss}\"",
     "lint:style:write": "stylelint \"**/*.{css,scss}\" --fix",
     "dev": "webpack server --env port=3000",
@@ -15,7 +15,7 @@
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": "npm run lint:write",
-    "*.{css,scss}": "npm run lint:style",
+    "*.{css,scss}": "npm run lint:style:write",
     "*.json": "prettier --write"
   },
   "keywords": [],
