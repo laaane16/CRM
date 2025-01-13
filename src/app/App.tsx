@@ -1,4 +1,4 @@
-import { FC, lazy, useState } from 'react';
+import { FC, lazy, useEffect, useState } from 'react';
 
 import { Header } from '../widgets/Header';
 import { Sidebar } from '../widgets/Sidebar';
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const App: FC<Props> = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <div className="app-default-theme">
