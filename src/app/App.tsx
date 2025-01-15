@@ -1,9 +1,10 @@
-import { FC, lazy, useEffect, useState } from 'react';
+import { FC } from 'react';
 
 import { Header } from '../widgets/Header';
 import { Sidebar } from '../widgets/Sidebar';
-import { MainLayout } from '../shared/ui';
+import { Loader, MainLayout } from '../shared/ui';
 import { useTranslation } from 'react-i18next';
+import { LoaderView } from '../shared/ui/Loader/Loader';
 
 interface Props {
   className?: string;
@@ -17,7 +18,11 @@ const App: FC<Props> = (props) => {
       <MainLayout>
         <Header />
         <Sidebar />
-        <main>{t('title')}</main>
+
+        <main>
+          {t('title')}
+          <Loader className="asd" />
+        </main>
       </MainLayout>
     </div>
   );
