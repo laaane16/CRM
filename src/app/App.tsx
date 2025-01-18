@@ -2,28 +2,29 @@ import { FC } from 'react';
 
 import { Header } from '../widgets/Header';
 import { Sidebar } from '../widgets/Sidebar';
-import { Loader, MainLayout } from '../shared/ui';
-import { useTranslation } from 'react-i18next';
-import { LoaderView } from '../shared/ui/Loader/Loader';
+import { MainLayout } from '../shared/ui';
+import { AppRouter } from '../shared/lib';
+import { AppPaths, AppRoutes } from '../shared/lib/router/routes';
+import { AuthPage } from '../pages/Auth';
 
 interface Props {
   className?: string;
 }
 
 const App: FC<Props> = (props) => {
-  const { t } = useTranslation();
-
+  console.log(location);
   return (
     <div className="app-default-theme">
-      <MainLayout>
-        <Header />
-        <Sidebar />
-
-        <main>
-          {t('title')}
-          <Loader className="asd" />
-        </main>
-      </MainLayout>
+      {location.pathname === AppPaths[AppRoutes.LOGIN] ? (
+        <AuthPage />
+      ) : (
+        1
+        // <MainLayout>
+        //   <Header />
+        //   <Sidebar />
+        //   <AppRouter />
+        // </MainLayout>
+      )}
     </div>
   );
 };

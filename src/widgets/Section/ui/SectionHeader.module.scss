@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.listItem {
+  padding: 8px;
+}
+
+.itemTitle {
+  color: var(--primary-color);
+  margin-right: 8px;
+}
+
+.itemCount {
+  background-color: var(--primary-color);
+  padding: 4px 8px;
+  border-radius: 8px;
+  color: white;
+}
+
+.gridToggle {
+  position: relative;
+  margin-left: auto;
+  display: inline-block;
+}
+
+.toggleItem {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.toggleItemDefault {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
