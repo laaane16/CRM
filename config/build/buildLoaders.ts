@@ -2,11 +2,11 @@ import { RuleSetRule } from 'webpack';
 import { buildCssLoader } from './loaders/buildCssLoader';
 
 export const buildLoaders = (isDev: boolean): RuleSetRule[] => {
-  const babelLoader = {
-    test: /\.tsx?$/,
-    use: 'babel-loader',
-    exclude: /node_modules/,
-  };
+  // const babelLoader = {
+  //   test: /\.tsx?$/,
+  //   use: 'babel-loader',
+  //   exclude: /node_modules/,
+  // };
   const tsLoader = {
     test: /\.tsx?$/,
     use: 'ts-loader',
@@ -22,5 +22,5 @@ export const buildLoaders = (isDev: boolean): RuleSetRule[] => {
     use: 'file-loader',
   };
 
-  return [babelLoader, cssLoader, tsLoader, svgLoader, fileLoader];
+  return [cssLoader, tsLoader, svgLoader, fileLoader];
 };

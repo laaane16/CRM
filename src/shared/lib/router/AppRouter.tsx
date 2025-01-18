@@ -2,8 +2,8 @@ import { FC, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { AppPaths, AppRoutes } from './routes';
 import { PageLoader } from '../../ui';
-import { AuthPage } from '../../../pages/Auth';
 
+const AuthPage = lazy(() => import('../../../pages/AuthPage'));
 const PeoplePage = lazy(() => import('../../../pages/PeoplePage'));
 
 const AppRoutesConfig = {

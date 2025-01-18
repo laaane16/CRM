@@ -1,29 +1,37 @@
-import { FC } from 'react';
+import { FC, lazy, useEffect } from 'react';
 
+import { useAppDispatch } from '../shared/lib/hooks/useAppDispatch';
+import { getUserId, userActions } from '../entities/User';
+import { AppRouter } from '../shared/lib';
+import { MainLayout } from '../shared/ui';
 import { Header } from '../widgets/Header';
 import { Sidebar } from '../widgets/Sidebar';
-import { MainLayout } from '../shared/ui';
-import { AppRouter } from '../shared/lib';
-import { AppPaths, AppRoutes } from '../shared/lib/router/routes';
-import { AuthPage } from '../pages/Auth';
+import { Navigate, useNavigate } from 'react-router-dom';
+const AuthPage = lazy(() => import('../pages/AuthPage'));
 
 interface Props {
   className?: string;
 }
 
 const App: FC<Props> = (props) => {
-  console.log(location);
+  const dispatch = useAppDispatch();
+  const userId = getUserId();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(userActions.initAuthState());
+  }, []);
+
   return (
     <div className="app-default-theme">
-      {location.pathname === AppPaths[AppRoutes.LOGIN] ? (
-        <AuthPage />
+      {userId ? (
+        <MainLayout>
+          <Header />
+          <Sidebar />
+          <AppRouter />
+        </MainLayout>
       ) : (
-        1
-        // <MainLayout>
-        //   <Header />
-        //   <Sidebar />
-        //   <AppRouter />
-        // </MainLayout>
+        <AuthPage />
       )}
     </div>
   );
