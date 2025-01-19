@@ -7,6 +7,10 @@ body {
   color: #050504;
 }
 
+.container {
+  max-height: 100vh;
+}
+
 h1 {
   font-family: 'Bebas Neue', sans-serif;
   font-size: var(--font-bebas-size-xxl);

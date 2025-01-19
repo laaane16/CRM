@@ -1,1 +1,27 @@
-// ignore
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sort {
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.list {
+  overflow-y: scroll;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.item {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  padding: 0 20px;
+  background-color: var(--light-gray-color);
+}

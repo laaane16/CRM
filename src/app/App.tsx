@@ -20,7 +20,7 @@ const App: FC<Props> = (props) => {
     dispatch(userActions.initAuthState());
   }, []);
 
-  return <div className="app-default-theme">{userId ? <AppRouter /> : <AuthPage />}</div>;
+  return <div className="app-default-theme container">{userId ? <AppRouter /> : <AuthPage />}</div>;
 };
 
 export default App;
