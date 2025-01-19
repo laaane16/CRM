@@ -13,7 +13,7 @@ const AppRoutesConfig = {
   [AppRoutes.MAIN]: {
     path: AppPaths[AppRoutes.MAIN],
     layout: 'main',
-    element: <></>,
+    element: <PeoplePage />,
   },
   [AppRoutes.PEOPLE]: {
     path: AppPaths[AppRoutes.PEOPLE],

@@ -5,7 +5,7 @@ export enum AppRoutes {
   NOT_FOUND = '*',
 }
 export const AppPaths = {
-  [AppRoutes.MAIN]: '/main',
+  [AppRoutes.MAIN]: '/',
   [AppRoutes.PEOPLE]: '/people',
   [AppRoutes.LOGIN]: '/login',
   [AppRoutes.NOT_FOUND]: '*',
