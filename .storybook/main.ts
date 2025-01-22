@@ -1,7 +1,8 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
+import { buildCssLoader } from '../config/build/loaders/buildCssLoader';
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     '@storybook/addon-webpack5-compiler-swc',
     '@storybook/addon-onboarding',
@@ -11,7 +12,27 @@ const config: StorybookConfig = {
   ],
   framework: {
     name: '@storybook/react-webpack5',
-    options: {},
+    options: {
+      builder: {
+        useSWC: true,
+      },
+    },
+  },
+  swc: () => ({
+    jsc: {
+      transform: {
+        react: {
+          runtime: 'automatic',
+        },
+      },
+    },
+  }),
+  docs: {
+    autodocs: 'tag',
+  },
+  webpackFinal: async (config, { configType }) => {
+    config.module?.rules?.push(buildCssLoader(true));
+    return config;
   },
 };
 export default config;

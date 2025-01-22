@@ -13,7 +13,7 @@
     "build:dev": "webpack --env mode=development",
     "unit": "jest",
     "server": "node ./json-server/index.js",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006 --debug-webpack",
     "build-storybook": "storybook build"
   },
   "husky": {
@@ -57,8 +57,10 @@
     "@storybook/addon-essentials": "^8.6.0-alpha.0",
     "@storybook/addon-interactions": "^8.6.0-alpha.0",
     "@storybook/addon-onboarding": "^8.6.0-alpha.0",
+    "@storybook/addon-styling-webpack": "^1.0.1",
     "@storybook/addon-webpack5-compiler-swc": "^2.0.0",
     "@storybook/blocks": "^8.6.0-alpha.0",
+    "@storybook/preset-scss": "^1.0.3",
     "@storybook/react": "^8.6.0-alpha.0",
     "@storybook/react-webpack5": "^8.5.0",
     "@storybook/test": "^8.6.0-alpha.0",
