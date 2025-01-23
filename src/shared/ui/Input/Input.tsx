@@ -8,8 +8,7 @@ interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> 
   type?: string;
   value: string;
   title?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onChange: (value: string) => any;
+  onChange: (value: string) => void;
 }
 
 const Input: FC<Props> = ({ type = 'text', onChange, value, title, className, ...otherProps }) => {

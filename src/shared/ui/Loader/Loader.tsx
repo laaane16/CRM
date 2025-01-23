@@ -14,7 +14,7 @@ export enum LoaderView {
   BAR = 'bar',
 }
 
-enum LoaderSize {
+export enum LoaderSize {
   LARGE = 'large',
   SMALL = 'small',
 }

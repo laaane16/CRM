@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import * as styles from './Tooltip.module.scss';
 
-enum ArrowPosition {
+export enum ArrowPosition {
   TOP = 'top',
   RIGHT = 'right',
   BOTTOM = 'bottom',
@@ -11,17 +11,18 @@ enum ArrowPosition {
 }
 
 interface Props {
+  style?: object;
   className?: string;
   children: ReactNode;
   title: string;
   arrowPosition?: ArrowPosition;
 }
 
-const Tooltip: FC<Props> = ({ className, children, title, arrowPosition = ArrowPosition.TOP }) => {
+const Tooltip: FC<Props> = ({ style, className, children, title, arrowPosition = ArrowPosition.TOP }) => {
   const tooltipClasses = cn(className, styles.tooltip, [styles[arrowPosition]]);
 
   return (
-    <div className={styles.container}>
+    <div style={style} className={styles.container}>
       <p className={tooltipClasses}>{title}</p>
       {children}
     </div>

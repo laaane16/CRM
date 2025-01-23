@@ -1,18 +1,12 @@
 import type { Preview } from '@storybook/react';
 import React from 'react';
 
+import { StyleDecorator } from '../src/shared/lib';
+
 import '../src/app/styles/index.scss';
 
 const preview: Preview = {
-  decorators: [
-    (Story, { parameters }) => {
-      return (
-        <div className="app-default-theme">
-          <Story />
-        </div>
-      );
-    },
-  ],
+  decorators: [StyleDecorator],
   parameters: {
     controls: {
       matchers: {

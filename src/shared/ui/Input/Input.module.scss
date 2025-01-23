@@ -10,6 +10,7 @@
   transition-timing-function: ease-in-out;
 
   &::placeholder {
+    transition: color 0.2s ease-in-out;
     color: var(--disabled-font-color);
   }
 

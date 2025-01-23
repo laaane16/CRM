@@ -8,6 +8,8 @@
 }
 
 .spin_small {
+  border: 2px solid black;
+  border-bottom-color: transparent;
   width: 20px;
   height: 20px;
 }
@@ -29,43 +31,74 @@
 
 // TODO: rewrite on transform
 .bar {
-  margin-left: 30px auto;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
   display: block;
+  border-radius: 50%;
+  background-color: #fff;
   position: relative;
-  color: black;
-  box-sizing: border-box;
-  animation: animloader 1s linear infinite alternate;
 }
 
-@keyframes animloader {
+.bar_large {
+  left: 32px;
+  width: 16px;
+  height: 16px;
+  box-shadow:
+    32px 0 #fff,
+    -32px 0 #fff;
+  animation: flash-for-large 0.6s ease-out infinite alternate;
+}
+
+.bar_small {
+  left: 16px;
+  width: 8px;
+  height: 8px;
+  box-shadow:
+    16px 0 #fff,
+    -16px 0 #fff;
+  animation: flash-for-small 0.6s ease-out infinite alternate;
+}
+
+@keyframes flash-for-large {
   0% {
+    background-color: #fff2;
     box-shadow:
-      -38px -6px,
-      -14px 6px,
-      14px -6px;
+      32px 0 #fff2,
+      -32px 0 #fff;
   }
 
-  33% {
+  50% {
+    background-color: #fff;
     box-shadow:
-      -38px 6px,
-      -14px -6px,
-      14px 6px;
-  }
-
-  66% {
-    box-shadow:
-      -38px -6px,
-      -14px 6px,
-      14px -6px;
+      32px 0 #fff2,
+      -32px 0 #fff2;
   }
 
   100% {
+    background-color: #fff2;
     box-shadow:
-      -38px 6px,
-      -14px -6px,
-      14px 6px;
+      32px 0 #fff,
+      -32px 0 #fff2;
+  }
+}
+
+@keyframes flash-for-small {
+  0% {
+    background-color: #fff2;
+    box-shadow:
+      16px 0 #fff2,
+      -16px 0 #fff;
+  }
+
+  50% {
+    background-color: #fff;
+    box-shadow:
+      16px 0 #fff2,
+      -16px 0 #fff2;
+  }
+
+  100% {
+    background-color: #fff2;
+    box-shadow:
+      16px 0 #fff,
+      -16px 0 #fff2;
   }
 }

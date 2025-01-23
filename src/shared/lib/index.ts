@@ -1,1 +1,1 @@
-export { default as AppRouter } from '../../app/providers/router/ui/AppRouter';
+export { default as StyleDecorator } from './decorators/StyleDecorator';

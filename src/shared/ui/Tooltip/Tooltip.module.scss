@@ -70,8 +70,8 @@
   }
 
   &.left {
-    bottom: 50%;
-    transform: translate(-106%, 50%);
+    top: 50%;
+    transform: translate(-106%, -50%);
 
     &::before {
       left: 100%;
