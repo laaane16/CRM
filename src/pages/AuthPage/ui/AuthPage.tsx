@@ -2,14 +2,16 @@ import { FC, useEffect } from 'react';
 
 import * as styles from './AuthPage.module.scss';
 
-import { getLoginUsername, getLoginPassword } from '../../../features/AuthByUsername';
+import { getLoginUsername, getLoginPassword, loginReducer } from '../../../features/AuthByUsername';
 import { Button, Input } from '../../../shared/ui';
 import { ThemeButton } from '../../../shared/ui';
 import { loginActions } from '../../../features/AuthByUsername';
 import { loginByUsername } from '../../../features/AuthByUsername/model/services/loginByUsername';
 import { useAppDispatch } from '../../../shared/lib/hooks/useAppDispatch';
-import { useNavigate } from 'react-router-dom';
+import { useStore } from 'react-redux';
+import { ReduxStoreWithManager } from '../../../app/providers';
 import { getUserId } from '../../../entities/User';
+import { useNavigate } from 'react-router-dom';
 import { AppPaths, AppRoutes } from '../../../shared/lib/router/routes';
 
 interface Props {
@@ -17,11 +19,15 @@ interface Props {
 }
 
 const AuthPage: FC<Props> = (props) => {
-  const userId = getUserId();
   const navigate = useNavigate();
+  const store = useStore() as ReduxStoreWithManager;
 
   useEffect(() => {
-    userId && navigate(AppPaths[AppRoutes.MAIN]);
+    store.reducerManager.add('login', loginReducer);
+
+    return () => {
+      store.reducerManager.remove('login');
+    };
   }, []);
 
   const dispatch = useAppDispatch();
@@ -37,7 +43,10 @@ const AuthPage: FC<Props> = (props) => {
   };
 
   const onClickEntry = async () => {
-    dispatch(loginByUsername({ username, password }));
+    const response = await dispatch(loginByUsername({ username, password }));
+    if (response.type === loginByUsername.fulfilled.type) {
+      navigate(AppPaths[AppRoutes.MAIN]);
+    }
   };
 
   return (

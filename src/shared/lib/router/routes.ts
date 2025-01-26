@@ -2,7 +2,7 @@ export enum AppRoutes {
   MAIN = 'main',
   PEOPLE = 'people',
   LOGIN = 'login',
-  NOT_FOUND = '*',
+  NOT_FOUND = 'notFound',
 }
 export const AppPaths = {
   [AppRoutes.MAIN]: '/',

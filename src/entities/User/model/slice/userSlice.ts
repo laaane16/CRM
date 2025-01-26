@@ -23,7 +23,9 @@ const userSlice = createSlice({
       }
     },
     setAuthData: (state, action: PayloadAction<UserSchema>) => {
-      state = action.payload;
+      const { id, username } = action.payload;
+      state.id = id;
+      state.username = username;
     },
     logout: (state) => {
       state = { id: null, username: '' };

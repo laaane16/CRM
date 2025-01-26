@@ -1,15 +1,23 @@
-import { FC, lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { FC, lazy, ReactNode, Suspense, useEffect } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { AppPaths, AppRoutes } from '../../../../shared/lib/router/routes';
 import { MainLayout, PageLoader } from '../../../../shared/ui';
 import { Header } from '../../../../widgets/Header';
 import { Sidebar } from '../../../../widgets/Sidebar';
+import { getUserId } from '../../../../entities/User';
 
 const NotFoundPage = lazy(() => import('../../../../pages/NotFound/ui/NotFoundPage'));
 const AuthPage = lazy(() => import('../../../../pages/AuthPage'));
 const PeoplePage = lazy(() => import('../../../../pages/PeoplePage'));
 
-const AppRoutesConfig = {
+interface IAppRouteConfig {
+  path: string;
+  layout: 'main' | null;
+  element: ReactNode;
+  public?: boolean | undefined;
+}
+
+const AppRoutesConfig: Record<AppRoutes, IAppRouteConfig> = {
   [AppRoutes.MAIN]: {
     path: AppPaths[AppRoutes.MAIN],
     layout: 'main',
@@ -24,6 +32,7 @@ const AppRoutesConfig = {
     path: AppPaths[AppRoutes.LOGIN],
     element: <AuthPage />,
     layout: null,
+    public: true,
   },
   [AppRoutes.NOT_FOUND]: {
     path: AppPaths[AppRoutes.NOT_FOUND],
@@ -32,6 +41,8 @@ const AppRoutesConfig = {
   },
 };
 const AppRouter: FC = () => {
+  const userId = getUserId();
+
   return (
     <Routes>
       {Object.values(AppRoutesConfig).map((route) => (
@@ -40,14 +51,20 @@ const AppRouter: FC = () => {
           path={route.path}
           element={
             <Suspense fallback={<PageLoader />}>
-              {route.layout === 'main' ? (
-                <MainLayout>
-                  <Header />
-                  <Sidebar />
-                  {route.element}
-                </MainLayout>
-              ) : (
+              {userId ? (
+                route.layout === 'main' ? (
+                  <MainLayout>
+                    <Header />
+                    <Sidebar />
+                    {route.element}
+                  </MainLayout>
+                ) : (
+                  route.element
+                )
+              ) : route.public === true ? (
                 route.element
+              ) : (
+                <Navigate to="/login" />
               )}
             </Suspense>
           }

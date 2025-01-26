@@ -1,6 +1,7 @@
 export { type StateSchema } from './StoreProvider/config/types/StateSchema';
 export { default as ErrorBoundary } from './ErrorBoundary/ErrorBoundary';
-export { store } from './StoreProvider/config/store/store';
+export { createStore } from './StoreProvider/config/store/store';
+export type { ReduxStoreWithManager } from './StoreProvider/config/types/StateSchema';
 
 export { default as StoreProvider } from './StoreProvider/ui/StoreProvider';
 

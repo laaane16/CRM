@@ -1,26 +1,31 @@
-import { FC, lazy, useEffect } from 'react';
+import { FC, lazy, useEffect, useState } from 'react';
 
 import { useAppDispatch } from '../shared/lib/hooks/useAppDispatch';
 import { getUserId, userActions } from '../entities/User';
-import { AppRouter } from '../shared/lib';
-
-import { Navigate, useNavigate } from 'react-router-dom';
-const AuthPage = lazy(() => import('../pages/AuthPage'));
+import AppRouter from './providers/router/ui/AppRouter';
+import { Navigate } from 'react-router-dom';
+import { PageLoader } from '../shared/ui';
 
 interface Props {
   className?: string;
 }
 
 const App: FC<Props> = (props) => {
+  const [isInit, setIsInit] = useState(false);
   const dispatch = useAppDispatch();
-  const userId = getUserId();
-  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(userActions.initAuthState());
+    setIsInit(true);
   }, []);
 
-  return <div className="app-default-theme container">{userId ? <AppRouter /> : <AuthPage />}</div>;
+  return isInit ? (
+    <div className="app-default-theme container">
+      <AppRouter />
+    </div>
+  ) : (
+    <PageLoader />
+  );
 };
 
 export default App;
