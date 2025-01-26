@@ -13,6 +13,7 @@ import { ReduxStoreWithManager } from '../../../app/providers';
 import { getUserId } from '../../../entities/User';
 import { useNavigate } from 'react-router-dom';
 import { AppPaths, AppRoutes } from '../../../shared/lib/router/routes';
+import { DynamicModuleLoader } from '../../../shared/lib';
 
 interface Props {
   className?: string;
@@ -20,15 +21,6 @@ interface Props {
 
 const AuthPage: FC<Props> = (props) => {
   const navigate = useNavigate();
-  const store = useStore() as ReduxStoreWithManager;
-
-  useEffect(() => {
-    store.reducerManager.add('login', loginReducer);
-
-    return () => {
-      store.reducerManager.remove('login');
-    };
-  }, []);
 
   const dispatch = useAppDispatch();
   const username = getLoginUsername();
@@ -50,36 +42,38 @@ const AuthPage: FC<Props> = (props) => {
   };
 
   return (
-    <main className={styles.layout}>
-      <div className={styles.content}>
-        <h1 className={styles.title}>LOGOTYPE</h1>
-        <h2 className={`alternative ${styles.subtitle}`}>Вход</h2>
-        <form className={styles.form} action="get">
-          <Input
-            placeholder="Введите имя пользователя"
-            className={styles.login}
-            title="Логин"
-            value={username}
-            onChange={onChangeUsername}
-          />
-          <Input
-            placeholder="Введите пароль"
-            className={styles.password}
-            title="Пароль"
-            value={password}
-            onChange={onChangePassword}
-          />
-          <label className={styles.checkboxWrap}>
-            Запомнить меня
-            <input type="checkbox" />
-          </label>
-          <Button onClick={onClickEntry} className={styles.loginBtn} theme={ThemeButton.PRIMARY}>
-            Войти
-          </Button>
-          <Button theme={ThemeButton.PRIMARY}>Запомнить меня</Button>
-        </form>
-      </div>
-    </main>
+    <DynamicModuleLoader name="login" reducer={loginReducer}>
+      <main className={styles.layout}>
+        <div className={styles.content}>
+          <h1 className={styles.title}>LOGOTYPE</h1>
+          <h2 className={`alternative ${styles.subtitle}`}>Вход</h2>
+          <form className={styles.form} action="get">
+            <Input
+              placeholder="Введите имя пользователя"
+              className={styles.login}
+              title="Логин"
+              value={username}
+              onChange={onChangeUsername}
+            />
+            <Input
+              placeholder="Введите пароль"
+              className={styles.password}
+              title="Пароль"
+              value={password}
+              onChange={onChangePassword}
+            />
+            <label className={styles.checkboxWrap}>
+              Запомнить меня
+              <input type="checkbox" />
+            </label>
+            <Button onClick={onClickEntry} className={styles.loginBtn} theme={ThemeButton.PRIMARY}>
+              Войти
+            </Button>
+            <Button theme={ThemeButton.PRIMARY}>Запомнить меня</Button>
+          </form>
+        </div>
+      </main>
+    </DynamicModuleLoader>
   );
 };
 

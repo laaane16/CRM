@@ -1,9 +1,8 @@
-import { FC, lazy, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { useAppDispatch } from '../shared/lib/hooks/useAppDispatch';
-import { getUserId, userActions } from '../entities/User';
+import { userActions } from '../entities/User';
 import AppRouter from './providers/router/ui/AppRouter';
-import { Navigate } from 'react-router-dom';
 import { PageLoader } from '../shared/ui';
 
 interface Props {
