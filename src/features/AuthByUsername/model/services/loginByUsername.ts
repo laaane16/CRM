@@ -9,7 +9,7 @@ interface LoginByUsernameProps {
   password: string;
 }
 
-export const loginByUsername = createAsyncThunk<UserSchema, LoginByUsernameProps>(
+export const loginByUsername = createAsyncThunk<UserSchema, LoginByUsernameProps, { rejectValue: string }>(
   'login/loginByUsername',
   // eslint-disable-next-line
   async (authdata, thunkAPI) => {
@@ -18,7 +18,7 @@ export const loginByUsername = createAsyncThunk<UserSchema, LoginByUsernameProps
       const { dispatch } = thunkAPI;
 
       if (!response.data) {
-        throw new Error('no data');
+        throw new Error();
       }
 
       localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(response.data));
