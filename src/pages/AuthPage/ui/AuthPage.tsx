@@ -1,4 +1,5 @@
 import { FC, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import * as styles from './AuthPage.module.scss';
 
@@ -8,23 +9,25 @@ import { ThemeButton } from '../../../shared/ui';
 import { loginActions } from '../../../features/AuthByUsername';
 import { loginByUsername } from '../../../features/AuthByUsername/model/services/loginByUsername';
 import { useAppDispatch } from '../../../shared/lib/hooks/useAppDispatch';
-import { useStore } from 'react-redux';
-import { ReduxStoreWithManager } from '../../../app/providers';
-import { getUserId } from '../../../entities/User';
-import { useNavigate } from 'react-router-dom';
 import { AppPaths, AppRoutes } from '../../../shared/lib/router/routes';
 import { DynamicModuleLoader } from '../../../shared/lib';
+import { ReducersList } from '../../../shared/lib/components/DynamicModuleLoader';
+import { useSelector } from 'react-redux';
 
 interface Props {
   className?: string;
 }
 
+const reducersList: ReducersList = {
+  login: loginReducer,
+};
+
 const AuthPage: FC<Props> = (props) => {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
-  const username = getLoginUsername();
-  const password = getLoginPassword();
+  const username = useSelector(getLoginUsername);
+  const password = useSelector(getLoginPassword);
 
   const onChangeUsername = (value: string) => {
     dispatch(loginActions.setUsername(value));
@@ -42,7 +45,7 @@ const AuthPage: FC<Props> = (props) => {
   };
 
   return (
-    <DynamicModuleLoader name="login" reducer={loginReducer}>
+    <DynamicModuleLoader reducers={reducersList}>
       <main className={styles.layout}>
         <div className={styles.content}>
           <h1 className={styles.title}>LOGOTYPE</h1>

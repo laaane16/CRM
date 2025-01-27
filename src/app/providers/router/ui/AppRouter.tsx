@@ -5,6 +5,7 @@ import { MainLayout, PageLoader } from '../../../../shared/ui';
 import { Header } from '../../../../widgets/Header';
 import { Sidebar } from '../../../../widgets/Sidebar';
 import { getUserId } from '../../../../entities/User';
+import { useSelector } from 'react-redux';
 
 const NotFoundPage = lazy(() => import('../../../../pages/NotFound/ui/NotFoundPage'));
 const AuthPage = lazy(() => import('../../../../pages/AuthPage'));
@@ -41,7 +42,7 @@ const AppRoutesConfig: Record<AppRoutes, IAppRouteConfig> = {
   },
 };
 const AppRouter: FC = () => {
-  const userId = getUserId();
+  const userId = useSelector(getUserId);
 
   return (
     <Routes>
