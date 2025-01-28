@@ -29,7 +29,7 @@ const userSlice = createSlice({
     },
     logout: (state) => {
       state = { id: null, username: '' };
-      localStorage.deleteItem(USER_LOCALSTORAGE_KEY);
+      localStorage.removeItem(USER_LOCALSTORAGE_KEY);
     },
   },
 });
