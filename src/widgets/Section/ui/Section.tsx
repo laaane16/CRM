@@ -8,7 +8,7 @@ interface Props {
   className?: string;
 }
 
-const Section: FC<Props> = (props) => {
+const Section: FC<Props> = () => {
   return (
     <section className={styles.section}>
       <SectionHeader />

@@ -4,7 +4,7 @@ interface Props {
   className?: string;
 }
 
-const ThemeProvider: FC<Props> = (props) => {
+const ThemeProvider: FC<Props> = () => {
   return <div></div>;
 };
 

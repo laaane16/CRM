@@ -20,7 +20,7 @@ const data = [
   { title: '213123213' },
 ];
 
-const SectionBody: FC<Props> = (props) => {
+const SectionBody: FC<Props> = () => {
   return (
     <div className={styles.container}>
       <div className={styles.sort}></div>

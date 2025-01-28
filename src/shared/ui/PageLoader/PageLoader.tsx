@@ -8,7 +8,7 @@ interface Props {
   className?: string;
 }
 
-const PageLoader: FC<Props> = (props) => {
+const PageLoader: FC<Props> = () => {
   return (
     <div className={styles.container}>
       <Loader />

@@ -7,7 +7,7 @@ interface Props {
   className?: string;
 }
 
-const Filters: FC<Props> = (props) => {
+const Filters: FC<Props> = () => {
   const listData = [
     { title: 'Бытовая техника', count: 10 },
     { title: 'Бытовая техника', count: 10 },

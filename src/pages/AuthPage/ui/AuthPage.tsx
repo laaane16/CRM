@@ -1,11 +1,11 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as styles from './AuthPage.module.scss';
 
 import { getLoginUsername, getLoginPassword, loginReducer } from '../../../features/AuthByUsername';
 import { Button, Input } from '../../../shared/ui';
-import { ThemeButton } from '../../../shared/ui';
+import { ButtonTheme } from '../../../shared/ui';
 import { loginActions } from '../../../features/AuthByUsername';
 import { loginByUsername } from '../../../features/AuthByUsername/model/services/loginByUsername';
 import { useAppDispatch } from '../../../shared/lib/hooks/useAppDispatch';
@@ -22,7 +22,7 @@ const reducersList: ReducersList = {
   login: loginReducer,
 };
 
-const AuthPage: FC<Props> = (props) => {
+const AuthPage: FC<Props> = () => {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
@@ -69,10 +69,10 @@ const AuthPage: FC<Props> = (props) => {
               Запомнить меня
               <input type="checkbox" />
             </label>
-            <Button onClick={onClickEntry} className={styles.loginBtn} theme={ThemeButton.PRIMARY}>
+            <Button onClick={onClickEntry} className={styles.loginBtn} theme={ButtonTheme.PRIMARY}>
               Войти
             </Button>
-            <Button theme={ThemeButton.PRIMARY}>Запомнить меня</Button>
+            <Button theme={ButtonTheme.PRIMARY}>Запомнить меня</Button>
           </form>
         </div>
       </main>

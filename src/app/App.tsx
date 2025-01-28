@@ -9,7 +9,7 @@ interface Props {
   className?: string;
 }
 
-const App: FC<Props> = (props) => {
+const App: FC<Props> = () => {
   const [isInit, setIsInit] = useState(false);
   const dispatch = useAppDispatch();
 

@@ -1,10 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LoginSchema } from '../types/LoginSchema';
 import { loginByUsername } from '../services/loginByUsername';
-import { Navigate } from 'react-router-dom';
-import { userActions } from '../../../../entities/User';
-import { useAppDispatch } from '../../../../shared/lib/hooks/useAppDispatch';
-import { useDispatch } from 'react-redux';
 
 const initialState: LoginSchema = {
   isLoading: false,
@@ -24,7 +20,7 @@ const loginSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loginByUsername.fulfilled, (state, action) => {
+      .addCase(loginByUsername.fulfilled, (state) => {
         state.password = '';
         state.username = '';
         state.isLoading = false;
@@ -34,7 +30,7 @@ const loginSlice = createSlice({
         state.isLoading = false;
         state.error = action.error;
       })
-      .addCase(loginByUsername.pending, (state, action) => {
+      .addCase(loginByUsername.pending, (state) => {
         state.isLoading = true;
       });
   },

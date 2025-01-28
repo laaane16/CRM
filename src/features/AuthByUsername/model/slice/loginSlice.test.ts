@@ -1,4 +1,3 @@
-import { StateSchema } from '../../../../app/providers';
 import { LoginSchema } from '../types/LoginSchema';
 import { loginActions, loginReducer } from './loginSlice';
 

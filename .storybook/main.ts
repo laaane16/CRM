@@ -30,7 +30,7 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
-  webpackFinal: async (config, { configType }) => {
+  webpackFinal: async (config) => {
     config.module?.rules?.push(buildCssLoader(true));
     return config;
   },

@@ -16,7 +16,7 @@ const data: { title: string; count: number }[] = [
   { title: 'Запросы', count: 10 },
 ];
 
-const SectionHeader: FC<Props> = (props) => {
+const SectionHeader: FC<Props> = () => {
   return (
     <div className={styles.header}>
       <ul className={styles.list}>

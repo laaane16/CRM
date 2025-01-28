@@ -1,4 +1,4 @@
-import { FC, lazy, ReactNode, Suspense, useEffect } from 'react';
+import { FC, lazy, ReactNode, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AppPaths, AppRoutes } from '../../../../shared/lib/router/routes';
 import { MainLayout, PageLoader } from '../../../../shared/ui';
@@ -7,9 +7,10 @@ import { Sidebar } from '../../../../widgets/Sidebar';
 import { getUserId } from '../../../../entities/User';
 import { useSelector } from 'react-redux';
 
-const NotFoundPage = lazy(() => import('../../../../pages/NotFound/ui/NotFoundPage'));
+const NotFoundPage = lazy(() => import('../../../../pages/NotFoundPage'));
 const AuthPage = lazy(() => import('../../../../pages/AuthPage'));
 const PeoplePage = lazy(() => import('../../../../pages/PeoplePage'));
+const ProfilePage = lazy(() => import('../../../../pages/ProfilePage'));
 
 interface IAppRouteConfig {
   path: string;
@@ -34,6 +35,11 @@ const AppRoutesConfig: Record<AppRoutes, IAppRouteConfig> = {
     element: <AuthPage />,
     layout: null,
     public: true,
+  },
+  [AppRoutes.PROFILE]: {
+    path: AppPaths[AppRoutes.PROFILE],
+    element: <ProfilePage />,
+    layout: null,
   },
   [AppRoutes.NOT_FOUND]: {
     path: AppPaths[AppRoutes.NOT_FOUND],

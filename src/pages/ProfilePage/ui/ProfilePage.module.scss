@@ -1,0 +1,40 @@
+.layout {
+  padding: var(--base-window-padding);
+  background-color: var(--disabled-color);
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: calc(var(--base-window-padding) / 2);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  background-color: white;
+  border-bottom: 2px solid var(--disabled-color);
+}
+
+.avatar {
+  margin-right: 15px;
+}
+
+.name {
+  flex-grow: 1;
+}
+
+.views {
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.view {
+  &.active {
+    color: black;
+  }
+}

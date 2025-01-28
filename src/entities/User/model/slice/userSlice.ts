@@ -28,6 +28,7 @@ const userSlice = createSlice({
       state.username = username;
     },
     logout: (state) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       state = { id: null, username: '' };
       localStorage.removeItem(USER_LOCALSTORAGE_KEY);
     },

@@ -9,7 +9,7 @@ interface Props {
   className?: string;
 }
 
-const PeoplePage: FC<Props> = (props) => {
+const PeoplePage: FC<Props> = () => {
   return (
     <main className={styles.container}>
       <Filters />
