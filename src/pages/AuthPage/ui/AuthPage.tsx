@@ -39,7 +39,7 @@ const AuthPage: FC<Props> = () => {
 
   const onClickEntry = async () => {
     const response = await dispatch(loginByUsername({ username, password }));
-    if (response.type === loginByUsername.fulfilled.type) {
+    if (response.meta.requestStatus === 'fulfilled') {
       navigate(AppPaths[AppRoutes.MAIN]);
     }
   };

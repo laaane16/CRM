@@ -1,4 +1,4 @@
 import { ThunkDispatch, UnknownAction } from '@reduxjs/toolkit';
-import { StateSchema } from './StateSchema';
+import { StateSchema, ThunkExtraArg } from './StateSchema';
 
-export type AppDispatch = ThunkDispatch<StateSchema, undefined, UnknownAction>;
+export type AppDispatch = ThunkDispatch<StateSchema, ThunkExtraArg, UnknownAction>;

@@ -1,12 +1,12 @@
 import { FC } from 'react';
-
-import { Button } from '../../../shared/ui';
+import { useNavigate } from 'react-router-dom';
 
 import * as styles from './Header.module.scss';
+
+import { Button } from '../../../shared/ui';
 import { ButtonSizes } from '../../../shared/ui';
 import { useAppDispatch } from '../../../shared/lib/hooks/useAppDispatch';
 import { userActions } from '../../../entities/User';
-import { useNavigate } from 'react-router-dom';
 import { AppPaths, AppRoutes } from '../../../shared/lib/router/routes';
 
 interface Props {
@@ -19,9 +19,7 @@ const Header: FC<Props> = () => {
 
   const onLogoutClick = () => {
     dispatch(userActions.logout());
-    console.log(123);
     navigate(AppPaths[AppRoutes.LOGIN]);
-    console.log(456);
   };
 
   return (
