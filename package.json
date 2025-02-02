@@ -17,7 +17,8 @@
     "unit": "jest",
     "start:dev:server": "node ./json-server/index.js",
     "storybook": "storybook dev -p 6006 --debug-webpack",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "format": "prettier --write ."
   },
   "husky": {
     "hooks": {
@@ -38,6 +39,7 @@
     "i18next": "^24.2.1",
     "i18next-browser-languagedetector": "^8.0.2",
     "i18next-http-backend": "^3.0.1",
+    "luxon": "^3.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-i18next": "^15.4.0",

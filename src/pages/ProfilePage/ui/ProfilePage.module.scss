@@ -5,9 +5,13 @@
 }
 
 .header {
+  margin-bottom: 24px;
+}
+
+.headerBox {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 8px;
   padding: calc(var(--base-window-padding) / 2);
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
@@ -16,11 +20,20 @@
 }
 
 .avatar {
-  margin-right: 15px;
+  border-radius: 8px;
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  object-position: 50% 50%;
+  margin-right: 12px;
 }
 
 .name {
   flex-grow: 1;
+}
+
+.tg {
+  color: var(--dark-gray-color);
 }
 
 .views {
@@ -37,4 +50,64 @@
   &.active {
     color: black;
   }
+}
+
+.mainInfo {
+  border-radius: 16px;
+  position: relative;
+  max-width: 348px;
+  padding: 20px 24px;
+  background-color: white;
+}
+
+.marker {
+  display: inline-block;
+  position: relative;
+  left: -24px;
+  padding: 4px 24px;
+  background-color: var(--disabled-font-color);
+  margin-bottom: 24px;
+}
+
+.extra {
+  box-sizing: border-box;
+}
+
+.extraInfo {
+  box-sizing: border-box;
+}
+
+.mainInfoList {
+  box-sizing: border-box;
+  margin-bottom: 188px;
+}
+
+.mainInfoItem {
+  max-height: 48px;
+  padding-left: 40px;
+  text-overflow: ellipsis;
+  color: var(--secondary-color);
+
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
+
+.socialsList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.socialItem {
+  width: 24px;
+  height: 24px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+}
+
+.dateItem {
+  color: var(--dark-gray-color);
 }

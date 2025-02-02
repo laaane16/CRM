@@ -7,13 +7,21 @@ export interface ProfileSchema {
   error: SerializedError | undefined;
 }
 
+interface IPost {
+  main: string;
+  extra: string;
+}
+
 export interface IProfile {
+  telegram: string;
   userId: number;
   name: string;
   age: number;
   number: string;
   mail: string;
-  post: string;
+  post: IPost;
   address: string;
   avatar: string;
+  createdAt: string;
+  updatedAt: string;
 }
