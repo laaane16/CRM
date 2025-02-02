@@ -13,6 +13,7 @@ import { AppPaths, AppRoutes } from '../../../shared/lib/router/routes';
 import { DynamicModuleLoader } from '../../../shared/lib';
 import { ReducersList } from '../../../shared/lib/components/DynamicModuleLoader';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   className?: string;
@@ -23,6 +24,7 @@ const reducersList: ReducersList = {
 };
 
 const AuthPage: FC<Props> = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
@@ -49,7 +51,7 @@ const AuthPage: FC<Props> = () => {
       <main className={styles.layout}>
         <div className={styles.content}>
           <h1 className={styles.title}>LOGOTYPE</h1>
-          <h2 className={`alternative ${styles.subtitle}`}>Вход</h2>
+          <h2 className={`alternative ${styles.subtitle}`}>{t('entry')}</h2>
           <form className={styles.form} action="get">
             <Input
               placeholder="Введите имя пользователя"
@@ -66,13 +68,13 @@ const AuthPage: FC<Props> = () => {
               onChange={onChangePassword}
             />
             <label className={styles.checkboxWrap}>
-              Запомнить меня
+              {t('remember')}
               <input type="checkbox" />
             </label>
             <Button onClick={onClickEntry} className={styles.loginBtn} theme={ButtonTheme.PRIMARY}>
-              Войти
+              {t('login')}
             </Button>
-            <Button theme={ButtonTheme.PRIMARY}>Запомнить меня</Button>
+            <Button theme={ButtonTheme.PRIMARY}>{t('forgot')}</Button>
           </form>
         </div>
       </main>

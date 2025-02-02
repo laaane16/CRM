@@ -24,8 +24,6 @@ const ProfilePage: FC<Props> = () => {
   const isLoading = useSelector(getProfileIsLoading);
   const data = useSelector(getProfileData);
 
-  console.log(isLoading);
-
   useEffect(() => {
     dispatch(profileFetchData({ id: 1 }));
   }, []);
