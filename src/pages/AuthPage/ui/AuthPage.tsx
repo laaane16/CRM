@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import * as styles from './AuthPage.module.scss';
 
-import { getLoginUsername, getLoginPassword, loginReducer } from '../../../features/AuthByUsername';
+import { getLoginUsername, getLoginPassword, loginReducer, getLoginError } from '../../../features/AuthByUsername';
 import { Button, Input } from '../../../shared/ui';
 import { ButtonTheme } from '../../../shared/ui';
 import { loginActions } from '../../../features/AuthByUsername';
@@ -24,12 +24,13 @@ const reducersList: ReducersList = {
 };
 
 const AuthPage: FC<Props> = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('auth-page');
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
   const username = useSelector(getLoginUsername);
   const password = useSelector(getLoginPassword);
+  const error = useSelector(getLoginError);
 
   const onChangeUsername = (value: string) => {
     dispatch(loginActions.setUsername(value));
@@ -67,6 +68,7 @@ const AuthPage: FC<Props> = () => {
               value={password}
               onChange={onChangePassword}
             />
+            {error ? <p className={styles.error}>{t('error')}</p> : null}
             <label className={styles.checkboxWrap}>
               {t('remember')}
               <input type="checkbox" />

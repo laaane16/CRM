@@ -1,6 +1,7 @@
 {
   "entry": "Entry",
   "login": "Login",
-  "remeber": "Remember me",
-  "forgot": "Forgot password"
+  "remember": "Remember me",
+  "forgot": "Forgot password",
+  "error": "Error"
 }
