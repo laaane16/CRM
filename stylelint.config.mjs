@@ -4,6 +4,7 @@ export default {
   rules: {
     'scss/double-slash-comment-whitespace-inside': null,
     'no-descending-specificity': null,
-    'selector-class-pattern': '[a-zA-z]',
+    'selector-class-pattern': '[a-zA-Z]',
+    'custom-property-pattern': '[a-zA-Z]',
   },
 };

@@ -3,14 +3,16 @@ import { useNavigate } from 'react-router-dom';
 
 import * as styles from './AuthPage.module.scss';
 
-import { getLoginUsername, getLoginPassword, loginReducer, getLoginError } from '../../../features/AuthByUsername';
-import { Button, Input } from '../../../shared/ui';
-import { ButtonTheme } from '../../../shared/ui';
-import { loginActions } from '../../../features/AuthByUsername';
-import { loginByUsername } from '../../../features/AuthByUsername/model/services/loginByUsername';
-import { useAppDispatch } from '../../../shared/lib/hooks/useAppDispatch';
-import { AppPaths, AppRoutes } from '../../../shared/lib/router/routes';
-import { DynamicModuleLoader } from '../../../shared/lib';
+import {
+  getLoginUsername,
+  getLoginPassword,
+  loginReducer,
+  getLoginError,
+  loginActions,
+  loginByUsername,
+} from '../../../features/AuthByUsername';
+import { Button, Input, Checkbox, ButtonTheme } from '../../../shared/ui';
+import { DynamicModuleLoader, AppPaths, AppRoutes, useAppDispatch } from '../../../shared/lib';
 import { ReducersList } from '../../../shared/lib/components/DynamicModuleLoader';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -67,12 +69,10 @@ const AuthPage: FC<Props> = () => {
               title="Пароль"
               value={password}
               onChange={onChangePassword}
+              type="password"
             />
             {error ? <p className={styles.error}>{t('error')}</p> : null}
-            <label className={styles.checkboxWrap}>
-              {t('remember')}
-              <input type="checkbox" />
-            </label>
+            <Checkbox />
             <Button onClick={onClickEntry} className={styles.loginBtn} theme={ButtonTheme.PRIMARY}>
               {t('login')}
             </Button>

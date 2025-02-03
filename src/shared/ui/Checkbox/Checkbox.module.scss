@@ -1,0 +1,48 @@
+:root {
+  --CHECKMARK-SIZE: 16px;
+}
+
+.container {
+  width: max-content;
+  position: relative;
+  padding-left: calc(var(--CHECKMARK-SIZE) + 8px);
+  color: var(--disabled-font-color);
+}
+
+.input:checked ~ .checkmark + label {
+  color: white;
+}
+
+.checkmarkContainer {
+  position: absolute;
+  left: 0%;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: var(--CHECKMARK-SIZE);
+  height: var(--CHECKMARK-SIZE);
+  background-color: white;
+  border: 1px solid var(--disabled-font-color);
+  border-radius: 5px;
+}
+
+.checkmark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  fill: white;
+}
+
+.input {
+  width: 0;
+  height: 0;
+
+  &:checked ~ .checkmarkContainer {
+    border: 0;
+    background-color: var(--secondary-color);
+  }
+
+  &:disabled ~ .checkmarkContainer {
+    background-color: var(--medium-gray-color);
+  }
+}
