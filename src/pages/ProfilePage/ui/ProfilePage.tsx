@@ -10,6 +10,7 @@ import { Button, ButtonSizes, ButtonTheme, PageLoader } from '../../../shared/ui
 import { useAppDispatch } from '../../../shared/lib/hooks/useAppDispatch';
 import { profileFetchData } from '../../../entities/Profile/model/services/profileFetchData';
 import cn from 'classnames';
+import { PieChart, Pie, Cell, Label, LabelList } from 'recharts';
 
 interface Props {
   className?: string;
@@ -18,6 +19,16 @@ interface Props {
 const reducerList = {
   profile: profileReducer,
 };
+
+const dataValue = [
+  { name: '1', value: 3 },
+  { name: '2', value: 48 },
+  { name: '3', value: 16 },
+  { name: '4', value: 16 },
+  { name: '5', value: 7 },
+  { name: '6', value: 9 },
+  { name: '7', value: 3 },
+];
 
 const ProfilePage: FC<Props> = () => {
   const dispatch = useAppDispatch();
@@ -31,6 +42,17 @@ const ProfilePage: FC<Props> = () => {
   const tgClasses = cn(styles.tg, 'primary bold');
   const mainInfoItemClasses = cn(styles.mainInfoItem, 'primary medium');
   const dateItemClasses = cn(styles.dateItem, 'tiny medium');
+
+  const chartData = [
+    { name: 'A', value: 48, color: '#16212B' },
+    { name: 'B', value: 16, color: '#2C3E50' },
+    { name: 'C', value: 16, color: '#5C7080' },
+    { name: 'D', value: 7, color: '#8A9BA8' },
+    { name: 'E', value: 9, color: '#B0BEC5' },
+    { name: 'F', value: 3, color: '#CFD8DC' },
+  ];
+
+  const total = chartData.reduce((sum, entry) => sum + entry.value, 0);
 
   return (
     <DynamicModuleLoader reducers={reducerList}>
@@ -99,6 +121,26 @@ const ProfilePage: FC<Props> = () => {
               <li className={dateItemClasses}>{data?.createdAt}</li>
               <li className={dateItemClasses}>{data?.updatedAt}</li>
             </ul>
+          </div>
+          <div className={styles.status}>
+            <h4 className={styles.statusTitle}>СТАТУС ПРОЕКТОВ</h4>
+            <ul className={styles.statusList}>
+              <li>Завершенные</li>
+              <li>В процессе</li>
+              <li>На рассмотрении</li>
+              <li>Без срока</li>
+              <li>Просрочены</li>
+              <li>Планируемые</li>
+            </ul>
+            <PieChart className={styles.chart} width={200} height={200}>
+              <Pie data={chartData} cx="50%" cy="50%" innerRadius={50} outerRadius={70} fill="#8884d8" dataKey="value">
+                {chartData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+                <LabelList dataKey="value" position="inside" fill="#fff" />
+                <Label position="center" value={`${total} Все`} />
+              </Pie>
+            </PieChart>
           </div>
         </main>
       )}

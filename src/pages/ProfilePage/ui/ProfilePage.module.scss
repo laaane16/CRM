@@ -2,10 +2,16 @@
   padding: var(--base-window-padding);
   background-color: var(--disabled-color);
   min-height: 100vh;
+  display: grid;
+  grid-template-areas:
+    'header header header header'
+    'main status workTime event'
+    'main tasks docs history';
+  gap: 24px;
 }
 
 .header {
-  margin-bottom: 24px;
+  grid-area: header;
 }
 
 .headerBox {
@@ -53,6 +59,7 @@
 }
 
 .mainInfo {
+  grid-area: main;
   border-radius: 16px;
   position: relative;
   max-width: 348px;
@@ -110,4 +117,33 @@
 
 .dateItem {
   color: var(--dark-gray-color);
+}
+
+.status {
+  display: grid;
+  grid-template-areas:
+    'title chart'
+    'list chart';
+  grid-area: status;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background-color: white;
+}
+
+.statusTitle {
+  grid-area: title;
+  width: max-content;
+  box-sizing: border-box;
+}
+
+.statusList {
+  grid-area: list;
+  max-width: 200px;
+  box-sizing: border-box;
+}
+
+.chart {
+  width: 100px;
+  height: 100px;
+  grid-area: chart;
 }
