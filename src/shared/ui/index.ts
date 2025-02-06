@@ -5,5 +5,7 @@ export { default as PageLoader } from './PageLoader/PageLoader';
 export { default as Input } from './Input/Input';
 export { default as Tooltip } from './Tooltip/Tooltip';
 export { default as Checkbox } from './Checkbox/Checkbox';
+export { default as Ellipsis } from './Ellipsis/Ellipsis';
+
 export { Theme as ButtonTheme } from './Button/Button';
 export { Sizes as ButtonSizes } from './Button/Button';

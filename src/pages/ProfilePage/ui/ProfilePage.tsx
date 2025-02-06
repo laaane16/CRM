@@ -10,7 +10,8 @@ import { Button, ButtonSizes, ButtonTheme, Checkbox, PageLoader } from '../../..
 import { useAppDispatch } from '../../../shared/lib/hooks/useAppDispatch';
 import { profileFetchData } from '../../../entities/Profile/model/services/profileFetchData';
 import cn from 'classnames';
-import { PieChart, Pie, Cell, Label, LabelList } from 'recharts';
+import { PieChart, Pie, Cell, Label, LabelList, BarChart, Bar } from 'recharts';
+import MainCard from './MainCard/MainCard';
 
 interface Props {
   className?: string;
@@ -40,8 +41,6 @@ const ProfilePage: FC<Props> = () => {
   }, []);
 
   const tgClasses = cn(styles.tg, 'primary bold');
-  const mainInfoItemClasses = cn(styles.mainInfoItem, 'primary medium');
-  const dateItemClasses = cn(styles.dateItem, 'tiny medium');
 
   const chartData = [
     { name: 'A', value: 48, color: '#16212B' },
@@ -89,39 +88,7 @@ const ProfilePage: FC<Props> = () => {
               <li className={styles.view}>Заявки и жалобы</li>
             </ul>
           </div>
-          <div className={styles.mainInfo}>
-            <span className={styles.marker}>штатный</span>
-            <span className={styles.extra}>...</span>
-            <ul className={styles.mainInfoList}>
-              <li className={mainInfoItemClasses}>{data?.number}</li>
-              <li className={mainInfoItemClasses}>{data?.mail}</li>
-              <li className={mainInfoItemClasses}>{data?.post.main}</li>
-              <li className={mainInfoItemClasses}>{data?.post.extra}</li>
-              <li className={mainInfoItemClasses}>{data?.post.extra}</li>
-              <li className={mainInfoItemClasses}>{`Живет в ${data?.address}`}</li>
-            </ul>
-            <ul className={styles.socialsList}>
-              <li className={styles.socialItem}></li>
-              <li className={styles.socialItem}></li>
-              <li className={styles.socialItem}></li>
-              <li className={styles.socialItem}></li>
-              <li className={styles.socialItem}></li>
-              <li className={styles.socialItem}></li>
-              <li className={styles.socialItem}></li>
-              <li className={styles.socialItem}></li>
-              <li className={styles.socialItem}></li>
-              <li className={styles.socialItem}></li>
-              <li className={styles.socialItem}></li>
-              <li className={styles.socialItem}></li>
-              <li className={styles.socialItem}></li>
-              <li className={styles.socialItem}></li>
-              <li className={styles.socialItem}></li>
-            </ul>
-            <ul>
-              <li className={dateItemClasses}>{data?.createdAt}</li>
-              <li className={dateItemClasses}>{data?.updatedAt}</li>
-            </ul>
-          </div>
+          <MainCard data={data} />
           <div className={styles.status}>
             <h4 className={styles.statusTitle}>СТАТУС ПРОЕКТОВ</h4>
             <ul className={styles.statusList}>
@@ -196,6 +163,121 @@ const ProfilePage: FC<Props> = () => {
                 </li>
               </ul>
             </div>
+          </div>
+          <div className={styles.workTime}>
+            <h2>55:30:41</h2>
+            <BarChart
+              width={300}
+              height={150}
+              className={styles.workTimeChart}
+              data={[
+                {
+                  day: '05-01',
+                  temperature: [-1, 10],
+                },
+                {
+                  day: '05-02',
+                  temperature: [2, 15],
+                },
+                {
+                  day: '05-03',
+                  temperature: [3, 12],
+                },
+                {
+                  day: '05-04',
+                  temperature: [4, 12],
+                },
+                {
+                  day: '05-05',
+                  temperature: [12, 16],
+                },
+                {
+                  day: '05-06',
+                  temperature: [5, 16],
+                },
+                {
+                  day: '05-07',
+                  temperature: [3, 12],
+                },
+              ]}
+              margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+            >
+              {/* <XAxis dataKey="day" /> */}
+              {/* <YAxis /> */}
+              <Bar dataKey="temperature" fill="#c4c4c4" />
+            </BarChart>
+            <span>Работал на этой неделе</span>
+            <span>5 опозданий</span>
+            <span>0 больничных</span>
+          </div>
+          <div className={styles.docs}>
+            <div className={styles.doc}></div>
+            <div className={styles.doc}></div>
+            <div className={styles.doc}></div>
+            <div className={styles.doc}></div>
+            <div className={styles.doc}></div>
+            <div className={styles.doc}></div>
+          </div>
+          <div className={styles.event}>
+            <h3>СОБЫТИЕ</h3>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span>Обсуждение проекта</span>
+            <span>Согласование технических функций с разработчиками</span>
+            <ul className={styles.eventList}>
+              <li className={styles.eventItem}>
+                <img className={styles.avatarEvent} src={data?.avatar} alt="" />
+              </li>
+              <li className={styles.eventItem}>
+                <img className={styles.avatarEvent} src={data?.avatar} alt="" />
+              </li>
+              <li className={styles.eventItem}>
+                <img className={styles.avatarEvent} src={data?.avatar} alt="" />
+              </li>
+              <li className={styles.eventItem}>
+                <img className={styles.avatarEvent} src={data?.avatar} alt="" />
+              </li>
+              <li className={styles.eventItem}>
+                <img className={styles.avatarEvent} src={data?.avatar} alt="" />
+              </li>
+              <li className={styles.eventItem}>
+                <img className={styles.avatarEvent} src={data?.avatar} alt="" />
+              </li>
+              <li className={styles.eventItem}>
+                <img className={styles.avatarEvent} src={data?.avatar} alt="" />
+              </li>
+            </ul>
+            <span>Комната Совещания</span>
+          </div>
+          <div className={styles.history}>
+            <h3>АКТИВНОСТЬ</h3>
+            <ul className={styles.historyList}>
+              <li className={styles.historyItem}>
+                <img className={styles.tasksAvatar} src={data?.avatar} alt="" />
+                <span>Александр Соломонов</span>
+                <span>добавил</span>
+                <span>NDA.docx</span>
+              </li>
+              <li className={styles.historyItem}>
+                <img className={styles.tasksAvatar} src={data?.avatar} alt="" />
+                <span>Александр Соломонов</span>
+                <span>добавил</span>
+                <span>NDA.docx</span>
+              </li>
+              <li className={styles.historyItem}>
+                <img className={styles.tasksAvatar} src={data?.avatar} alt="" />
+                <span>Александр Соломонов</span>
+                <span>добавил</span>
+                <span>NDA.docx</span>
+              </li>
+              <li className={styles.historyItem}>
+                <img className={styles.tasksAvatar} src={data?.avatar} alt="" />
+                <span>Александр Соломонов</span>
+                <span>добавил</span>
+                <span>NDA.docx</span>
+              </li>
+            </ul>
           </div>
         </main>
       )}

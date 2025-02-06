@@ -30,7 +30,7 @@
     "*.{css,scss}": [
       "stylelint"
     ],
-    "*.json": "prettier --write"
+    "*.json": "prettier"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",

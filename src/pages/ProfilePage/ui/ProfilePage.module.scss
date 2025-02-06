@@ -58,67 +58,6 @@
   }
 }
 
-.mainInfo {
-  grid-area: main;
-  border-radius: 16px;
-  position: relative;
-  max-width: 348px;
-  padding: 20px 24px;
-  background-color: white;
-}
-
-.marker {
-  display: inline-block;
-  position: relative;
-  left: -24px;
-  padding: 4px 24px;
-  background-color: var(--disabled-font-color);
-  margin-bottom: 24px;
-}
-
-.extra {
-  box-sizing: border-box;
-}
-
-.extraInfo {
-  box-sizing: border-box;
-}
-
-.mainInfoList {
-  box-sizing: border-box;
-  margin-bottom: 188px;
-}
-
-.mainInfoItem {
-  max-height: 48px;
-  padding-left: 40px;
-  text-overflow: ellipsis;
-  color: var(--secondary-color);
-
-  &:not(:last-child) {
-    margin-bottom: 16px;
-  }
-}
-
-.socialsList {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 24px;
-}
-
-.socialItem {
-  width: 24px;
-  height: 24px;
-  background-color: var(--primary-color);
-  border-radius: 50%;
-}
-
-.dateItem {
-  color: var(--dark-gray-color);
-}
-
 .status {
   display: grid;
   grid-template-areas:
@@ -171,4 +110,69 @@
   object-fit: cover;
   object-position: 50% 50%;
   margin-right: 12px;
+}
+
+.workTime {
+  grid-area: workTime;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background-color: white;
+}
+
+.workTimeChart {
+  height: 100%;
+  width: 100%;
+}
+
+.docs {
+  grid-area: docs;
+  display: grid;
+  grid-template-rows: repeat(auto, minmax(100px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  border: 3px solid white;
+  border-radius: 16px;
+  background-color: white;
+}
+
+.doc {
+  background-color: var(--disabled-color);
+}
+
+.event {
+  grid-area: event;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background-color: white;
+}
+
+.eventList {
+  position: relative;
+  display: flex;
+}
+
+.eventItem {
+  position: absolute;
+}
+
+@for $i from 1 to 9 {
+  .eventItem:nth-child(#{$i}) {
+    left: calc(#{$i} * 20px);
+  }
+}
+
+.avatarEvent {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  margin-right: 12px;
+}
+
+.history {
+  grid-area: history;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background-color: white;
 }
