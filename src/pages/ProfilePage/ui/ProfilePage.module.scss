@@ -143,7 +143,32 @@
 }
 
 .chart {
+  grid-area: chart;
   width: 100px;
   height: 100px;
-  grid-area: chart;
+}
+
+.tasksContainer {
+  grid-area: tasks;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background-color: white;
+}
+
+.tasks {
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.tasksTitle {
+  box-sizing: border-box;
+}
+
+.tasksAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  margin-right: 12px;
 }

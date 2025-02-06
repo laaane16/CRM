@@ -5,15 +5,16 @@ import * as styles from './Checkbox.module.scss';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
+  label?: string;
 }
 
-const Checkbox: FC<Props> = ({ className }) => {
-  const containerClasses = cn(styles.container, 'tiny regular');
+const Checkbox: FC<Props> = ({ className, label }) => {
+  const containerClasses = cn(styles.container, 'tiny regular', className);
 
   return (
     <>
       <label data-parent className={containerClasses}>
-        123123
+        {label}
         <input className={styles.input} type="checkbox" name="" id="" />
         <span className={styles.checkmarkContainer}>
           <svg className={styles.checkmark} width="10" height="7" viewBox="0 0 10 7" xmlns="http://www.w3.org/2000/svg">

@@ -3,6 +3,7 @@
 }
 
 .container {
+  cursor: pointer;
   width: max-content;
   position: relative;
   padding-left: calc(var(--CHECKMARK-SIZE) + 8px);

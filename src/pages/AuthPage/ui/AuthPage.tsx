@@ -72,7 +72,7 @@ const AuthPage: FC<Props> = () => {
               type="password"
             />
             {error ? <p className={styles.error}>{t('error')}</p> : null}
-            <Checkbox />
+            <Checkbox className={styles.checkbox} label="Запомнить меня" />
             <Button onClick={onClickEntry} className={styles.loginBtn} theme={ButtonTheme.PRIMARY}>
               {t('login')}
             </Button>

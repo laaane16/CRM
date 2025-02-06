@@ -6,7 +6,7 @@ import * as styles from './ProfilePage.module.scss';
 import { getProfileData, getProfileIsLoading } from '../../../entities/Profile';
 import { DynamicModuleLoader } from '../../../shared/lib';
 import { profileReducer } from '../../../entities/Profile';
-import { Button, ButtonSizes, ButtonTheme, PageLoader } from '../../../shared/ui';
+import { Button, ButtonSizes, ButtonTheme, Checkbox, PageLoader } from '../../../shared/ui';
 import { useAppDispatch } from '../../../shared/lib/hooks/useAppDispatch';
 import { profileFetchData } from '../../../entities/Profile/model/services/profileFetchData';
 import cn from 'classnames';
@@ -141,6 +141,61 @@ const ProfilePage: FC<Props> = () => {
                 <Label position="center" value={`${total} Все`} />
               </Pie>
             </PieChart>
+          </div>
+          <div className={styles.tasksContainer}>
+            <div className={styles.tasks}>
+              <h4 className={styles.tasksTitle}>задачи</h4>
+              <ul>
+                <li>
+                  <Checkbox label="Подготовка какой-то презентации" />
+                  <span className="tiny medium">Срочно</span>
+                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
+                  <p>До - 10:00, 15 марта 2020</p>
+                </li>
+                <li>
+                  <Checkbox label="Подготовка какой-то презентации" />
+                  <span className="tiny medium">Срочно</span>
+                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
+                  <p>До - 10:00, 15 марта 2020</p>
+                </li>
+                <li>
+                  <Checkbox label="Подготовка какой-то презентации" />
+                  <span className="tiny medium">Срочно</span>
+                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
+                  <p>До - 10:00, 15 марта 2020</p>
+                </li>
+                <li>
+                  <Checkbox label="Подготовка какой-то презентации" />
+                  <span className="tiny medium">Срочно</span>
+                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
+                  <p>До - 10:00, 15 марта 2020</p>
+                </li>
+                <li>
+                  <Checkbox label="Подготовка какой-то презентации" />
+                  <span className="tiny medium">Срочно</span>
+                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
+                  <p>До - 10:00, 15 марта 2020</p>
+                </li>
+                <li>
+                  <Checkbox label="Подготовка какой-то презентации" />
+                  <span className="tiny medium">Срочно</span>
+                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
+                  <p>До - 10:00, 15 марта 2020</p>
+                </li>
+                <li>
+                  <Checkbox label="Подготовка какой-то презентации" />
+                  <span className="tiny medium">Срочно</span>
+                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
+                  <p>До - 10:00, 15 марта 2020</p>
+                </li>
+                <li>
+                  <Checkbox label="Подготовка какой-то презентации" />
+                  <span className="tiny medium">Срочно</span>
+                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
+                  <p>До - 10:00, 15 марта 2020</p>
+                </li>
+              </ul>
+            </div>
           </div>
         </main>
       )}
