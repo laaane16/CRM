@@ -6,5 +6,7 @@ export default {
     'no-descending-specificity': null,
     'selector-class-pattern': '[a-zA-Z]',
     'custom-property-pattern': '[a-zA-Z]',
+    'font-family-no-missing-generic-family-keyword': null,
+    'selector-pseudo-class-no-unknown': null,
   },
 };

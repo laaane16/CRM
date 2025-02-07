@@ -1,4 +1,6 @@
 .mainInfo {
+  display: flex;
+  flex-direction: column;
   grid-area: main;
   border-radius: 16px;
   position: relative;
@@ -16,6 +18,7 @@
 
 .marker {
   display: inline-block;
+  width: max-content;
   position: relative;
   left: -24px;
   padding: 4px 24px;
@@ -28,13 +31,17 @@
 }
 
 .mainInfoList {
+  flex-grow: 1;
   box-sizing: border-box;
-  margin-bottom: 188px;
+
+  // margin-bottom: 188px;
 }
 
 .mainInfoItem {
   max-height: 48px;
-  padding-left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
   text-overflow: ellipsis;
   color: var(--secondary-color);
 
@@ -43,19 +50,34 @@
   }
 }
 
+.mainInfoItemIcon {
+  font-size: 24px;
+
+  &:global {
+    &.icon-call {
+      font-size: 18px;
+    }
+
+    &.icon-alternate-mail {
+      font-size: 18px;
+    }
+  }
+}
+
 .socialsList {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 16px 8px;
   margin-bottom: 24px;
 }
 
 .socialItem {
-  width: 24px;
-  height: 24px;
-  background-color: var(--primary-color);
-  border-radius: 50%;
+  cursor: pointer;
+}
+
+.socialIcon {
+  font-size: 24px;
 }
 
 .dateItem {

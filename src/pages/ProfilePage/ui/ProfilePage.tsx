@@ -89,7 +89,7 @@ const ProfilePage: FC<Props> = () => {
             </ul>
           </div>
           <MainCard data={data} />
-          <div className={styles.status}>
+          {/* <div className={styles.status}>
             <h4 className={styles.statusTitle}>СТАТУС ПРОЕКТОВ</h4>
             <ul className={styles.statusList}>
               <li>Завершенные</li>
@@ -108,8 +108,8 @@ const ProfilePage: FC<Props> = () => {
                 <Label position="center" value={`${total} Все`} />
               </Pie>
             </PieChart>
-          </div>
-          <div className={styles.tasksContainer}>
+          </div> */}
+          {/* <div className={styles.tasksContainer}>
             <div className={styles.tasks}>
               <h4 className={styles.tasksTitle}>задачи</h4>
               <ul>
@@ -163,8 +163,8 @@ const ProfilePage: FC<Props> = () => {
                 </li>
               </ul>
             </div>
-          </div>
-          <div className={styles.workTime}>
+          </div> */}
+          {/* <div className={styles.workTime}>
             <h2>55:30:41</h2>
             <BarChart
               width={300}
@@ -203,22 +203,22 @@ const ProfilePage: FC<Props> = () => {
               margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
             >
               {/* <XAxis dataKey="day" /> */}
-              {/* <YAxis /> */}
-              <Bar dataKey="temperature" fill="#c4c4c4" />
-            </BarChart>
-            <span>Работал на этой неделе</span>
-            <span>5 опозданий</span>
-            <span>0 больничных</span>
-          </div>
-          <div className={styles.docs}>
+          {/* <YAxis /> */}
+          <Bar dataKey="temperature" fill="#c4c4c4" />
+          {/* </BarChart> */}
+          {/* <span>Работал на этой неделе</span> */}
+          {/* <span>5 опозданий</span> */}
+          {/* <span>0 больничных</span> */}
+          {/* </div> */}
+          {/* <div className={styles.docs}>
             <div className={styles.doc}></div>
             <div className={styles.doc}></div>
             <div className={styles.doc}></div>
             <div className={styles.doc}></div>
             <div className={styles.doc}></div>
             <div className={styles.doc}></div>
-          </div>
-          <div className={styles.event}>
+          </div> */}
+          {/* <div className={styles.event}>
             <h3>СОБЫТИЕ</h3>
             <span></span>
             <span></span>
@@ -249,8 +249,8 @@ const ProfilePage: FC<Props> = () => {
               </li>
             </ul>
             <span>Комната Совещания</span>
-          </div>
-          <div className={styles.history}>
+          </div> */}
+          {/* <div className={styles.history}>
             <h3>АКТИВНОСТЬ</h3>
             <ul className={styles.historyList}>
               <li className={styles.historyItem}>
@@ -278,7 +278,7 @@ const ProfilePage: FC<Props> = () => {
                 <span>NDA.docx</span>
               </li>
             </ul>
-          </div>
+          </div> */}
         </main>
       )}
     </DynamicModuleLoader>
