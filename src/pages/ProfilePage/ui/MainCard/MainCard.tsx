@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import cn from 'classnames';
 
 import * as styles from './MainCard.module.scss';
@@ -26,16 +26,20 @@ const socialItems = [
 ];
 
 const MainCard: FC<Props> = ({ data }) => {
-  const mainInfoListData = [
-    { data: data?.number, icon: 'call' },
-    { data: data?.mail, icon: 'alternate-mail' },
-    { data: data?.post.main, icon: 'verify-bordered' },
-    { data: data?.post?.extra, icon: 'verify-bordered' },
-    { data: data?.address, icon: 'map' },
-  ];
+  const mainInfoListData = useMemo(
+    () => [
+      { data: data?.number, icon: 'call' },
+      { data: data?.mail, icon: 'alternate-mail' },
+      { data: data?.post.main, icon: 'verify-bordered' },
+      { data: data?.post?.extra, icon: 'verify-bordered' },
+      { data: data?.address, icon: 'map' },
+    ],
+    [data],
+  );
 
   const mainInfoItemClasses = cn(styles.mainInfoItem, 'primary medium');
   const dateItemClasses = cn(styles.dateItem, 'tiny medium');
+
   // TODO: marker should return from profile data
   return (
     <>
@@ -52,7 +56,7 @@ const MainCard: FC<Props> = ({ data }) => {
         </ul>
         <ul className={styles.socialsList}>
           {socialItems.map((item, index) => (
-            <li key={index}>
+            <li className={styles.socialsItem} key={index}>
               <span className={cn(`icon-${item.icon}`, styles.socialIcon)}>
                 <a href={item.link}></a>
               </span>

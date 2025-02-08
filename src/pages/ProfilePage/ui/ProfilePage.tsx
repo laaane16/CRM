@@ -1,5 +1,6 @@
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import cn from 'classnames';
 
 import * as styles from './ProfilePage.module.scss';
 
@@ -9,9 +10,9 @@ import { profileReducer } from '../../../entities/Profile';
 import { Button, ButtonSizes, ButtonTheme, Checkbox, PageLoader } from '../../../shared/ui';
 import { useAppDispatch } from '../../../shared/lib/hooks/useAppDispatch';
 import { profileFetchData } from '../../../entities/Profile/model/services/profileFetchData';
-import cn from 'classnames';
-import { PieChart, Pie, Cell, Label, LabelList, BarChart, Bar } from 'recharts';
 import MainCard from './MainCard/MainCard';
+import StatusCard from './StatusCard/StatusCard';
+import TasksCard from './TasksCard/TasksCard';
 
 interface Props {
   className?: string;
@@ -21,14 +22,23 @@ const reducerList = {
   profile: profileReducer,
 };
 
-const dataValue = [
-  { name: '1', value: 3 },
-  { name: '2', value: 48 },
-  { name: '3', value: 16 },
-  { name: '4', value: 16 },
-  { name: '5', value: 7 },
-  { name: '6', value: 9 },
-  { name: '7', value: 3 },
+// const dataValue = [
+//   { name: '1', value: 3 },
+//   { name: '2', value: 48 },
+//   { name: '3', value: 16 },
+//   { name: '4', value: 16 },
+//   { name: '5', value: 7 },
+//   { name: '6', value: 9 },
+//   { name: '7', value: 3 },
+// ];
+
+const statusData = [
+  { name: 'A', value: 48, color: '#16212B' },
+  { name: 'B', value: 16, color: '#2C3E50' },
+  { name: 'C', value: 16, color: '#5C7080' },
+  { name: 'D', value: 7, color: '#8A9BA8' },
+  { name: 'E', value: 9, color: '#B0BEC5' },
+  { name: 'F', value: 3, color: '#CFD8DC' },
 ];
 
 const ProfilePage: FC<Props> = () => {
@@ -36,22 +46,20 @@ const ProfilePage: FC<Props> = () => {
   const isLoading = useSelector(getProfileIsLoading);
   const data = useSelector(getProfileData);
 
+  const tasksData = new Array(15).fill({
+    avatar:
+      'https://s3-alpha-sig.figma.com/img/93e2/fb68/8d9c02096c95887f5dd199d9b5fe5d8f?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=U6Sn5Lse9m6zKApeAzPh-qhcICZMQ231njoxKR-ySm1KSO2gpSEZE9yRvcdG9e9x6XXh2ANHEX-RVu9fIpdwJaG-MyeQh4lYcypG0W7cnE73WUuYhAM-ite9liWwbktZxMo2VeVEzxomxpmp0aiM5-raYJWCCcubmdP4w0D816ual3RijN-UbWfpe4Zjydu5MAH7i2cNRZUqHiBZx6h2RL5IuRDunpS4b71sq5ZuKvRym~XUBTv~s6XUBmjtA6UiPUTe1gsOJ~g2Re3kr5S-aRY5DrpVp~gL3lHVg3AsK275d-wZs7tzrHIWxyssA2~U~VVAecEbhFBOi5QV1w8DJQ__',
+
+    title: 'Подготовка презентации по мобильного приложения Sample App',
+    importance: 'Срочно',
+    deadline: '10:30, 15 марта, 2025',
+  });
+
   useEffect(() => {
     dispatch(profileFetchData({ id: 1 }));
   }, []);
 
   const tgClasses = cn(styles.tg, 'primary bold');
-
-  const chartData = [
-    { name: 'A', value: 48, color: '#16212B' },
-    { name: 'B', value: 16, color: '#2C3E50' },
-    { name: 'C', value: 16, color: '#5C7080' },
-    { name: 'D', value: 7, color: '#8A9BA8' },
-    { name: 'E', value: 9, color: '#B0BEC5' },
-    { name: 'F', value: 3, color: '#CFD8DC' },
-  ];
-
-  const total = chartData.reduce((sum, entry) => sum + entry.value, 0);
 
   return (
     <DynamicModuleLoader reducers={reducerList}>
@@ -89,81 +97,8 @@ const ProfilePage: FC<Props> = () => {
             </ul>
           </div>
           <MainCard data={data} />
-          {/* <div className={styles.status}>
-            <h4 className={styles.statusTitle}>СТАТУС ПРОЕКТОВ</h4>
-            <ul className={styles.statusList}>
-              <li>Завершенные</li>
-              <li>В процессе</li>
-              <li>На рассмотрении</li>
-              <li>Без срока</li>
-              <li>Просрочены</li>
-              <li>Планируемые</li>
-            </ul>
-            <PieChart className={styles.chart} width={200} height={200}>
-              <Pie data={chartData} cx="50%" cy="50%" innerRadius={50} outerRadius={70} fill="#8884d8" dataKey="value">
-                {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-                <LabelList dataKey="value" position="inside" fill="#fff" />
-                <Label position="center" value={`${total} Все`} />
-              </Pie>
-            </PieChart>
-          </div> */}
-          {/* <div className={styles.tasksContainer}>
-            <div className={styles.tasks}>
-              <h4 className={styles.tasksTitle}>задачи</h4>
-              <ul>
-                <li>
-                  <Checkbox label="Подготовка какой-то презентации" />
-                  <span className="tiny medium">Срочно</span>
-                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
-                  <p>До - 10:00, 15 марта 2020</p>
-                </li>
-                <li>
-                  <Checkbox label="Подготовка какой-то презентации" />
-                  <span className="tiny medium">Срочно</span>
-                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
-                  <p>До - 10:00, 15 марта 2020</p>
-                </li>
-                <li>
-                  <Checkbox label="Подготовка какой-то презентации" />
-                  <span className="tiny medium">Срочно</span>
-                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
-                  <p>До - 10:00, 15 марта 2020</p>
-                </li>
-                <li>
-                  <Checkbox label="Подготовка какой-то презентации" />
-                  <span className="tiny medium">Срочно</span>
-                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
-                  <p>До - 10:00, 15 марта 2020</p>
-                </li>
-                <li>
-                  <Checkbox label="Подготовка какой-то презентации" />
-                  <span className="tiny medium">Срочно</span>
-                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
-                  <p>До - 10:00, 15 марта 2020</p>
-                </li>
-                <li>
-                  <Checkbox label="Подготовка какой-то презентации" />
-                  <span className="tiny medium">Срочно</span>
-                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
-                  <p>До - 10:00, 15 марта 2020</p>
-                </li>
-                <li>
-                  <Checkbox label="Подготовка какой-то презентации" />
-                  <span className="tiny medium">Срочно</span>
-                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
-                  <p>До - 10:00, 15 марта 2020</p>
-                </li>
-                <li>
-                  <Checkbox label="Подготовка какой-то презентации" />
-                  <span className="tiny medium">Срочно</span>
-                  <img className={styles.tasksAvatar} src={data?.avatar} alt="avatar" />
-                  <p>До - 10:00, 15 марта 2020</p>
-                </li>
-              </ul>
-            </div>
-          </div> */}
+          <StatusCard data={statusData} />
+          <TasksCard data={tasksData} />
           {/* <div className={styles.workTime}>
             <h2>55:30:41</h2>
             <BarChart
@@ -204,7 +139,7 @@ const ProfilePage: FC<Props> = () => {
             >
               {/* <XAxis dataKey="day" /> */}
           {/* <YAxis /> */}
-          <Bar dataKey="temperature" fill="#c4c4c4" />
+          {/* <Bar dataKey="temperature" fill="#c4c4c4" /> */}
           {/* </BarChart> */}
           {/* <span>Работал на этой неделе</span> */}
           {/* <span>5 опозданий</span> */}

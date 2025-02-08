@@ -1,0 +1,71 @@
+.status {
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    'title chart'
+    'list chart';
+  grid-area: status;
+  padding: calc(var(--PADDING-BASE) * 5) calc(var(--PADDING-BASE) * 6);
+  border-radius: 16px;
+  background-color: white;
+}
+
+.statusTitle {
+  grid-area: title;
+  width: max-content;
+  color: var(--secondary-color);
+}
+
+.extra {
+  position: absolute;
+  top: calc(var(--PADDING-BASE) * 7);
+  right: calc(var(--PADDING-BASE) * 8.5);
+  transform: translate(-100%, 100%);
+}
+
+.statusList {
+  grid-area: list;
+  max-width: 200px;
+  color: var(--secondary-color);
+}
+
+.itemIcon1,
+.itemIcon2,
+.itemIcon3,
+.itemIcon4,
+.itemIcon5,
+.itemIcon6 {
+  display: inline-block;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+}
+
+.itemIcon1 {
+  background-color: var(--secondary-color-active);
+}
+
+.itemIcon2 {
+  background-color: var(--secondary-color);
+}
+
+.itemIcon3 {
+  background-color: var(--dark-gray-color);
+}
+
+.itemIcon4 {
+  background-color: var(--disabled-font-color);
+}
+
+.itemIcon5 {
+  background-color: var(--medium-gray-color);
+}
+
+.itemIcon6 {
+  background-color: var(--disabled-color);
+}
+
+.chart {
+  grid-area: chart;
+}

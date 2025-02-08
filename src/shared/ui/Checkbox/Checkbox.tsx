@@ -9,7 +9,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Checkbox: FC<Props> = ({ className, label }) => {
-  const containerClasses = cn(styles.container, 'tiny regular', className);
+  const containerClasses = cn(styles.container, className);
 
   return (
     <>
