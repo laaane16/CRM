@@ -1,0 +1,26 @@
+.wrap {
+  cursor: pointer;
+  position: relative;
+}
+
+.list {
+  z-index: 1000;
+  position: absolute;
+  display: block;
+  border: 1px solid var(--disabled-font-color);
+  border-radius: 5px;
+  max-width: 343px;
+  width: max-content;
+  top: calc(100% + 5px);
+  background-color: white;
+}
+
+.item {
+  display: block;
+  padding: 12px 16px;
+  color: var(--secondary-color);
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--disabled-font-color);
+  }
+}

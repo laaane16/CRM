@@ -7,13 +7,17 @@
   max-width: 348px;
   padding: calc(var(--PADDING-BASE) * 5) calc(var(--PADDING-BASE) * 6);
   background-color: white;
+
+  &.editorMode {
+    outline: 3px solid var(--disabled-font-color);
+    box-shadow: 0 0 100px 22px var(--disabled-font-color);
+  }
 }
 
 .extra {
   position: absolute;
-  right: calc(var(--PADDING-BASE) * 8.5);
-  top: calc(var(--PADDING-BASE) * 7);
-  transform: translateY(100%);
+  top: calc(var(--PADDING-BASE) * 5.5);
+  right: calc(var(--PADDING-BASE) * 6);
 }
 
 .marker {
@@ -48,6 +52,11 @@
   &:not(:last-child) {
     margin-bottom: 16px;
   }
+}
+
+.saveButton {
+  position: absolute;
+  right: calc(var(--PADDING-BASE) * 3);
 }
 
 .mainInfoItemIcon {

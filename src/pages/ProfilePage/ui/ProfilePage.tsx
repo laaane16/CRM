@@ -6,7 +6,7 @@ import * as styles from './ProfilePage.module.scss';
 
 import { getProfileData, getProfileIsLoading, profileReducer } from '../../../entities/Profile';
 import { DynamicModuleLoader } from '../../../shared/lib';
-import { Button, ButtonSizes, ButtonTheme, Checkbox, PageLoader } from '../../../shared/ui';
+import { Button, ButtonSizes, ButtonTheme, Select, PageLoader } from '../../../shared/ui';
 import { useAppDispatch } from '../../../shared/lib/hooks/useAppDispatch';
 import { profileFetchData } from '../../../entities/Profile/model/services/profileFetchData';
 import MainCard from './MainCard/MainCard';
@@ -97,48 +97,47 @@ const ProfilePage: FC<Props> = () => {
 
   return (
     <DynamicModuleLoader reducers={reducerList}>
-      {isLoading ? (
-        <PageLoader />
-      ) : (
-        <main className={styles.layout}>
-          <div className={styles.header}>
-            <div className={styles.headerBox}>
-              <img className={styles.avatar} src={data?.avatar} alt="avatar" />
-              {/* <div className={styles.avatar}>avatar</div> */}
-              <div className={styles.name}>
-                <h2 className="alternative">{data?.name}</h2>
-                <p className={tgClasses}>{data?.telegram}</p>
-              </div>
-              <Button size={ButtonSizes.SMALL} theme={ButtonTheme.SECONDARY}>
-                Написать
-              </Button>
-              <Button size={ButtonSizes.SMALL} theme={ButtonTheme.SECONDARY}>
-                Позвонить
-              </Button>
-              <Button size={ButtonSizes.SMALL} theme={ButtonTheme.GHOST}>
-                *
-              </Button>
-              <Button size={ButtonSizes.SMALL} theme={ButtonTheme.GHOST}>
-                ...
-              </Button>
+      {/* {isLoading ? ( */}
+      {/* ) : ( */}
+      <main className={styles.layout}>
+        <div className={styles.header}>
+          <div className={styles.headerBox}>
+            <img className={styles.avatar} src={data?.avatar} alt="avatar" />
+            {/* <div className={styles.avatar}>avatar</div> */}
+            <div className={styles.name}>
+              <h2 className="alternative">{data?.name}</h2>
+              <p className={tgClasses}>{data?.telegram}</p>
             </div>
-            <ul className={styles.views}>
-              <li className={styles.view}>Общий</li>
-              <li className={styles.view}>Проекты и задачи</li>
-              <li className={styles.view}>Документы</li>
-              <li className={styles.view}>Резюме</li>
-              <li className={styles.view}>Заявки и жалобы</li>
-            </ul>
+            <Button size={ButtonSizes.SMALL} theme={ButtonTheme.SECONDARY}>
+              Написать
+            </Button>
+            <Button size={ButtonSizes.SMALL} theme={ButtonTheme.SECONDARY}>
+              Позвонить
+            </Button>
+            <Button size={ButtonSizes.SMALL} theme={ButtonTheme.GHOST}>
+              *
+            </Button>
+            <Button size={ButtonSizes.SMALL} theme={ButtonTheme.GHOST}>
+              ...
+            </Button>
           </div>
-          <MainCard data={data} />
-          <StatusCard data={statusData} />
-          <TasksCard data={tasksData} />
-          <WorkCard data={workData} />
-          <DocsCard />
-          <EventCard />
-          <HistoryCard />
-        </main>
-      )}
+          <ul className={styles.views}>
+            <li className={styles.view}>Общий</li>
+            <li className={styles.view}>Проекты и задачи</li>
+            <li className={styles.view}>Документы</li>
+            <li className={styles.view}>Резюме</li>
+            <li className={styles.view}>Заявки и жалобы</li>
+          </ul>
+        </div>
+        <MainCard data={data} />
+        <StatusCard data={statusData} />
+        <TasksCard data={tasksData} />
+        <WorkCard data={workData} />
+        <DocsCard />
+        <EventCard />
+        <HistoryCard />
+      </main>
+      {/* )} */}
     </DynamicModuleLoader>
   );
 };

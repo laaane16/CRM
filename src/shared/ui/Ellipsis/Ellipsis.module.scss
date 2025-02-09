@@ -2,6 +2,11 @@
   --EXTRA-SIZE: 4px;
 }
 
+.wrap {
+  display: inline-block;
+  width: calc(var(--EXTRA-SIZE) * 3 + 2px * 2);
+}
+
 .ellipsis {
   display: inline-block;
   width: var(--EXTRA-SIZE);

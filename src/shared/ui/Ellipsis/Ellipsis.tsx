@@ -8,9 +8,13 @@ interface Props {
 }
 
 const Ellipsis: FC<Props> = ({ className }) => {
-  const classes = cn(styles.ellipsis, className);
+  const wrapClasses = cn(styles.wrap, className);
 
-  return <span className={classes}></span>;
+  return (
+    <span className={wrapClasses}>
+      <span className={styles.ellipsis}></span>
+    </span>
+  );
 };
 
 export default Ellipsis;
