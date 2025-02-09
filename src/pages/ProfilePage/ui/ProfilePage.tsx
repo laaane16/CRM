@@ -4,15 +4,18 @@ import cn from 'classnames';
 
 import * as styles from './ProfilePage.module.scss';
 
-import { getProfileData, getProfileIsLoading } from '../../../entities/Profile';
+import { getProfileData, getProfileIsLoading, profileReducer } from '../../../entities/Profile';
 import { DynamicModuleLoader } from '../../../shared/lib';
-import { profileReducer } from '../../../entities/Profile';
 import { Button, ButtonSizes, ButtonTheme, Checkbox, PageLoader } from '../../../shared/ui';
 import { useAppDispatch } from '../../../shared/lib/hooks/useAppDispatch';
 import { profileFetchData } from '../../../entities/Profile/model/services/profileFetchData';
 import MainCard from './MainCard/MainCard';
 import StatusCard from './StatusCard/StatusCard';
 import TasksCard from './TasksCard/TasksCard';
+import WorkCard from './WorkCard/WorkCard';
+import DocsCard from './DocsCard/DocsCard';
+import EventCard from './EventCard/EventCard';
+import HistoryCard from './HistoryCard/HistoryCard';
 
 interface Props {
   className?: string;
@@ -39,6 +42,37 @@ const statusData = [
   { name: 'D', value: 7, color: '#8A9BA8' },
   { name: 'E', value: 9, color: '#B0BEC5' },
   { name: 'F', value: 3, color: '#CFD8DC' },
+];
+
+const workData = [
+  {
+    day: '01',
+    workTime: [0, 100],
+  },
+  {
+    day: '02',
+    workTime: [0, 80],
+  },
+  {
+    day: '03',
+    workTime: [0, 50],
+  },
+  {
+    day: '04',
+    workTime: [0, 60],
+  },
+  {
+    day: '05',
+    workTime: [0, 100],
+  },
+  {
+    day: '06',
+    workTime: [0, 40],
+  },
+  {
+    day: '07',
+    workTime: [0, 90],
+  },
 ];
 
 const ProfilePage: FC<Props> = () => {
@@ -99,121 +133,10 @@ const ProfilePage: FC<Props> = () => {
           <MainCard data={data} />
           <StatusCard data={statusData} />
           <TasksCard data={tasksData} />
-          {/* <div className={styles.workTime}>
-            <h2>55:30:41</h2>
-            <BarChart
-              width={300}
-              height={150}
-              className={styles.workTimeChart}
-              data={[
-                {
-                  day: '05-01',
-                  temperature: [-1, 10],
-                },
-                {
-                  day: '05-02',
-                  temperature: [2, 15],
-                },
-                {
-                  day: '05-03',
-                  temperature: [3, 12],
-                },
-                {
-                  day: '05-04',
-                  temperature: [4, 12],
-                },
-                {
-                  day: '05-05',
-                  temperature: [12, 16],
-                },
-                {
-                  day: '05-06',
-                  temperature: [5, 16],
-                },
-                {
-                  day: '05-07',
-                  temperature: [3, 12],
-                },
-              ]}
-              margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-            >
-              {/* <XAxis dataKey="day" /> */}
-          {/* <YAxis /> */}
-          {/* <Bar dataKey="temperature" fill="#c4c4c4" /> */}
-          {/* </BarChart> */}
-          {/* <span>Работал на этой неделе</span> */}
-          {/* <span>5 опозданий</span> */}
-          {/* <span>0 больничных</span> */}
-          {/* </div> */}
-          {/* <div className={styles.docs}>
-            <div className={styles.doc}></div>
-            <div className={styles.doc}></div>
-            <div className={styles.doc}></div>
-            <div className={styles.doc}></div>
-            <div className={styles.doc}></div>
-            <div className={styles.doc}></div>
-          </div> */}
-          {/* <div className={styles.event}>
-            <h3>СОБЫТИЕ</h3>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span>Обсуждение проекта</span>
-            <span>Согласование технических функций с разработчиками</span>
-            <ul className={styles.eventList}>
-              <li className={styles.eventItem}>
-                <img className={styles.avatarEvent} src={data?.avatar} alt="" />
-              </li>
-              <li className={styles.eventItem}>
-                <img className={styles.avatarEvent} src={data?.avatar} alt="" />
-              </li>
-              <li className={styles.eventItem}>
-                <img className={styles.avatarEvent} src={data?.avatar} alt="" />
-              </li>
-              <li className={styles.eventItem}>
-                <img className={styles.avatarEvent} src={data?.avatar} alt="" />
-              </li>
-              <li className={styles.eventItem}>
-                <img className={styles.avatarEvent} src={data?.avatar} alt="" />
-              </li>
-              <li className={styles.eventItem}>
-                <img className={styles.avatarEvent} src={data?.avatar} alt="" />
-              </li>
-              <li className={styles.eventItem}>
-                <img className={styles.avatarEvent} src={data?.avatar} alt="" />
-              </li>
-            </ul>
-            <span>Комната Совещания</span>
-          </div> */}
-          {/* <div className={styles.history}>
-            <h3>АКТИВНОСТЬ</h3>
-            <ul className={styles.historyList}>
-              <li className={styles.historyItem}>
-                <img className={styles.tasksAvatar} src={data?.avatar} alt="" />
-                <span>Александр Соломонов</span>
-                <span>добавил</span>
-                <span>NDA.docx</span>
-              </li>
-              <li className={styles.historyItem}>
-                <img className={styles.tasksAvatar} src={data?.avatar} alt="" />
-                <span>Александр Соломонов</span>
-                <span>добавил</span>
-                <span>NDA.docx</span>
-              </li>
-              <li className={styles.historyItem}>
-                <img className={styles.tasksAvatar} src={data?.avatar} alt="" />
-                <span>Александр Соломонов</span>
-                <span>добавил</span>
-                <span>NDA.docx</span>
-              </li>
-              <li className={styles.historyItem}>
-                <img className={styles.tasksAvatar} src={data?.avatar} alt="" />
-                <span>Александр Соломонов</span>
-                <span>добавил</span>
-                <span>NDA.docx</span>
-              </li>
-            </ul>
-          </div> */}
+          <WorkCard data={workData} />
+          <DocsCard />
+          <EventCard />
+          <HistoryCard />
         </main>
       )}
     </DynamicModuleLoader>

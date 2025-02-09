@@ -1,8 +1,9 @@
 import { FC, useMemo } from 'react';
+import { PieChart, Pie, Cell, LabelList, Label } from 'recharts';
+
+import { Ellipsis } from '../../../../shared/ui';
 
 import * as styles from './StatusCard.module.scss';
-import { PieChart, Pie, Cell, LabelList, Label } from 'recharts';
-import { Ellipsis } from '../../../../shared/ui';
 
 interface IData {
   value: number;

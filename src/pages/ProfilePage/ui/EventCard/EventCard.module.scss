@@ -1,0 +1,101 @@
+.event {
+  position: relative;
+  grid-area: event;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background-color: white;
+}
+
+.extra {
+  position: absolute;
+  top: calc(var(--PADDING-BASE) * 7);
+  right: calc(var(--PADDING-BASE) * 8.5);
+  transform: translate(-100%, 100%);
+}
+
+.title {
+  margin-bottom: 16px;
+}
+
+.importance {
+  vertical-align: middle;
+  display: inline-flex;
+  min-height: 31px;
+  position: relative;
+  border-radius: 5px;
+  padding: 8px 12px 8px 30px;
+  background-color: var(--disabled-color);
+  color: var(--secondary-color);
+  margin-bottom: 16px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+  }
+
+  &:not(:last-child) {
+    margin-right: 8px;
+  }
+}
+
+.eventTitle {
+  display: block;
+  max-width: 220px;
+  color: var(--secondary-color);
+  margin-bottom: 8px;
+}
+
+.eventDescription {
+  display: block;
+  max-width: 220px;
+  max-height: 40px;
+  text-overflow: ellipsis;
+  color: var(--secondary-color);
+  margin-bottom: 12px;
+}
+
+.eventList {
+  position: relative;
+  display: flex;
+  height: 24px;
+  margin-bottom: 12px;
+}
+
+.eventItem {
+  position: absolute;
+}
+
+@for $i from 1 to 9 {
+  .eventItem:nth-child(#{$i}) {
+    left: calc(#{$i - 1} * 20px);
+  }
+}
+
+.avatarEvent {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  margin-right: 12px;
+}
+
+.eventRoom {
+  font-size: 24px;
+  color: var(--secondary-color);
+}
+
+.eventRoomTitle {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 16px;
+  font-weight: bold;
+  transform: translateY(-3px);
+}

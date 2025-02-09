@@ -18,7 +18,7 @@ interface Props {
 }
 
 const TasksCard: FC<Props> = ({ data }) => {
-  const taskTitleClasses = cn(styles.taskTitle, 'primary medium');
+  const taskTitleClasses = cn(styles.taskTitle, 'primary bold');
   const importanceClasses = cn(styles.taskImportance, 'tiny medium');
 
   return (
@@ -29,11 +29,13 @@ const TasksCard: FC<Props> = ({ data }) => {
         {data.map((item, index) => (
           <li className={styles.task} key={index}>
             <Checkbox className={styles.checkbox} />
-            <div className={styles.taskInfo}>
+            <div>
               <span className={taskTitleClasses}>{item.title}</span>
               <span className={importanceClasses}>{item.importance}</span>
-              <img className={styles.taskAvatar} src={item.avatar} alt="avatar" />
-              <span className={styles.taskDeadline}>До {item.deadline}</span>
+              <div className={styles.wrap}>
+                <img className={styles.taskAvatar} src={item.avatar} alt="avatar" />
+                <span className={styles.taskDeadline}>До - {item.deadline}</span>
+              </div>
             </div>
           </li>
         ))}

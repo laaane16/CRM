@@ -1,0 +1,57 @@
+.history {
+  position: relative;
+  grid-area: history;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background-color: white;
+}
+
+.title {
+  color: var(--secondary-color);
+  margin-bottom: 16px;
+}
+
+.extra {
+  position: absolute;
+  top: calc(var(--PADDING-BASE) * 7);
+  right: calc(var(--PADDING-BASE) * 8.5);
+  transform: translate(-100%, 100%);
+}
+
+.historyList {
+  overflow-y: scroll;
+  height: 280px;
+}
+
+.historyItem {
+  vertical-align: top;
+  margin-bottom: 20px;
+}
+
+.boldText {
+  color: var(--secondary-color);
+  vertical-align: top;
+}
+
+.mediumText {
+  color: var(--dark-gray-color);
+}
+
+.date {
+  color: var(--disabled-font-color);
+  margin-top: 4px;
+}
+
+.info {
+  vertical-align: top;
+  display: inline-block;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  margin-right: 12px;
+}
