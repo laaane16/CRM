@@ -1,0 +1,99 @@
+.mainInfo {
+  display: flex;
+  flex-direction: column;
+  grid-area: main;
+  border-radius: 16px;
+  position: relative;
+  max-width: 348px;
+  padding: calc(var(--PADDING-BASE) * 5) calc(var(--PADDING-BASE) * 6);
+  background-color: white;
+
+  &.editorMode {
+    outline: 3px solid var(--disabled-font-color);
+    box-shadow: 0 0 20px 2px var(--disabled-font-color);
+  }
+
+  &.hasError {
+    outline: 3px solid var(--error-color);
+    box-shadow: 0 0 20px 2px var(--error-color);
+  }
+}
+
+.extra {
+  position: absolute;
+  top: calc(var(--PADDING-BASE) * 5.5);
+  right: calc(var(--PADDING-BASE) * 6);
+}
+
+.marker {
+  display: inline-block;
+  width: max-content;
+  position: relative;
+  left: -24px;
+  padding: 4px 24px;
+  background-color: var(--disabled-font-color);
+  margin-bottom: 24px;
+}
+
+.extraInfo {
+  box-sizing: border-box;
+}
+
+.mainInfoList {
+  flex-grow: 1;
+  box-sizing: border-box;
+
+  // margin-bottom: 188px;
+}
+
+.mainInfoItem {
+  max-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-overflow: ellipsis;
+  color: var(--secondary-color);
+
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
+
+.saveButton {
+  position: absolute;
+  right: calc(var(--PADDING-BASE) * 3);
+}
+
+.mainInfoItemIcon {
+  font-size: 24px;
+
+  &:global {
+    &.icon-call {
+      font-size: 18px;
+    }
+
+    &.icon-alternate-mail {
+      font-size: 18px;
+    }
+  }
+}
+
+.socialsList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 8px;
+  margin-bottom: 24px;
+}
+
+.socialsItem {
+  cursor: pointer;
+}
+
+.socialIcon {
+  font-size: 24px;
+}
+
+.dateItem {
+  color: var(--dark-gray-color);
+}

@@ -1,0 +1,32 @@
+.filters {
+  width: var(--filters-width);
+  padding: 24px;
+}
+
+.title {
+  text-transform: uppercase;
+  color: var(--dark-gray-color);
+  margin-bottom: 32px;
+}
+
+.listTitle {
+  text-transform: uppercase;
+  color: var(--dark-gray-color);
+  opacity: 0.4;
+}
+
+.listItem {
+  height: 48px;
+  gap: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.itemTitle {
+  flex-grow: 1;
+  color: var(--secondary-color);
+}
+
+.itemCount {
+  color: var(--secondary-color);
+}

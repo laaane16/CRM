@@ -1,25 +1,29 @@
-import { FC, lazy, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
-import { Header } from '../widgets/Header';
-import { Sidebar } from '../widgets/Sidebar';
-import { MainLayout } from '../shared/ui';
-import { useTranslation } from 'react-i18next';
+import { useAppDispatch } from '../shared/lib/hooks/useAppDispatch';
+import { userActions } from '../entities/User';
+import AppRouter from './providers/router/ui/AppRouter';
+import { PageLoader } from '../shared/ui';
 
 interface Props {
   className?: string;
 }
 
-const App: FC<Props> = (props) => {
-  const { t, i18n } = useTranslation();
+const App: FC<Props> = () => {
+  const [isInit, setIsInit] = useState(false);
+  const dispatch = useAppDispatch();
 
-  return (
-    <div className="app-default-theme">
-      <MainLayout>
-        <Header />
-        <Sidebar />
-        <main>{t('title')}</main>
-      </MainLayout>
+  useEffect(() => {
+    dispatch(userActions.initAuthState());
+    setIsInit(true);
+  }, []);
+
+  return isInit ? (
+    <div className="app-default-theme container">
+      <AppRouter />
     </div>
+  ) : (
+    <PageLoader />
   );
 };
 

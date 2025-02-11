@@ -1,3 +1,9 @@
 {
-  "title": "Title"
+  "title": "Title",
+  "header": {
+    "title": "People",
+    "getEmployee": "Get Employee",
+    "addEmployee": "Add",
+    "exit": "Exit"
+  }
 }

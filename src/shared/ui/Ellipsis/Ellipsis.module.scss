@@ -1,0 +1,19 @@
+:root {
+  --EXTRA-SIZE: 4px;
+}
+
+.wrap {
+  display: inline-block;
+  width: calc(var(--EXTRA-SIZE) * 3 + 2px * 2);
+}
+
+.ellipsis {
+  display: inline-block;
+  width: var(--EXTRA-SIZE);
+  height: var(--EXTRA-SIZE);
+  background-color: var(--secondary-color);
+  border-radius: 50%;
+  box-shadow:
+    calc(var(--EXTRA-SIZE) + 2px) 0 0 var(--secondary-color),
+    calc((var(--EXTRA-SIZE) + 2px) * 2) 0 0 var(--secondary-color);
+}

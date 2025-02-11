@@ -1,0 +1,32 @@
+.docs {
+  position: relative;
+  z-index: 100;
+  grid-area: docs;
+  display: grid;
+  grid-template-rows: repeat(auto, minmax(100px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px 8px;
+  border-radius: 16px;
+  background-color: white;
+}
+
+.doc {
+  border: 2px solid var(--medium-gray-color);
+  background-color: white;
+
+  &:first-child {
+    border-top-left-radius: 16px;
+  }
+
+  &:nth-child(2) {
+    border-top-right-radius: 16px;
+  }
+
+  &:last-child {
+    border-bottom-right-radius: 16px;
+  }
+
+  &:nth-last-child(2) {
+    border-bottom-left-radius: 16px;
+  }
+}
