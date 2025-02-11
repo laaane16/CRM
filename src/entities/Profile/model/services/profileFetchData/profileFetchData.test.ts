@@ -1,5 +1,5 @@
 import { profileFetchData } from './profileFetchData';
-import { TestAsyncThunk } from '../../../../shared/lib/tests/TestAsyncThunk';
+import { TestAsyncThunk } from '../../../../../shared/lib/tests/TestAsyncThunk';
 
 describe('loginByUsername.test', () => {
   test('fulfilled', async () => {

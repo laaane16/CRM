@@ -9,9 +9,7 @@ interface Props {
 }
 
 const HistoryCard: FC<Props> = (props) => {
-  const avatar =
-    'https://s3-alpha-sig.figma.com/img/93e2/fb68/8d9c02096c95887f5dd199d9b5fe5d8f?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=U6Sn5Lse9m6zKApeAzPh-qhcICZMQ231njoxKR-ySm1KSO2gpSEZE9yRvcdG9e9x6XXh2ANHEX-RVu9fIpdwJaG-MyeQh4lYcypG0W7cnE73WUuYhAM-ite9liWwbktZxMo2VeVEzxomxpmp0aiM5-raYJWCCcubmdP4w0D816ual3RijN-UbWfpe4Zjydu5MAH7i2cNRZUqHiBZx6h2RL5IuRDunpS4b71sq5ZuKvRym~XUBTv~s6XUBmjtA6UiPUTe1gsOJ~g2Re3kr5S-aRY5DrpVp~gL3lHVg3AsK275d-wZs7tzrHIWxyssA2~U~VVAecEbhFBOi5QV1w8DJQ__';
-
+  const avatar = 'https://timeweb.com/ru/community/article/43/4372a42395939b59d7e234e6042983f8.jpg';
   const boldTextClasses = cn(styles.boldText, 'primary bold');
   const mediumTextClasses = cn(styles.mediumText, 'primary medium');
   const dateClasses = cn(styles.date, 'tiny medium');

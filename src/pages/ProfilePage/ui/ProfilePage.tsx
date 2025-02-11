@@ -4,11 +4,16 @@ import cn from 'classnames';
 
 import * as styles from './ProfilePage.module.scss';
 
-import { getProfileData, getProfileIsLoading, profileReducer } from '../../../entities/Profile';
+import {
+  getProfileData,
+  getProfileIsLoading,
+  profileReducer,
+  profileFetchData,
+  getProfileError,
+} from '../../../entities/Profile';
 import { DynamicModuleLoader } from '../../../shared/lib';
-import { Button, ButtonSizes, ButtonTheme, Select, PageLoader } from '../../../shared/ui';
+import { Button, ButtonSizes, ButtonTheme } from '../../../shared/ui';
 import { useAppDispatch } from '../../../shared/lib/hooks/useAppDispatch';
-import { profileFetchData } from '../../../entities/Profile/model/services/profileFetchData';
 import MainCard from './MainCard/MainCard';
 import StatusCard from './StatusCard/StatusCard';
 import TasksCard from './TasksCard/TasksCard';
@@ -79,11 +84,10 @@ const ProfilePage: FC<Props> = () => {
   const dispatch = useAppDispatch();
   const isLoading = useSelector(getProfileIsLoading);
   const data = useSelector(getProfileData);
+  const error = useSelector(getProfileError);
 
   const tasksData = new Array(15).fill({
-    avatar:
-      'https://s3-alpha-sig.figma.com/img/93e2/fb68/8d9c02096c95887f5dd199d9b5fe5d8f?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=U6Sn5Lse9m6zKApeAzPh-qhcICZMQ231njoxKR-ySm1KSO2gpSEZE9yRvcdG9e9x6XXh2ANHEX-RVu9fIpdwJaG-MyeQh4lYcypG0W7cnE73WUuYhAM-ite9liWwbktZxMo2VeVEzxomxpmp0aiM5-raYJWCCcubmdP4w0D816ual3RijN-UbWfpe4Zjydu5MAH7i2cNRZUqHiBZx6h2RL5IuRDunpS4b71sq5ZuKvRym~XUBTv~s6XUBmjtA6UiPUTe1gsOJ~g2Re3kr5S-aRY5DrpVp~gL3lHVg3AsK275d-wZs7tzrHIWxyssA2~U~VVAecEbhFBOi5QV1w8DJQ__',
-
+    avatar: 'https://timeweb.com/ru/community/article/43/4372a42395939b59d7e234e6042983f8.jpg',
     title: 'Подготовка презентации по мобильного приложения Sample App',
     importance: 'Срочно',
     deadline: '10:30, 15 марта, 2025',
@@ -129,7 +133,7 @@ const ProfilePage: FC<Props> = () => {
             <li className={styles.view}>Заявки и жалобы</li>
           </ul>
         </div>
-        <MainCard data={data} />
+        <MainCard data={data} error={error} />
         <StatusCard data={statusData} />
         <TasksCard data={tasksData} />
         <WorkCard data={workData} />

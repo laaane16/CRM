@@ -4,13 +4,15 @@ import cn from 'classnames';
 import * as styles from './MainCard.module.scss';
 
 import { IProfile, profileActions } from '../../../../entities/Profile';
-import { Button, ButtonSizes, Dropdown, Ellipsis, Input } from '../../../../shared/ui';
+import { Button, ButtonSizes, Dropdown, Ellipsis, Input, Message } from '../../../../shared/ui';
 import { useAppDispatch } from '../../../../shared/lib';
-import updateProfileData from '../../../../entities/Profile/model/services/updateProfileData';
+import updateProfileData from '../../../../entities/Profile/model/services/updateProfileData/updateProfileData';
+import { SerializedError } from '@reduxjs/toolkit';
 
 interface Props {
   className?: string;
   data?: IProfile;
+  error?: SerializedError;
 }
 
 interface MenuItem {
@@ -32,14 +34,16 @@ const socialItems = [
   { icon: 'pinterest', link: '' },
 ];
 
-const MainCard: FC<Props> = ({ data }) => {
+const MainCard: FC<Props> = ({ data, error }) => {
   const dispatch = useAppDispatch();
 
   const [isEditorMode, setIsEditorMode] = useState(false);
 
   const mainInfoClasses = cn(styles.mainInfo, {
     [styles.editorMode]: isEditorMode,
+    [styles.hasError]: Boolean(error),
   });
+
   const mainInfoItemClasses = cn(styles.mainInfoItem, 'primary medium');
   const dateItemClasses = cn(styles.dateItem, 'tiny medium');
 
@@ -47,9 +51,11 @@ const MainCard: FC<Props> = ({ data }) => {
     setIsEditorMode(true);
   };
 
-  const offEditorMode = () => {
-    setIsEditorMode(false);
-    dispatch(updateProfileData(data as IProfile));
+  const offEditorMode = async () => {
+    const response = await dispatch(updateProfileData(data as IProfile));
+    if (response.meta.requestStatus === 'fulfilled') {
+      setIsEditorMode(false);
+    }
   };
 
   const onChangeNumber = (value: string) => {
@@ -72,8 +78,8 @@ const MainCard: FC<Props> = ({ data }) => {
     dispatch(profileActions.updateProfile({ address: value }));
   };
 
-  const handleDropdownClick = (value: MenuItem) => {
-    switch (value.value) {
+  const handleDropdownClick = (item: MenuItem) => {
+    switch (item.value) {
       case 'edit':
         onEditorMode();
         break;
@@ -86,6 +92,7 @@ const MainCard: FC<Props> = ({ data }) => {
   return (
     <>
       <div className={mainInfoClasses}>
+        {error && <Message description={error.message || ''} />}
         <span className={styles.marker}>штатный</span>
         <Dropdown
           onClick={handleDropdownClick}

@@ -10,7 +10,12 @@
 
   &.editorMode {
     outline: 3px solid var(--disabled-font-color);
-    box-shadow: 0 0 100px 22px var(--disabled-font-color);
+    box-shadow: 0 0 20px 2px var(--disabled-font-color);
+  }
+
+  &.hasError {
+    outline: 3px solid var(--error-color);
+    box-shadow: 0 0 20px 2px var(--error-color);
   }
 }
 

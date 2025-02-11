@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IProfile } from '../types/ProfileSchema';
-import { ThunkConfig } from '../../../../app/providers';
+import { IProfile } from '../../types/ProfileSchema';
+import { ThunkConfig } from '../../../../../app/providers';
 
 interface ProfileFetchDataProps {
   id: number;
