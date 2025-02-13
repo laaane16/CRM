@@ -11,7 +11,6 @@ export const profileFetchData = createAsyncThunk<IProfile, ProfileFetchDataProps
   async (arg, thunkAPI) => {
     const { extra, rejectWithValue } = thunkAPI;
     try {
-      console.log(arg);
       const response = await extra.api.get('/profile');
 
       if (!response.data) {
