@@ -35,7 +35,7 @@ const Select: FC<Props> = ({ defaultValue, className, options, onSelect, onOpen 
   return (
     <div className={styles.wrap}>
       <div className={styles.select} onClick={handleSelectOpen}>
-        {selectedItem?.label}
+        {selectedItem?.label || defaultValue}
       </div>
       {isOpen ? (
         <ul className={styles.list}>

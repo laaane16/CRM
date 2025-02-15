@@ -32,7 +32,7 @@ const Dropdown: FC<Props> = ({ children, className, onOpen, onClick, menu }) => 
 
   return (
     <div onClick={handleSelectOpen} className={wrapClasses}>
-      {children}
+      {children || <div>place for you child</div>}
       {isOpen ? (
         <ul className={styles.list}>
           {menu.map((item) => (
