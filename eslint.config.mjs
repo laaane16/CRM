@@ -7,7 +7,7 @@ import prettierRecommended from 'eslint-plugin-prettier/recommended';
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
-  { languageOptions: { globals: globals.browser } },
+  { languageOptions: { globals: { ...globals.browser, __PROJECT__: true, __IS_DEV__: true } } },
   { ignores: ['node_modules/*', 'dist/*'] },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,

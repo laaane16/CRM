@@ -6,6 +6,11 @@ declare module '*.svg' {
 declare module '*.png';
 declare module '*.jpeg';
 
-type DeepPartial<T> = {
-  [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K];
-};
+declare const __IS_DEV__: boolean;
+declare const __PROJECT__: 'storybook' | 'frontend' | 'jest';
+
+type DeepPartial<T> = T extends object
+  ? {
+      [P in keyof T]?: DeepPartial<T[P]>;
+    }
+  : T;

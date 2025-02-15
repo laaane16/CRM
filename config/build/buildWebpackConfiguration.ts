@@ -6,7 +6,13 @@ import { buildPlugins } from './buildPlugins';
 import { buildResolve } from './buildResolve';
 import { buildDevServer } from './buildDevServer';
 
-export const buildWebpackConfiguration: (options: BuildOptions) => Configuration = ({ mode, isDev, paths, port }) => ({
+export const buildWebpackConfiguration: (options: BuildOptions) => Configuration = ({
+  mode,
+  isDev,
+  paths,
+  port,
+  project,
+}) => ({
   mode,
   entry: paths.entry,
   output: {
@@ -15,7 +21,7 @@ export const buildWebpackConfiguration: (options: BuildOptions) => Configuration
     clean: true,
   },
   resolve: buildResolve(paths),
-  plugins: buildPlugins(paths, isDev),
+  plugins: buildPlugins(paths, isDev, project),
   module: {
     rules: buildLoaders(isDev),
   },

@@ -25,3 +25,9 @@ export interface IProfile {
   createdAt: string;
   updatedAt: string;
 }
+
+export enum ValidateProfileErrors {
+  NO_DATA = 'NO_DATA',
+  INCORRECT_NUMBER = 'INCORRECT_NUMBER',
+  INCORRECT_MAIL = 'INCORRECT_MAIL',
+}

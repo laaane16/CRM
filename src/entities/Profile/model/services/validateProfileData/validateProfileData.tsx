@@ -1,6 +1,18 @@
-import { IProfile } from '../../types/ProfileSchema';
+import { IProfile, ValidateProfileErrors } from '../../types/ProfileSchema';
 
 export const validateProfileData = (profile: IProfile): string[] => {
+  if (Object.keys(profile).length === 0) {
+    return [ValidateProfileErrors.NO_DATA];
+  }
+
+  const options = Object.values(profile)
+    .map(Boolean)
+    .find((i) => i === false);
+
+  if (options === false) {
+    return [ValidateProfileErrors.NO_DATA];
+  }
+
   const { number, name, mail } = profile;
   const errors = [];
 
@@ -14,7 +26,7 @@ export const validateProfileData = (profile: IProfile): string[] => {
   const mailIsValid = name && mailRegExp.test(mail);
 
   if (!numberIsValid) {
-    errors.push('Вы ввели некорректный номер телефона');
+    errors.push(ValidateProfileErrors.INCORRECT_NUMBER);
   }
 
   // if (!nameIsValid) {
@@ -22,7 +34,7 @@ export const validateProfileData = (profile: IProfile): string[] => {
   // }
 
   if (!mailIsValid) {
-    errors.push('Вы ввели некорректную почту');
+    errors.push(ValidateProfileErrors.INCORRECT_MAIL);
   }
 
   return errors;
