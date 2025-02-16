@@ -30,8 +30,13 @@ const Header: FC<Props> = () => {
         localStorage.setItem(THEME_LOCALSTORAGE_KEY, Themes.DARK);
         break;
       case Themes.DARK:
+        setTheme && setTheme(Themes.PINK);
+        localStorage.setItem(THEME_LOCALSTORAGE_KEY, Themes.PINK);
+        break;
+      default:
         setTheme && setTheme(Themes.LIGHT);
         localStorage.setItem(THEME_LOCALSTORAGE_KEY, Themes.LIGHT);
+        break;
     }
   };
 
