@@ -4,7 +4,7 @@ export interface ProfileSchema {
   data: IProfile | undefined;
   readonly: boolean;
   isLoading: boolean;
-  error: SerializedError | undefined;
+  error: string | undefined;
 }
 
 interface IPost {
