@@ -68,7 +68,7 @@ const AppRouter: FC = () => {
                 ) : (
                   route.element
                 )
-              ) : route.public === true ? (
+              ) : route.public === true || route.path === AppPaths[AppRoutes.NOT_FOUND] ? (
                 route.element
               ) : (
                 <Navigate to="/login" />

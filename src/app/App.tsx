@@ -11,7 +11,9 @@ interface Props {
 }
 
 const App: FC<Props> = () => {
+  // need to show the ui only after we have found out the user authorization information!!!
   const [isInit, setIsInit] = useState(false);
+
   const dispatch = useAppDispatch();
 
   const { theme } = useContext(ThemeContext);
