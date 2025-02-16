@@ -7,20 +7,21 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "lint": "eslint ./",
-    "lint:write": "eslint ./ --fix",
-    "lint:style": "stylelint \"**/*.{css,scss}\"",
-    "lint:style:write": "stylelint \"**/*.{css,scss}\" --fix",
-    "dev": "webpack server --env port=3000",
+    "start:dev:app": "webpack server --env port=3000",
+    "start:dev:server": "node ./json-server/index.js",
+    "start:dev": "concurrently \"npm run start:dev:app\" \"npm run start:dev:server\"",
     "build:prod": "webpack --env mode=production",
     "build:dev": "webpack --env mode=development",
     "test:unit": "jest",
     "test:ui": "npx loki test",
     "test:ui:ok": "npx loki approve",
-    "start:dev:server": "node ./json-server/index.js",
     "storybook": "storybook dev -p 6006 --debug-webpack",
     "build-storybook": "storybook build",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "lint": "eslint ./",
+    "lint:write": "eslint ./ --fix",
+    "lint:style": "stylelint \"**/*.{css,scss}\"",
+    "lint:style:write": "stylelint \"**/*.{css,scss}\" --fix"
   },
   "husky": {
     "hooks": {
@@ -38,6 +39,7 @@
     "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.9",
     "classnames": "^2.5.1",
+    "concurrently": "^9.1.2",
     "i18next": "^24.2.1",
     "i18next-browser-languagedetector": "^8.0.2",
     "i18next-http-backend": "^3.0.1",
