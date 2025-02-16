@@ -6,7 +6,7 @@
   position: relative;
   max-width: 348px;
   padding: calc(var(--PADDING-BASE) * 5) calc(var(--PADDING-BASE) * 6);
-  background-color: white;
+  background-color: var(--ghost-color);
 
   &.editorMode {
     outline: 3px solid var(--disabled-font-color);

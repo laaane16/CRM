@@ -7,12 +7,11 @@ import { IProfile, profileActions } from '../../../../entities/Profile';
 import { Button, ButtonSizes, Dropdown, Ellipsis, Input, Message } from '../../../../shared/ui';
 import { useAppDispatch } from '../../../../shared/lib';
 import updateProfileData from '../../../../entities/Profile/model/services/updateProfileData/updateProfileData';
-import { SerializedError } from '@reduxjs/toolkit';
 
 interface Props {
   className?: string;
   data?: IProfile;
-  error?: SerializedError;
+  error?: string;
 }
 
 interface MenuItem {
@@ -92,7 +91,7 @@ const MainCard: FC<Props> = ({ data, error }) => {
   return (
     <>
       <div className={mainInfoClasses}>
-        {error && <Message description={error.message || ''} />}
+        {error && <Message description={error || ''} />}
         <span className={styles.marker}>штатный</span>
         <Dropdown
           onClick={handleDropdownClick}

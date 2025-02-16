@@ -4,12 +4,13 @@ body {
   overflow-x: hidden;
   max-width: 100vw;
   font-weight: 400;
-  color: #050504;
   scrollbar-gutter: stable;
 }
 
 .container {
   max-height: 100vh;
+  color: var(--primary-color);
+  background-color: var(--ghost-color);
 }
 
 /* Стили для firefox */
@@ -17,7 +18,7 @@ body {
 @-moz-document url-prefix() {
   * {
     scrollbar-width: thin;
-    scrollbar-color: #050504 #d3dce6;
+    scrollbar-color: var(--primary-color) var(--disabled-font-color);
   }
 }
 
@@ -28,12 +29,12 @@ body {
 
 *::-webkit-scrollbar-thumb {
   border-radius: 3px;
-  background-color: #050504;
+  background-color: var(--primary-color);
 }
 
 *::-webkit-scrollbar-track {
   border-radius: 3px;
-  background-color: #d3dce6;
+  background-color: var(--disabled-font-color);
 }
 
 h1 {

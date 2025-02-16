@@ -5,7 +5,7 @@ describe('getProfileError.test', () => {
   test('work with filled state', () => {
     const state: DeepPartial<StateSchema> = {
       profile: {
-        error: { message: 'error' },
+        error: 'error',
       },
     };
     expect(getProfileError(state as StateSchema)).toBe(state.profile?.error);

@@ -36,7 +36,7 @@
 
 .logo {
   display: inline-block;
-  color: white;
+  color: var(--ghost-color);
   margin-bottom: 40px;
   margin-right: 24px;
 }
@@ -49,7 +49,7 @@
   font-size: var(--font-avenir-size-huge);
   line-height: 39px;
   display: inline-block;
-  color: white;
+  color: var(--ghost-color);
   transition-property: transform, opacity;
   transition-duration: 0.5s, 0.3s;
 }

@@ -21,7 +21,7 @@
   padding: calc(var(--base-window-padding) / 2);
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  background-color: white;
+  background-color: var(--ghost-color);
   border-bottom: 2px solid var(--disabled-color);
 }
 
@@ -43,7 +43,7 @@
 }
 
 .views {
-  background-color: white;
+  background-color: var(--ghost-color);
   padding: 20px;
   display: flex;
   align-items: center;

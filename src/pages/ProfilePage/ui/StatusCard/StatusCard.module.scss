@@ -7,7 +7,7 @@
   grid-area: status;
   padding: calc(var(--PADDING-BASE) * 5) calc(var(--PADDING-BASE) * 6);
   border-radius: 16px;
-  background-color: white;
+  background-color: var(--ghost-color);
 }
 
 .statusTitle {

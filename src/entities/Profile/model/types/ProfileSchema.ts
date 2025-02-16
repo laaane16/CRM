@@ -1,5 +1,3 @@
-import { SerializedError } from '@reduxjs/toolkit';
-
 export interface ProfileSchema {
   data: IProfile | undefined;
   readonly: boolean;
