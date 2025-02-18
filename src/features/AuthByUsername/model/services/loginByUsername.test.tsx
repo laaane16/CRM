@@ -4,7 +4,7 @@ import { TestAsyncThunk } from '../../../../shared/lib/tests/TestAsyncThunk';
 
 describe('loginByUsername.test', () => {
   test('fulfilled', async () => {
-    const userValue = { id: 1, username: '123' };
+    const userValue = { id: 1, username: '123', avatar: '' };
 
     const thunk = new TestAsyncThunk(loginByUsername);
     thunk.api.post.mockReturnValue(Promise.resolve({ data: userValue }));

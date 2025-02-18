@@ -18,6 +18,7 @@ export const buildWebpackConfiguration: (options: BuildOptions) => Configuration
   output: {
     filename: '[name].[contenthash].js',
     path: paths.output,
+    publicPath: '/',
     clean: true,
   },
   resolve: buildResolve(paths),

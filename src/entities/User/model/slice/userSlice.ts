@@ -5,6 +5,7 @@ import { USER_LOCALSTORAGE_KEY } from '../../../../shared/constants/localstorage
 const initialState: UserSchema = {
   id: null,
   username: '',
+  avatar: '',
 };
 
 const userSlice = createSlice({
@@ -18,18 +19,20 @@ const userSlice = createSlice({
         const parseData = JSON.parse(data);
         state.id = parseData.id;
         state.username = parseData.username;
+        state.avatar = parseData.avatar;
       } else {
         console.log('ПОЛЬЗОВАТЕЛЬ НЕ АВТОРИЗОВАН');
       }
     },
     setAuthData: (state, action: PayloadAction<UserSchema>) => {
-      const { id, username } = action.payload;
+      const { id, username, avatar } = action.payload;
       state.id = id;
       state.username = username;
+      state.avatar = avatar;
     },
     logout: (state) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      state = { id: null, username: '' };
+      state = { id: null, username: '', avatar: '' };
       localStorage.removeItem(USER_LOCALSTORAGE_KEY);
     },
   },

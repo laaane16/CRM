@@ -1,0 +1,37 @@
+.wrap {
+  position: relative;
+  width: 100%;
+}
+
+// .item {
+//   display: flex;
+//   align-items: center;
+//   gap: 16px;
+// }
+.title {
+  display: inline-block;
+  margin-right: 16px;
+}
+
+.arrowIcon {
+  display: inline-block;
+
+  &.isOpen::before {
+    transform: translateY(-100px);
+
+    // transform: rotate(180deg);
+  }
+}
+
+.moveIcon {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 6px;
+  transform: translateY(-50%);
+}
+
+.arrowIcon,
+.moveIcon {
+  font-size: 6px;
+}

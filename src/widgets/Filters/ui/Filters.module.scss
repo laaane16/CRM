@@ -1,12 +1,27 @@
 .filters {
   width: var(--filters-width);
   padding: 24px;
+  border-right: 2px solid var(--medium-gray-color);
+}
+
+.search {
+  margin-bottom: 32px;
 }
 
 .title {
+  width: max-content;
+  display: inline-block;
   text-transform: uppercase;
   color: var(--dark-gray-color);
   margin-bottom: 32px;
+  margin-right: 16px;
+}
+
+.filterIcon {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateY(calc(-50% + 2.4px));
+  color: var(--secondary-color-active);
 }
 
 .listTitle {

@@ -1,5 +1,7 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import cn from 'classnames';
+
+import { Accordeon, Input, Search } from '../../../shared/ui';
 
 import * as styles from './Filters.module.scss';
 
@@ -8,6 +10,8 @@ interface Props {
 }
 
 const Filters: FC<Props> = () => {
+  const [search, setSearch] = useState('');
+
   const listData = [
     { title: 'Бытовая техника', count: 10 },
     { title: 'Бытовая техника', count: 10 },
@@ -24,10 +28,12 @@ const Filters: FC<Props> = () => {
 
   return (
     <aside className={styles.filters}>
-      <div>Поиск</div>
+      <Search className={styles.search} value={search} onChange={setSearch} />
       <div>
         <h3 className={styles.title}>Настройки фильтра</h3>
+        <span className={`${styles.filterIcon} icon-filter`}></span>
         <p className={`secondary medium ${styles.listTitle}`}>Мои компании</p>
+        <Accordeon title="Рубрика" items={listData} />
         <ul>
           {listData.map((item, index) => (
             <li className={styles.listItem} key={index}>

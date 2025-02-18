@@ -3,6 +3,7 @@ import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
+import plugini18n from 'eslint-plugin-i18next';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -13,6 +14,8 @@ export default [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   prettierRecommended,
+  // plugini18n.configs['flat/recommended'],
+
   {
     rules: {
       'react/react-in-jsx-scope': 'off',

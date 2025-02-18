@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/react/*';
 import Ellipsis from './Ellipsis';
 
 const meta: Meta<typeof Ellipsis> = {
+  title: 'shared/ellipsis',
   component: Ellipsis,
 };
 

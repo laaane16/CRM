@@ -12,12 +12,13 @@
   transition-duration: 0.5s;
 
   .container {
-    transform: translateX(calc(-100% - 40px));
+    transform: translateX(calc(-100% - 40px - 150px));
   }
 
   .title {
     opacity: 0;
-    transform: translateX(calc(-100% - 24px));
+
+    // transform: translateX(calc(-100% - 24px - 500px));
   }
 
   &:hover {
@@ -60,18 +61,32 @@
 }
 
 .navItem {
-  cursor: pointer;
   padding-right: 40px;
-  border-top-left-radius: 13.5px;
-  border-bottom-left-radius: 13.5px;
+
+  // border-top-left-radius: 13.5px;
+  // border-bottom-left-radius: 13.5px;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  gap: 24px;
 
   &:not(:last-child) {
     margin-bottom: 40px;
   }
+}
+
+.navLink {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.avatar {
+  z-index: 1;
+  flex-shrink: 0;
+  display: inline-block;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .itemIcon {
@@ -81,6 +96,14 @@
   width: 27px;
   height: 27px;
   background-color: var(--secondary-color);
+
+  &[data-icon='true'] {
+    z-index: 1000;
+    text-align: center;
+    font-size: 24px;
+    background-color: transparent;
+    color: var(--secondary-color);
+  }
 }
 
 .container {

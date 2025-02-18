@@ -40,11 +40,6 @@ const Header: FC<Props> = () => {
     }
   };
 
-  const onLogoutClick = () => {
-    dispatch(userActions.logout());
-    navigate(AppPaths[AppRoutes.LOGIN]);
-  };
-
   return (
     <header className={styles.header}>
       <h1 className={styles.title}>{t('header.title')}</h1>
@@ -59,9 +54,6 @@ const Header: FC<Props> = () => {
       <span
         style={{ border: '1px solid black', borderRadius: '50%', width: '15px', height: '15px', display: 'block' }}
       ></span>
-      <Button onClick={onLogoutClick} size={ButtonSizes.SMALL}>
-        {t('header.exit')}
-      </Button>
     </header>
   );
 };
