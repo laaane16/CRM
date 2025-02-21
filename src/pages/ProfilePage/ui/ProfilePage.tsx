@@ -21,6 +21,8 @@ import WorkCard from './WorkCard/WorkCard';
 import DocsCard from './DocsCard/DocsCard';
 import EventCard from './EventCard/EventCard';
 import HistoryCard from './HistoryCard/HistoryCard';
+import { getUserId } from '../../../entities/User';
+import Avatar, { AvatarSizes } from '../../../shared/ui/Avatar/Avatar';
 
 interface Props {
   className?: string;
@@ -85,6 +87,7 @@ const ProfilePage: FC<Props> = () => {
   const isLoading = useSelector(getProfileIsLoading);
   const data = useSelector(getProfileData);
   const error = useSelector(getProfileError);
+  const userId = useSelector(getUserId);
 
   const tasksData = new Array(15).fill({
     avatar: 'https://timeweb.com/ru/community/article/43/4372a42395939b59d7e234e6042983f8.jpg',
@@ -94,20 +97,17 @@ const ProfilePage: FC<Props> = () => {
   });
 
   useEffect(() => {
-    dispatch(profileFetchData({ id: 1 }));
+    dispatch(profileFetchData({ id: userId as number }));
   }, []);
 
   const tgClasses = cn(styles.tg, 'primary bold');
 
   return (
     <DynamicModuleLoader reducers={reducerList}>
-      {/* {isLoading ? ( */}
-      {/* ) : ( */}
       <main className={styles.layout}>
         <div className={styles.header}>
           <div className={styles.headerBox}>
-            <img className={styles.avatar} src={data?.avatar} alt="avatar" />
-            {/* <div className={styles.avatar}>avatar</div> */}
+            <Avatar size={AvatarSizes.LARGE} avatar={data?.avatar} />
             <div className={styles.name}>
               <h2 className="alternative">{data?.name}</h2>
               <p className={tgClasses}>{data?.telegram}</p>
@@ -133,7 +133,7 @@ const ProfilePage: FC<Props> = () => {
             <li className={styles.view}>Заявки и жалобы</li>
           </ul>
         </div>
-        <MainCard data={data} error={error} />
+        <MainCard isLoading={isLoading as boolean} data={data} error={error} />
         <StatusCard data={statusData} />
         <TasksCard data={tasksData} />
         <WorkCard data={workData} />

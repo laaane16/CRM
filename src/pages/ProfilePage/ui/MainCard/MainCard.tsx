@@ -7,11 +7,13 @@ import { IProfile, profileActions } from '../../../../entities/Profile';
 import { Button, ButtonSizes, Dropdown, Ellipsis, Input, Message } from '../../../../shared/ui';
 import { useAppDispatch } from '../../../../shared/lib';
 import updateProfileData from '../../../../entities/Profile/model/services/updateProfileData/updateProfileData';
+import Skeleton from '../../../../shared/ui/Skeleton/Skeleton';
 
 interface Props {
   className?: string;
   data?: IProfile;
   error?: string;
+  isLoading: boolean;
 }
 
 interface MenuItem {
@@ -33,7 +35,7 @@ const socialItems = [
   { icon: 'pinterest', link: '' },
 ];
 
-const MainCard: FC<Props> = ({ data, error }) => {
+const MainCard: FC<Props> = ({ isLoading, data, error }) => {
   const dispatch = useAppDispatch();
 
   const [isEditorMode, setIsEditorMode] = useState(false);
