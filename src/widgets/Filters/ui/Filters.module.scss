@@ -1,7 +1,10 @@
 .filters {
   width: var(--filters-width);
   padding: 24px;
-  border-right: 2px solid var(--medium-gray-color);
+
+  // border-right: 2px solid var(--medium-gray-color);
+  overflow-y: scroll;
+  height: calc(100vh - var(--header-height));
 }
 
 .search {
@@ -43,5 +46,29 @@
 }
 
 .itemCount {
+  color: var(--secondary-color);
+}
+
+// Чтоб линтер не ругался
+.component {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--dark-gray-color);
+}
+
+.componentTitle {
+  flex-grow: 1;
+  color: var(--secondary-color);
+}
+
+.count {
   color: var(--secondary-color);
 }

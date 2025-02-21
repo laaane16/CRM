@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import cn from 'classnames';
 
 import * as styles from './Sidebar.module.scss';
@@ -65,7 +65,7 @@ const Sidebar: FC<Props> = () => {
         </div>
         <div className={styles.navItem}>
           <Link className={styles.navLink} to={AppPaths[AppRoutes.MAIN]}>
-            <span data-icon="true" className={`${styles.itemIcon} icon-user`} />
+            <span data-icon="true" className={`${styles.itemIcon} icon-user `} />
             <div className={styles.container}>
               <span className={styles.itemTitle}>Люди</span>
               <span className={styles.circle}></span>
@@ -101,7 +101,7 @@ const Sidebar: FC<Props> = () => {
         </div>
         <div className={styles.navItem}>
           <Link className={styles.navLink} to={AppPaths[AppRoutes.MAIN]}>
-            <span data-icon="true" className={`${styles.itemIcon} bookmark`} />
+            <span data-icon="true" className={`${styles.itemIcon} icon-bookmark`} />
             <div className={styles.container}>
               <span className={styles.itemTitle}>Закладки</span>
               <span className={styles.circle}></span>

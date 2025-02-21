@@ -116,6 +116,10 @@
 .itemTitle {
   flex-grow: 1;
   color: var(--secondary-color);
+
+  &.active {
+    color: white;
+  }
 }
 
 .circle {

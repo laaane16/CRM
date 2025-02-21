@@ -13,18 +13,44 @@ const Filters: FC<Props> = () => {
   const [search, setSearch] = useState('');
 
   const listData = [
-    { title: 'Бытовая техника', count: 10 },
-    { title: 'Бытовая техника', count: 10 },
-    { title: 'Бытовая техника', count: 10 },
-    { title: 'Бытовая техника', count: 10 },
-    { title: 'Бытовая техника', count: 10 },
-    { title: 'Бытовая техника', count: 10 },
-    { title: 'Бытовая техника', count: 10 },
-    { title: 'Бытовая техника', count: 10 },
-    { title: 'Бытовая техника', count: 10 },
-    { title: 'Бытовая техника', count: 10 },
-    { title: 'Бытовая техника', count: 10 },
+    {
+      Component: () => (
+        <span className={styles.component}>
+          <span className={styles.circle}></span>
+          <span className={`${styles.componentTitle} secondary regular`}>Global Solutions</span>
+          <span className={`${styles.count} secondary bold`}>10</span>
+        </span>
+      ),
+    },
+    {
+      Component: () => (
+        <span className={styles.component}>
+          <span className={styles.circle}></span>
+          <span className={`${styles.componentTitle} secondary regular`}>Global Solutions</span>
+          <span className={`${styles.count} secondary bold`}>10</span>
+        </span>
+      ),
+    },
+    {
+      Component: () => (
+        <span className={styles.component}>
+          <span className={styles.circle}></span>
+          <span className={`${styles.componentTitle} secondary regular`}>Global Solutions</span>
+          <span className={`${styles.count} secondary bold`}>10</span>
+        </span>
+      ),
+    },
+    {
+      Component: () => (
+        <span className={styles.component}>
+          <span className={styles.circle}></span>
+          <span className={`${styles.componentTitle} secondary regular`}>Global Solutions</span>
+          <span className={`${styles.count} secondary bold`}>10</span>
+        </span>
+      ),
+    },
   ];
+  const Component = () => <span></span>;
 
   return (
     <aside className={styles.filters}>
@@ -32,16 +58,12 @@ const Filters: FC<Props> = () => {
       <div>
         <h3 className={styles.title}>Настройки фильтра</h3>
         <span className={`${styles.filterIcon} icon-filter`}></span>
-        <p className={`secondary medium ${styles.listTitle}`}>Мои компании</p>
-        <Accordeon title="Рубрика" items={listData} />
-        <ul>
+        <Accordeon title="Рубрики" items={listData} />
+        {/* <ul>
           {listData.map((item, index) => (
-            <li className={styles.listItem} key={index}>
-              <span className={cn(styles.itemTitle, 'tiny regular')}>{item.title}</span>
-              <span className={cn(styles.itemCount, 'tiny bold')}>{item.count}</span>
-            </li>
+            <li className={styles.listItem} key={index}></li>
           ))}
-        </ul>
+        </ul> */}
       </div>
     </aside>
   );
