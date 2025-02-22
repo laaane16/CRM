@@ -1,10 +1,21 @@
+.skeleton {
+  border-radius: 16px;
+  position: relative;
+
+  &:nth-child(1) {
+    margin-bottom: 270px;
+  }
+
+  &:nth-child(2) {
+    margin-bottom: 15px;
+  }
+}
+
 .mainInfo {
   display: flex;
   flex-direction: column;
-  grid-area: main;
   border-radius: 16px;
   position: relative;
-  max-width: 348px;
   padding: calc(var(--PADDING-BASE) * 5) calc(var(--PADDING-BASE) * 6);
   background-color: var(--ghost-color);
 

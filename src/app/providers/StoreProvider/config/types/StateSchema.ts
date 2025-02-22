@@ -3,6 +3,10 @@ import { UserSchema } from '../../../../../entities/User';
 import { LoginSchema } from '../../../../../features/AuthByUsername';
 import { ProfileSchema } from '../../../../../entities/Profile';
 import { AxiosInstance } from 'axios';
+import { TasksSchema } from '../../../../../entities/Task/model/types/TaskSchema';
+import { AppDispatch } from './AppDispatch';
+import { UseDispatch, useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../../../../shared/lib';
 
 export interface StateSchema {
   user: UserSchema;
@@ -10,6 +14,7 @@ export interface StateSchema {
   //Async reducers
   login?: LoginSchema;
   profile?: ProfileSchema;
+  tasks?: TasksSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

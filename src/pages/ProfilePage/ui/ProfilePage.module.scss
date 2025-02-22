@@ -3,6 +3,7 @@
   background-color: var(--disabled-color);
   min-height: 100vh;
   display: grid;
+  grid-template-columns: 350px auto 250px 300px;
   grid-template-areas:
     'header header header header'
     'main status workTime event'
@@ -12,6 +13,14 @@
 
 .header {
   grid-area: header;
+}
+
+.mainCard {
+  grid-area: main;
+}
+
+.tasksCard {
+  grid-area: tasks;
 }
 
 .headerBox {

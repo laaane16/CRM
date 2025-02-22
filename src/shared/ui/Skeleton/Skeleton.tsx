@@ -13,7 +13,7 @@ interface Props {
 const Skeleton: FC<Props> = ({ width, height, className, borderRadius = '8px' }) => {
   const skeletonClasses = cn(className, styles.skeleton);
 
-  return <div className={skeletonClasses}></div>;
+  return <div style={{ width, height }} className={skeletonClasses}></div>;
 };
 
 export default Skeleton;

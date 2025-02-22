@@ -15,8 +15,11 @@ interface Props {
   size?: AvatarSizes;
 }
 
-const Avatar: FC<Props> = ({ avatar, size = AvatarSizes.MEDIUM }) => {
-  const avatarStyles = cn(styles.avatar, { [`${styles.noAvatar} icon-user`]: !avatar, [styles[size]]: true });
+const Avatar: FC<Props> = ({ avatar, size = AvatarSizes.MEDIUM, className }) => {
+  const avatarStyles = cn(styles.avatar, className, {
+    [`${styles.noAvatar} icon-user`]: !avatar,
+    [styles[size]]: true,
+  });
 
   return avatar ? <img className={avatarStyles} src={avatar} alt="avatar" /> : <span className={avatarStyles}></span>;
 };

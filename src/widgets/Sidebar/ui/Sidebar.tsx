@@ -4,8 +4,9 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import cn from 'classnames';
 
 import * as styles from './Sidebar.module.scss';
-import { getUsername, getAvatar, userActions } from '../../../entities/User';
+import { getUsername, userActions } from '../../../entities/User';
 import { AppPaths, AppRoutes, useAppDispatch } from '../../../shared/lib';
+import Avatar, { AvatarSizes } from '../../../shared/ui/Avatar/Avatar';
 
 interface Props {
   className?: string;
@@ -13,7 +14,6 @@ interface Props {
 
 const Sidebar: FC<Props> = () => {
   const username = useSelector(getUsername);
-  const avatar = useSelector(getAvatar);
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const Sidebar: FC<Props> = () => {
       <nav className={styles.nav}>
         <div className={styles.navItem}>
           <Link className={styles.navLink} to={AppPaths[AppRoutes.PROFILE]}>
-            <img className={styles.avatar} src={avatar} />
+            <Avatar size={AvatarSizes.SMALL} />
             <div className={styles.container}>
               <span className={styles.itemTitle}>{username}</span>
               <span className={styles.circle}></span>

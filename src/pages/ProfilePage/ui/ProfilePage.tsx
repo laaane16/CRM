@@ -32,16 +32,6 @@ const reducerList = {
   profile: profileReducer,
 };
 
-// const dataValue = [
-//   { name: '1', value: 3 },
-//   { name: '2', value: 48 },
-//   { name: '3', value: 16 },
-//   { name: '4', value: 16 },
-//   { name: '5', value: 7 },
-//   { name: '6', value: 9 },
-//   { name: '7', value: 3 },
-// ];
-
 const statusData = [
   { name: 'A', value: 48, color: '#16212B' },
   { name: 'B', value: 16, color: '#2C3E50' },
@@ -133,9 +123,9 @@ const ProfilePage: FC<Props> = () => {
             <li className={styles.view}>Заявки и жалобы</li>
           </ul>
         </div>
-        <MainCard isLoading={isLoading as boolean} data={data} error={error} />
+        <MainCard className={styles.mainCard} isLoading={isLoading as boolean} data={data} error={error} />
         <StatusCard data={statusData} />
-        <TasksCard data={tasksData} />
+        <TasksCard className={styles.tasksCard} />
         <WorkCard data={workData} />
         <DocsCard />
         <EventCard />

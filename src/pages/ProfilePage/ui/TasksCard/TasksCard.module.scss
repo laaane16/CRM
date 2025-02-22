@@ -1,9 +1,17 @@
 .tasksContainer {
+  width: 100%;
   position: relative;
-  grid-area: tasks;
   padding: 20px 24px;
   border-radius: 16px;
   background-color: var(--ghost-color);
+}
+
+.skeleton {
+  border-radius: 16px;
+
+  &:not(:last-child) {
+    margin-bottom: 15px;
+  }
 }
 
 .extra {
@@ -66,13 +74,7 @@
   }
 }
 
-.taskAvatar {
-  display: inline-block;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: 50% 50%;
+.avatar {
   margin-right: 12px;
 }
 
