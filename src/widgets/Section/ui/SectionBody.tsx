@@ -1,8 +1,9 @@
 import { FC } from 'react';
 
-import * as styles from './SectionBody.module.scss';
 import { EmployeesList } from '../../../entities/Employee';
 import { EmployeesCardView } from '../../../entities/Employee/ui/EmployeesCard/EmployeesCard';
+
+import * as styles from './SectionBody.module.scss';
 
 interface Props {
   className?: string;

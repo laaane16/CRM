@@ -1,7 +1,17 @@
 .wrap {
+  position: relative;
   background-color: var(--light-gray-color);
   border-radius: 16px;
   width: 100%;
+  cursor: pointer;
+  transition-property: transform background-color;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.1s;
+
+  &:hover {
+    transform: scale(1.01);
+    background-color: var(--disabled-color);
+  }
 }
 
 .small {
