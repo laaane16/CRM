@@ -1,0 +1,21 @@
+.list {
+  &.small {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .card {
+      box-sizing: border-box;
+    }
+  }
+
+  &.large {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 28px;
+  }
+
+  .card {
+    box-sizing: border-box;
+  }
+}

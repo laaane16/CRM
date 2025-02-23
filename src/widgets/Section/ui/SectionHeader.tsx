@@ -2,9 +2,12 @@ import { FC } from 'react';
 import cn from 'classnames';
 
 import * as styles from './SectionHeader.module.scss';
+import { EmployeesCardView } from '../../../entities/Employee/ui/EmployeesCard/EmployeesCard';
 
 interface Props {
   className?: string;
+  currentView: EmployeesCardView;
+  onChangeListView: (type: EmployeesCardView) => void;
 }
 
 const data: { title: string; count: number }[] = [
@@ -16,7 +19,7 @@ const data: { title: string; count: number }[] = [
   { title: 'Запросы', count: 10 },
 ];
 
-const SectionHeader: FC<Props> = () => {
+const SectionHeader: FC<Props> = ({ className, currentView, onChangeListView }) => {
   return (
     <div className={styles.header}>
       <ul className={styles.list}>
@@ -27,9 +30,15 @@ const SectionHeader: FC<Props> = () => {
           </li>
         ))}
       </ul>
-      <div className={styles.gridToggle}>
-        <span className={styles.toggleItem}>L</span>
-        <span className={cn(styles.toggleItem, styles.toggleItemDefault)}>C</span>
+      <div className={styles.viewToggle}>
+        <span
+          onClick={() => onChangeListView(EmployeesCardView.SMALL)}
+          className={cn(styles.toggleItem, 'icon-list', { [styles.active]: EmployeesCardView.SMALL === currentView })}
+        />
+        <span
+          onClick={() => onChangeListView(EmployeesCardView.LARGE)}
+          className={cn(styles.toggleItem, 'icon-grid', { [styles.active]: EmployeesCardView.LARGE === currentView })}
+        />
       </div>
     </div>
   );
