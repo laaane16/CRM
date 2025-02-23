@@ -3,6 +3,7 @@ import Select from './Select';
 
 const meta: Meta<typeof Select> = {
   component: Select,
+  title: 'shared/Select',
 };
 
 export default meta;

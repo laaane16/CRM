@@ -3,7 +3,7 @@ import { PartialStoryFn } from 'storybook/internal/types';
 
 const StyleDecorator = (Story: PartialStoryFn<ReactRenderer>) => {
   return (
-    <div className="app-default-theme">
+    <div className="app-light-theme">
       <Story />
     </div>
   );

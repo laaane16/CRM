@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from 'react';
+import { FC, useState } from 'react';
 import cn from 'classnames';
 
 import * as styles from './Accordeon.module.scss';

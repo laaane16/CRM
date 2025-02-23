@@ -3,6 +3,7 @@ import Tooltip, { ArrowPosition } from './Tooltip';
 
 const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
+  title: 'shared/Tooltip',
 };
 
 export default meta;

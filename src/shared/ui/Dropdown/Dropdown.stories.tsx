@@ -3,6 +3,7 @@ import Dropdown from './Dropdown';
 
 const meta: Meta<typeof Dropdown> = {
   component: Dropdown,
+  title: 'shared/Dropdown',
 };
 
 export default meta;
