@@ -25,31 +25,34 @@ const profileSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(profileFetchData.fulfilled, (state, action: PayloadAction<IProfile>) => {
-      state.isLoading = false;
-      state.data = action.payload;
-    });
-    builder.addCase(profileFetchData.pending, (state) => {
-      state.isLoading = true;
-      state.error = undefined;
-    });
-    builder.addCase(profileFetchData.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = action.error.message;
-    });
+    builder
+      .addCase(profileFetchData.fulfilled, (state, action: PayloadAction<IProfile>) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
 
-    builder.addCase(updateProfileData.fulfilled, (state, action: PayloadAction<IProfile>) => {
-      state.isLoading = false;
-      state.data = action.payload;
-    });
-    builder.addCase(updateProfileData.pending, (state) => {
-      state.isLoading = true;
-      state.error = undefined;
-    });
-    builder.addCase(updateProfileData.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = action.error.message;
-    });
+      .addCase(profileFetchData.pending, (state) => {
+        state.isLoading = true;
+        state.error = undefined;
+      })
+
+      .addCase(profileFetchData.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+
+      .addCase(updateProfileData.fulfilled, (state, action: PayloadAction<IProfile>) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(updateProfileData.pending, (state) => {
+        state.isLoading = true;
+        state.error = undefined;
+      })
+      .addCase(updateProfileData.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      });
   },
 });
 

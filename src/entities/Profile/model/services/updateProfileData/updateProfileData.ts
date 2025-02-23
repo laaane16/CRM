@@ -16,7 +16,7 @@ const updateProfileData = createAsyncThunk<IProfile, IProfile, ThunkConfig<strin
         throw new Error(...errors);
       }
 
-      const response = await extra.api.put('/profile', arg);
+      const response = await extra.api.put(`/profiles/${arg.userId}`, arg);
 
       if (response.status !== 200) {
         throw new Error('error with update');

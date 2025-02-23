@@ -34,6 +34,21 @@
   border-bottom: 2px solid var(--disabled-color);
 }
 
+.skeletonWrap {
+  flex-grow: 1;
+  padding-top: 8px;
+}
+
+.skeleton {
+  &:nth-child(1) {
+    margin-right: 8px;
+  }
+
+  &:nth-child(2) {
+    margin-bottom: 8px;
+  }
+}
+
 .name {
   flex-grow: 1;
 }

@@ -37,7 +37,7 @@ const AppRoutesConfig: Record<AppRoutes, IAppRouteConfig> = {
     public: true,
   },
   [AppRoutes.PROFILE]: {
-    path: AppPaths[AppRoutes.PROFILE],
+    path: AppPaths[AppRoutes.PROFILE] + '/:id',
     element: <ProfilePage />,
     layout: null,
   },

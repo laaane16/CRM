@@ -24,8 +24,6 @@ describe('loginByUsername.test', () => {
     thunk.api.put.mockReturnValue(Promise.resolve({ data: profileValue, status: 200 }));
     const result = await thunk.callThunk(profileValue);
 
-    console.log(result);
-
     expect(thunk.dispatch).toHaveBeenCalledTimes(2);
     expect(thunk.api.put).toHaveBeenCalled();
 

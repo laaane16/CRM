@@ -11,6 +11,7 @@ import { tasksReducer, tasksSelectors } from '../../../../entities/Task/model/sl
 import { DynamicModuleLoader, useAppDispatch } from '../../../../shared/lib';
 import Avatar, { AvatarSizes } from '../../../../shared/ui/Avatar/Avatar';
 import Skeleton from '../../../../shared/ui/Skeleton/Skeleton';
+import { useParams } from 'react-router-dom';
 
 interface Props {
   className?: string;
@@ -20,13 +21,13 @@ const reducersList = { tasks: tasksReducer };
 
 const TasksCard: FC<Props> = ({ className }) => {
   const dispatch = useAppDispatch();
+  const { id } = useParams();
 
   useEffect(() => {
-    dispatch(fetchTasksByUserId({ id: 1 }));
+    dispatch(fetchTasksByUserId({ id: Number(id) }));
   }, []);
 
   const tasks = useSelector(tasksSelectors.selectAll);
-  console.log(tasks);
   const tasksIsLoading = useSelector(getTasksIsLoading);
 
   const taskTitleClasses = cn(styles.taskTitle, 'primary bold');

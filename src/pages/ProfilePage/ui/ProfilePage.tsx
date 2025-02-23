@@ -1,6 +1,7 @@
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import cn from 'classnames';
+import { useParams } from 'react-router-dom';
 
 import * as styles from './ProfilePage.module.scss';
 
@@ -21,8 +22,9 @@ import WorkCard from './WorkCard/WorkCard';
 import DocsCard from './DocsCard/DocsCard';
 import EventCard from './EventCard/EventCard';
 import HistoryCard from './HistoryCard/HistoryCard';
-import { getUserId } from '../../../entities/User';
+import { getUserAvatar, getUserId } from '../../../entities/User';
 import Avatar, { AvatarSizes } from '../../../shared/ui/Avatar/Avatar';
+import Skeleton from '../../../shared/ui/Skeleton/Skeleton';
 
 interface Props {
   className?: string;
@@ -78,16 +80,14 @@ const ProfilePage: FC<Props> = () => {
   const data = useSelector(getProfileData);
   const error = useSelector(getProfileError);
   const userId = useSelector(getUserId);
+  const { userId: profileId } = useSelector(getProfileData) || {};
 
-  const tasksData = new Array(15).fill({
-    avatar: 'https://timeweb.com/ru/community/article/43/4372a42395939b59d7e234e6042983f8.jpg',
-    title: 'Подготовка презентации по мобильного приложения Sample App',
-    importance: 'Срочно',
-    deadline: '10:30, 15 марта, 2025',
-  });
+  const { id } = useParams();
+
+  const canEdit = userId === profileId;
 
   useEffect(() => {
-    dispatch(profileFetchData({ id: userId as number }));
+    dispatch(profileFetchData({ id: Number(id) }));
   }, []);
 
   const tgClasses = cn(styles.tg, 'primary bold');
@@ -97,11 +97,23 @@ const ProfilePage: FC<Props> = () => {
       <main className={styles.layout}>
         <div className={styles.header}>
           <div className={styles.headerBox}>
-            <Avatar size={AvatarSizes.LARGE} avatar={data?.avatar} />
-            <div className={styles.name}>
-              <h2 className="alternative">{data?.name}</h2>
-              <p className={tgClasses}>{data?.telegram}</p>
-            </div>
+            {isLoading ? (
+              <>
+                <Skeleton className={styles.skeleton} borderRadius="50%" width="64px" height="64px" />
+                <span className={styles.skeletonWrap}>
+                  <Skeleton className={styles.skeleton} width="300px" height="28px" />
+                  <Skeleton className={styles.skeleton} width="200px" height="20px" />
+                </span>
+              </>
+            ) : (
+              <>
+                <Avatar size={AvatarSizes.LARGE} avatar={data?.avatar} />
+                <div className={styles.name}>
+                  <h2 className="alternative">{data?.name}</h2>
+                  <p className={tgClasses}>{data?.telegram}</p>
+                </div>
+              </>
+            )}
             <Button size={ButtonSizes.SMALL} theme={ButtonTheme.SECONDARY}>
               Написать
             </Button>
@@ -123,7 +135,13 @@ const ProfilePage: FC<Props> = () => {
             <li className={styles.view}>Заявки и жалобы</li>
           </ul>
         </div>
-        <MainCard className={styles.mainCard} isLoading={isLoading as boolean} data={data} error={error} />
+        <MainCard
+          canEdit={canEdit}
+          className={styles.mainCard}
+          isLoading={isLoading as boolean}
+          data={data}
+          error={error}
+        />
         <StatusCard data={statusData} />
         <TasksCard className={styles.tasksCard} />
         <WorkCard data={workData} />
@@ -131,7 +149,6 @@ const ProfilePage: FC<Props> = () => {
         <EventCard />
         <HistoryCard />
       </main>
-      {/* )} */}
     </DynamicModuleLoader>
   );
 };

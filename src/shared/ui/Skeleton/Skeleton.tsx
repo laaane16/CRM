@@ -10,10 +10,10 @@ interface Props {
   borderRadius?: string;
 }
 
-const Skeleton: FC<Props> = ({ width, height, className, borderRadius = '8px' }) => {
+const Skeleton: FC<Props> = ({ width, height, className, borderRadius = '16px' }) => {
   const skeletonClasses = cn(className, styles.skeleton);
 
-  return <div style={{ width, height }} className={skeletonClasses}></div>;
+  return <div style={{ width, height, borderRadius }} className={skeletonClasses}></div>;
 };
 
 export default Skeleton;

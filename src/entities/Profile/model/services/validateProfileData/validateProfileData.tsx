@@ -5,13 +5,13 @@ export const validateProfileData = (profile: IProfile): string[] => {
     return [ValidateProfileErrors.NO_DATA];
   }
 
-  const options = Object.values(profile)
-    .map(Boolean)
-    .find((i) => i === false);
+  // const options = Object.values(profile)
+  //   .map(Boolean)
+  //   .find((i) => i === false);
 
-  if (options === false) {
-    return [ValidateProfileErrors.NO_DATA];
-  }
+  // if (options === false) {
+  //   return [ValidateProfileErrors.NO_DATA];
+  // }
 
   const { number, name, mail } = profile;
   const errors = [];

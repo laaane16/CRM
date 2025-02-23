@@ -14,6 +14,7 @@ interface Props {
   data?: IProfile;
   error?: string;
   isLoading: boolean;
+  canEdit: boolean;
 }
 
 interface MenuItem {
@@ -35,7 +36,7 @@ const socialItems = [
   { icon: 'pinterest', link: '' },
 ];
 
-const MainCard: FC<Props> = ({ isLoading, data, error, className }) => {
+const MainCard: FC<Props> = ({ isLoading, data, error, className, canEdit }) => {
   const dispatch = useAppDispatch();
 
   const [isEditorMode, setIsEditorMode] = useState(false);
@@ -102,13 +103,15 @@ const MainCard: FC<Props> = ({ isLoading, data, error, className }) => {
         <>
           {error && <Message description={error || ''} />}
           <span className={styles.marker}>штатный</span>
-          <Dropdown
-            onClick={handleDropdownClick}
-            menu={[{ value: 'edit', label: 'Редактировать профиль' }]}
-            className={styles.extra}
-          >
-            <Ellipsis />
-          </Dropdown>
+          {canEdit && (
+            <Dropdown
+              onClick={handleDropdownClick}
+              menu={[{ value: 'edit', label: 'Редактировать профиль' }]}
+              className={styles.extra}
+            >
+              <Ellipsis />
+            </Dropdown>
+          )}
           <ul className={styles.mainInfoList}>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-call`, styles.mainInfoItemIcon)} />

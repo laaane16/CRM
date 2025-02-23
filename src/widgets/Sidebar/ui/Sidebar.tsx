@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import cn from 'classnames';
 
 import * as styles from './Sidebar.module.scss';
-import { getUsername, userActions } from '../../../entities/User';
+import { getUserId, getUsername, getUserAvatar, userActions } from '../../../entities/User';
 import { AppPaths, AppRoutes, useAppDispatch } from '../../../shared/lib';
 import Avatar, { AvatarSizes } from '../../../shared/ui/Avatar/Avatar';
 
@@ -15,6 +15,11 @@ interface Props {
 const Sidebar: FC<Props> = () => {
   const username = useSelector(getUsername);
   const dispatch = useAppDispatch();
+
+  const userId = useSelector(getUserId);
+  const avatar = useSelector(getUserAvatar);
+
+  console.log(avatar);
 
   const navigate = useNavigate();
 
@@ -37,8 +42,8 @@ const Sidebar: FC<Props> = () => {
       </h1>
       <nav className={styles.nav}>
         <div className={styles.navItem}>
-          <Link className={styles.navLink} to={AppPaths[AppRoutes.PROFILE]}>
-            <Avatar size={AvatarSizes.SMALL} />
+          <Link className={styles.navLink} to={`${AppPaths[AppRoutes.PROFILE]}/${userId}`}>
+            <Avatar size={AvatarSizes.SMALL} avatar={avatar} />
             <div className={styles.container}>
               <span className={styles.itemTitle}>{username}</span>
               <span className={styles.circle}></span>
