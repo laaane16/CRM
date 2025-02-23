@@ -25,6 +25,7 @@ import HistoryCard from './HistoryCard/HistoryCard';
 import { getUserAvatar, getUserId } from '../../../entities/User';
 import Avatar, { AvatarSizes } from '../../../shared/ui/Avatar/Avatar';
 import Skeleton from '../../../shared/ui/Skeleton/Skeleton';
+import { getProfileForm } from '../../../entities/Profile/model/selectors/getProfileForm/getProfileForm';
 
 interface Props {
   className?: string;
@@ -77,7 +78,7 @@ const workData = [
 const ProfilePage: FC<Props> = () => {
   const dispatch = useAppDispatch();
   const isLoading = useSelector(getProfileIsLoading);
-  const data = useSelector(getProfileData);
+  const form = useSelector(getProfileForm);
   const error = useSelector(getProfileError);
   const userId = useSelector(getUserId);
   const { userId: profileId } = useSelector(getProfileData) || {};
@@ -107,10 +108,10 @@ const ProfilePage: FC<Props> = () => {
               </>
             ) : (
               <>
-                <Avatar size={AvatarSizes.LARGE} avatar={data?.avatar} />
+                <Avatar size={AvatarSizes.LARGE} avatar={form?.avatar} />
                 <div className={styles.name}>
-                  <h2 className="alternative">{data?.name}</h2>
-                  <p className={tgClasses}>{data?.telegram}</p>
+                  <h2 className="alternative">{form?.name}</h2>
+                  <p className={tgClasses}>{form?.telegram}</p>
                 </div>
               </>
             )}
@@ -139,7 +140,7 @@ const ProfilePage: FC<Props> = () => {
           canEdit={canEdit}
           className={styles.mainCard}
           isLoading={isLoading as boolean}
-          data={data}
+          data={form}
           error={error}
         />
         <StatusCard data={statusData} />

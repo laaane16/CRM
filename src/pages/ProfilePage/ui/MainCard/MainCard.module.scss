@@ -75,6 +75,12 @@
   right: calc(var(--PADDING-BASE) * 3);
 }
 
+.cancelEditButton {
+  position: absolute;
+  right: calc(var(--PADDING-BASE) * 3);
+  transform: translateY(calc(100% + 8px));
+}
+
 .mainInfoItemIcon {
   font-size: 24px;
 

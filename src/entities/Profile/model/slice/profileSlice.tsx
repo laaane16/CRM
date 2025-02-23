@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IProfile, ProfileSchema } from '../types/ProfileSchema';
 import { profileFetchData } from '../services/profileFetchData/profileFetchData';
@@ -6,9 +6,10 @@ import updateProfileData from '../services/updateProfileData/updateProfileData';
 
 const initialState: ProfileSchema = {
   data: undefined,
+  form: undefined,
   isLoading: false,
   error: undefined,
-  readonly: true,
+  readonly: false,
 };
 
 const profileSlice = createSlice({
@@ -17,10 +18,19 @@ const profileSlice = createSlice({
   reducers: {
     updateProfile: (state, action) => {
       state.error = undefined;
-      state.data = {
-        ...state.data,
+      state.form = {
+        ...state.form,
         ...action.payload,
       };
+    },
+
+    onEditorMode: (state) => {
+      state.readonly = true;
+    },
+
+    cancelEdit: (state) => {
+      state.form = state.data;
+      state.readonly = false;
     },
   },
 
@@ -29,6 +39,7 @@ const profileSlice = createSlice({
       .addCase(profileFetchData.fulfilled, (state, action: PayloadAction<IProfile>) => {
         state.isLoading = false;
         state.data = action.payload;
+        state.form = action.payload;
       })
 
       .addCase(profileFetchData.pending, (state) => {
@@ -43,7 +54,9 @@ const profileSlice = createSlice({
 
       .addCase(updateProfileData.fulfilled, (state, action: PayloadAction<IProfile>) => {
         state.isLoading = false;
+        state.readonly = false;
         state.data = action.payload;
+        state.form = action.payload;
       })
       .addCase(updateProfileData.pending, (state) => {
         state.isLoading = true;

@@ -1,8 +1,9 @@
 export interface ProfileSchema {
-  data: IProfile | undefined;
+  data?: IProfile;
   readonly: boolean;
   isLoading: boolean;
-  error: string | undefined;
+  error?: string;
+  form?: IProfile;
 }
 
 interface IPost {

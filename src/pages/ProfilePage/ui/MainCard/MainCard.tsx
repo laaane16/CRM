@@ -8,6 +8,8 @@ import { Button, ButtonSizes, Dropdown, Ellipsis, Input, Message } from '../../.
 import { useAppDispatch } from '../../../../shared/lib';
 import updateProfileData from '../../../../entities/Profile/model/services/updateProfileData/updateProfileData';
 import Skeleton from '../../../../shared/ui/Skeleton/Skeleton';
+import { useSelector } from 'react-redux';
+import { getProfileReadonly } from '../../../../entities/Profile/model/selectors/getProfileReadonly/getProfileReadonly';
 
 interface Props {
   className?: string;
@@ -38,11 +40,10 @@ const socialItems = [
 
 const MainCard: FC<Props> = ({ isLoading, data, error, className, canEdit }) => {
   const dispatch = useAppDispatch();
-
-  const [isEditorMode, setIsEditorMode] = useState(false);
+  const readonly = useSelector(getProfileReadonly);
 
   const mainInfoClasses = cn(styles.mainInfo, className, {
-    [styles.editorMode]: isEditorMode,
+    [styles.editorMode]: readonly,
     [styles.hasError]: Boolean(error),
   });
 
@@ -50,14 +51,15 @@ const MainCard: FC<Props> = ({ isLoading, data, error, className, canEdit }) => 
   const dateItemClasses = cn(styles.dateItem, 'tiny medium');
 
   const onEditorMode = () => {
-    setIsEditorMode(true);
+    dispatch(profileActions.onEditorMode());
   };
 
   const offEditorMode = async () => {
-    const response = await dispatch(updateProfileData(data as IProfile));
-    if (response.meta.requestStatus === 'fulfilled') {
-      setIsEditorMode(false);
-    }
+    dispatch(updateProfileData(data as IProfile));
+  };
+
+  const onCancelEdit = () => {
+    dispatch(profileActions.cancelEdit());
   };
 
   const onChangeNumber = (value: string) => {
@@ -115,29 +117,34 @@ const MainCard: FC<Props> = ({ isLoading, data, error, className, canEdit }) => 
           <ul className={styles.mainInfoList}>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-call`, styles.mainInfoItemIcon)} />
-              {isEditorMode ? <Input onChange={onChangeNumber} value={data?.number || ''} /> : data?.number}
+              {readonly ? <Input onChange={onChangeNumber} value={data?.number || ''} /> : data?.number}
             </li>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-alternate-mail`, styles.mainInfoItemIcon)} />
-              {isEditorMode ? <Input onChange={onChangeMail} value={data?.mail || ''} /> : data?.mail}
+              {readonly ? <Input onChange={onChangeMail} value={data?.mail || ''} /> : data?.mail}
             </li>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-verify-bordered`, styles.mainInfoItemIcon)} />
-              {isEditorMode ? <Input onChange={onChangeMainPost} value={data?.post.main || ''} /> : data?.post.main}
+              {readonly ? <Input onChange={onChangeMainPost} value={data?.post.main || ''} /> : data?.post.main}
             </li>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-verify-bordered`, styles.mainInfoItemIcon)} />
-              {isEditorMode ? <Input onChange={onChangeExtraPost} value={data?.post.extra || ''} /> : data?.post.extra}
+              {readonly ? <Input onChange={onChangeExtraPost} value={data?.post.extra || ''} /> : data?.post.extra}
             </li>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-map`, styles.mainInfoItemIcon)} />
-              {isEditorMode ? <Input onChange={onChangeAddress} value={data?.address || ''} /> : data?.address}
+              {readonly ? <Input onChange={onChangeAddress} value={data?.address || ''} /> : data?.address}
             </li>
           </ul>
-          {isEditorMode ? (
-            <Button className={styles.saveButton} size={ButtonSizes.SMALL} onClick={offEditorMode}>
-              Сохранить
-            </Button>
+          {readonly ? (
+            <>
+              <Button className={styles.saveButton} size={ButtonSizes.SMALL} onClick={offEditorMode}>
+                Сохранить
+              </Button>
+              <Button className={styles.cancelEditButton} size={ButtonSizes.SMALL} onClick={onCancelEdit}>
+                Отмена
+              </Button>
+            </>
           ) : null}
           <ul className={styles.socialsList}>
             {socialItems.map((item, index) => (
