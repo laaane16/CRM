@@ -10,7 +10,6 @@ interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> 
   title?: string;
   onChange: (value: string) => void;
 }
-
 const Input: FC<Props> = ({ type = 'text', onChange, value, title, className, ...otherProps }) => {
   const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange && onChange(e.target.value);

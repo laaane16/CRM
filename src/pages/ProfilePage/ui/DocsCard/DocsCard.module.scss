@@ -7,12 +7,12 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 4px 8px;
   border-radius: 16px;
-  background-color: white;
+  background-color: var(--ghost-color);
 }
 
 .doc {
   border: 2px solid var(--medium-gray-color);
-  background-color: white;
+  background-color: var(--ghost-color);
 
   &:first-child {
     border-top-left-radius: 16px;

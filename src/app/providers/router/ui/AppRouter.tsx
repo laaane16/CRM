@@ -37,7 +37,7 @@ const AppRoutesConfig: Record<AppRoutes, IAppRouteConfig> = {
     public: true,
   },
   [AppRoutes.PROFILE]: {
-    path: AppPaths[AppRoutes.PROFILE],
+    path: AppPaths[AppRoutes.PROFILE] + '/:id',
     element: <ProfilePage />,
     layout: null,
   },
@@ -68,7 +68,7 @@ const AppRouter: FC = () => {
                 ) : (
                   route.element
                 )
-              ) : route.public === true ? (
+              ) : route.public === true || route.path === AppPaths[AppRoutes.NOT_FOUND] ? (
                 route.element
               ) : (
                 <Navigate to="/login" />

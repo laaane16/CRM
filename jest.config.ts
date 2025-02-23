@@ -1,6 +1,9 @@
 import type { Config } from '@jest/types';
 
 const config: Config.InitialOptions = {
+  globals: {
+    __PROJECT__: 'jest',
+  },
   clearMocks: true,
   testEnvironment: 'jsdom',
   coveragePathIgnorePatterns: ['\\\\node_modules\\\\'],

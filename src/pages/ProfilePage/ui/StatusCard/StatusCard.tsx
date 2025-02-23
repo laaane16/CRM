@@ -4,6 +4,7 @@ import { PieChart, Pie, Cell, LabelList, Label } from 'recharts';
 import { Ellipsis } from '../../../../shared/ui';
 
 import * as styles from './StatusCard.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface IData {
   value: number;
@@ -28,9 +29,11 @@ const listData = [
 const StatusCard: FC<Props> = ({ className, data }) => {
   const total = useMemo(() => data.reduce((sum, entry) => sum + entry.value, 0), [data]);
 
+  const { t } = useTranslation();
+
   return (
     <div className={styles.status}>
-      <h3 className={styles.statusTitle}>СТАТУС ПРОЕКТОВ</h3>
+      <h3 className={styles.statusTitle}>dasdasd</h3>
       <Ellipsis className={styles.extra} />
       <ul className={styles.statusList}>
         {listData.map((item, index) => (

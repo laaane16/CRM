@@ -7,12 +7,16 @@ import { IProfile, profileActions } from '../../../../entities/Profile';
 import { Button, ButtonSizes, Dropdown, Ellipsis, Input, Message } from '../../../../shared/ui';
 import { useAppDispatch } from '../../../../shared/lib';
 import updateProfileData from '../../../../entities/Profile/model/services/updateProfileData/updateProfileData';
-import { SerializedError } from '@reduxjs/toolkit';
+import Skeleton from '../../../../shared/ui/Skeleton/Skeleton';
+import { useSelector } from 'react-redux';
+import { getProfileReadonly } from '../../../../entities/Profile/model/selectors/getProfileReadonly/getProfileReadonly';
 
 interface Props {
   className?: string;
   data?: IProfile;
-  error?: SerializedError;
+  error?: string;
+  isLoading: boolean;
+  canEdit: boolean;
 }
 
 interface MenuItem {
@@ -34,13 +38,12 @@ const socialItems = [
   { icon: 'pinterest', link: '' },
 ];
 
-const MainCard: FC<Props> = ({ data, error }) => {
+const MainCard: FC<Props> = ({ isLoading, data, error, className, canEdit }) => {
   const dispatch = useAppDispatch();
+  const readonly = useSelector(getProfileReadonly);
 
-  const [isEditorMode, setIsEditorMode] = useState(false);
-
-  const mainInfoClasses = cn(styles.mainInfo, {
-    [styles.editorMode]: isEditorMode,
+  const mainInfoClasses = cn(styles.mainInfo, className, {
+    [styles.editorMode]: !readonly,
     [styles.hasError]: Boolean(error),
   });
 
@@ -48,14 +51,15 @@ const MainCard: FC<Props> = ({ data, error }) => {
   const dateItemClasses = cn(styles.dateItem, 'tiny medium');
 
   const onEditorMode = () => {
-    setIsEditorMode(true);
+    dispatch(profileActions.onEditorMode());
   };
 
   const offEditorMode = async () => {
-    const response = await dispatch(updateProfileData(data as IProfile));
-    if (response.meta.requestStatus === 'fulfilled') {
-      setIsEditorMode(false);
-    }
+    dispatch(updateProfileData(data as IProfile));
+  };
+
+  const onCancelEdit = () => {
+    dispatch(profileActions.cancelEdit());
   };
 
   const onChangeNumber = (value: string) => {
@@ -90,65 +94,74 @@ const MainCard: FC<Props> = ({ data, error }) => {
 
   // TODO: marker should return from profile data
   return (
-    <>
-      <div className={mainInfoClasses}>
-        {error && <Message description={error.message || ''} />}
-        <span className={styles.marker}>штатный</span>
-        <Dropdown
-          onClick={handleDropdownClick}
-          menu={[{ value: 'edit', label: 'Редактировать профиль' }]}
-          className={styles.extra}
-        >
-          <Ellipsis />
-        </Dropdown>
-        <ul className={styles.mainInfoList}>
-          {/* {mainInfoListData.map((item, index) => (
-            <li key={index} className={mainInfoItemClasses}>
-              <span className={cn(`icon-${item.icon}`, styles.mainInfoItemIcon)} />
-              {editorMode ? <Input onChange={() => {}} value={item.data as string} /> : item.data}
+    <div className={mainInfoClasses}>
+      {isLoading ? (
+        <>
+          <Skeleton className={styles.skeleton} width="100%" height="220px" />
+          <Skeleton className={styles.skeleton} width="100%" height="80px" />
+          <Skeleton className={styles.skeleton} width="100%" height="30px" />
+        </>
+      ) : (
+        <>
+          {error && <Message description={error || ''} />}
+          <span className={styles.marker}>штатный</span>
+          {canEdit && (
+            <Dropdown
+              onClick={handleDropdownClick}
+              menu={[{ value: 'edit', label: 'Редактировать профиль' }]}
+              className={styles.extra}
+            >
+              <Ellipsis />
+            </Dropdown>
+          )}
+          <ul className={styles.mainInfoList}>
+            <li className={mainInfoItemClasses}>
+              <span className={cn(`icon-call`, styles.mainInfoItemIcon)} />
+              {!readonly ? <Input onChange={onChangeNumber} value={data?.number || ''} /> : data?.number}
             </li>
-          ))} */}
-          <li className={mainInfoItemClasses}>
-            <span className={cn(`icon-call`, styles.mainInfoItemIcon)} />
-            {isEditorMode ? <Input onChange={onChangeNumber} value={data?.number || ''} /> : data?.number}
-          </li>
-          <li className={mainInfoItemClasses}>
-            <span className={cn(`icon-alternate-mail`, styles.mainInfoItemIcon)} />
-            {isEditorMode ? <Input onChange={onChangeMail} value={data?.mail || ''} /> : data?.mail}
-          </li>
-          <li className={mainInfoItemClasses}>
-            <span className={cn(`icon-verify-bordered`, styles.mainInfoItemIcon)} />
-            {isEditorMode ? <Input onChange={onChangeMainPost} value={data?.post.main || ''} /> : data?.post.main}
-          </li>
-          <li className={mainInfoItemClasses}>
-            <span className={cn(`icon-verify-bordered`, styles.mainInfoItemIcon)} />
-            {isEditorMode ? <Input onChange={onChangeExtraPost} value={data?.post.extra || ''} /> : data?.post.extra}
-          </li>
-          <li className={mainInfoItemClasses}>
-            <span className={cn(`icon-map`, styles.mainInfoItemIcon)} />
-            {isEditorMode ? <Input onChange={onChangeAddress} value={data?.address || ''} /> : data?.address}
-          </li>
-        </ul>
-        {isEditorMode ? (
-          <Button className={styles.saveButton} size={ButtonSizes.SMALL} onClick={offEditorMode}>
-            Сохранить
-          </Button>
-        ) : null}
-        <ul className={styles.socialsList}>
-          {socialItems.map((item, index) => (
-            <li className={styles.socialsItem} key={index}>
-              <span className={cn(`icon-${item.icon}`, styles.socialIcon)}>
-                <a href={item.link}></a>
-              </span>
+            <li className={mainInfoItemClasses}>
+              <span className={cn(`icon-alternate-mail`, styles.mainInfoItemIcon)} />
+              {!readonly ? <Input onChange={onChangeMail} value={data?.mail || ''} /> : data?.mail}
             </li>
-          ))}
-        </ul>
-        <ul>
-          <li className={dateItemClasses}>{data?.createdAt}</li>
-          <li className={dateItemClasses}>{data?.updatedAt}</li>
-        </ul>
-      </div>
-    </>
+            <li className={mainInfoItemClasses}>
+              <span className={cn(`icon-verify-bordered`, styles.mainInfoItemIcon)} />
+              {!readonly ? <Input onChange={onChangeMainPost} value={data?.post.main || ''} /> : data?.post.main}
+            </li>
+            <li className={mainInfoItemClasses}>
+              <span className={cn(`icon-verify-bordered`, styles.mainInfoItemIcon)} />
+              {!readonly ? <Input onChange={onChangeExtraPost} value={data?.post.extra || ''} /> : data?.post.extra}
+            </li>
+            <li className={mainInfoItemClasses}>
+              <span className={cn(`icon-map`, styles.mainInfoItemIcon)} />
+              {!readonly ? <Input onChange={onChangeAddress} value={data?.address || ''} /> : data?.address}
+            </li>
+          </ul>
+          {!readonly ? (
+            <>
+              <Button className={styles.saveButton} size={ButtonSizes.SMALL} onClick={offEditorMode}>
+                Сохранить
+              </Button>
+              <Button className={styles.cancelEditButton} size={ButtonSizes.SMALL} onClick={onCancelEdit}>
+                Отмена
+              </Button>
+            </>
+          ) : null}
+          <ul className={styles.socialsList}>
+            {socialItems.map((item, index) => (
+              <li className={styles.socialsItem} key={index}>
+                <span className={cn(`icon-${item.icon}`, styles.socialIcon)}>
+                  <a href={item.link}></a>
+                </span>
+              </li>
+            ))}
+          </ul>
+          <ul>
+            <li className={dateItemClasses}>{data?.createdAt}</li>
+            <li className={dateItemClasses}>{data?.updatedAt}</li>
+          </ul>
+        </>
+      )}
+    </div>
   );
 };
 

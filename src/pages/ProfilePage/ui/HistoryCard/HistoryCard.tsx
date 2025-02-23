@@ -1,8 +1,10 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 import * as styles from './HistoryCard.module.scss';
 import cn from 'classnames';
 import { Ellipsis } from '../../../../shared/ui';
+import { DynamicModuleLoader } from '../../../../shared/lib';
+import { tasksReducer } from '../../../../entities/Task/model/slice/tasksSlice';
 
 interface Props {
   className?: string;

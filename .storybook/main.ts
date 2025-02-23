@@ -1,5 +1,6 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
 import { buildCssLoader } from '../config/build/loaders/buildCssLoader';
+import { DefinePlugin } from 'webpack';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -32,6 +33,14 @@ const config: StorybookConfig = {
   },
   webpackFinal: async (config) => {
     config.module?.rules?.push(buildCssLoader(true));
+
+    config.plugins?.push(
+      new DefinePlugin({
+        __IS_DEV__: JSON.stringify(true),
+        // __API__: '',
+        __PROJECT__: JSON.stringify('storybook'),
+      }),
+    );
     return config;
   },
 };

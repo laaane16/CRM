@@ -8,11 +8,10 @@ interface ProfileFetchDataProps {
 
 export const profileFetchData = createAsyncThunk<IProfile, ProfileFetchDataProps, ThunkConfig<string>>(
   'profile/profileFetchData',
-  async (arg, thunkAPI) => {
+  async ({ id }, thunkAPI) => {
     const { extra, rejectWithValue } = thunkAPI;
     try {
-      console.log(arg);
-      const response = await extra.api.get('/profile');
+      const response = await extra.api.get(`/profiles/${id}`);
 
       if (!response.data) {
         throw new Error('no data');

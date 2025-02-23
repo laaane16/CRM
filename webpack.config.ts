@@ -9,6 +9,7 @@ export default (env: BuildEnv) => {
   const PORT = env.port || 3000;
 
   const isDev = MODE === 'development';
+  const project = 'frontend';
 
   const paths: BuildPaths = {
     src: path.resolve(__dirname, 'src'),
@@ -17,7 +18,7 @@ export default (env: BuildEnv) => {
     html: path.resolve(__dirname, 'public', 'index.html'),
   };
 
-  const config: Configuration = buildWebpackConfiguration({ mode: MODE, port: PORT, isDev, paths });
+  const config: Configuration = buildWebpackConfiguration({ mode: MODE, port: PORT, isDev, paths, project });
 
   return config;
 };

@@ -1,0 +1,41 @@
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 50%;
+
+  &.noAvatar {
+    background-color: var(--medium-gray-color);
+  }
+
+  &.large {
+    width: 64px;
+    height: 64px;
+
+    &.noAvatar {
+      padding: 16px;
+      line-height: 1;
+      font-size: 32px;
+      text-align: center;
+    }
+  }
+
+  &.medium {
+    width: 48px;
+    height: 48px;
+
+    &.noAvatar {
+      font-size: 24px;
+      padding: 12px;
+    }
+  }
+
+  &.small {
+    width: 32px;
+    height: 32px;
+
+    &.noAvatar {
+      font-size: 16px;
+      padding: 8px;
+    }
+  }
+}

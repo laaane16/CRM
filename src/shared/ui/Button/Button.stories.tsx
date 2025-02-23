@@ -5,6 +5,7 @@ import '../../../app/styles/index.scss';
 
 const meta: Meta<typeof Button> = {
   component: Button,
+  title: 'shared/Button',
 };
 
 export default meta;

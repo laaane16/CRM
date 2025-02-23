@@ -13,38 +13,14 @@
   left: 50%;
   min-width: 200px;
   text-align: center;
-  transform: translate(-50%, -100%);
   padding: 15px 10px;
-  background-color: white;
+  background-color: var(--ghost-color);
   border-radius: 10px;
   border: 1px solid var(--secondary-color);
   color: var(--secondary-color);
-  animation: mount ease-out 5s 1;
 
   &.error {
     border-color: 1px solid var(--error-color);
     color: var(--error-color);
-  }
-}
-
-@keyframes mount {
-  0% {
-    transform: translate(-50%, -100%);
-  }
-
-  20% {
-    transform: translate(-50%, 200%);
-  }
-
-  40% {
-    transform: translate(-50%, 200%);
-  }
-
-  60% {
-    transform: translate(-50%, 200%);
-  }
-
-  100% {
-    transform: translate(-50%, -100%);
   }
 }

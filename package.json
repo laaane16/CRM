@@ -7,18 +7,21 @@
   "author": "",
   "license": "ISC",
   "scripts": {
+    "start:dev:app": "webpack server --env port=3000",
+    "start:dev:server": "node ./json-server/index.js",
+    "start:dev": "concurrently \"npm run start:dev:app\" \"npm run start:dev:server\"",
+    "build:prod": "webpack --env mode=production",
+    "build:dev": "webpack --env mode=development",
+    "test:unit": "jest",
+    "test:ui": "npx loki test",
+    "test:ui:ok": "npx loki approve",
+    "storybook": "storybook dev -p 6006 --debug-webpack",
+    "build-storybook": "storybook build",
+    "format": "prettier --write .",
     "lint": "eslint ./",
     "lint:write": "eslint ./ --fix",
     "lint:style": "stylelint \"**/*.{css,scss}\"",
-    "lint:style:write": "stylelint \"**/*.{css,scss}\" --fix",
-    "dev": "webpack server --env port=3000",
-    "build:prod": "webpack --env mode=production",
-    "build:dev": "webpack --env mode=development",
-    "unit": "jest",
-    "start:dev:server": "node ./json-server/index.js",
-    "storybook": "storybook dev -p 6006 --debug-webpack",
-    "build-storybook": "storybook build",
-    "format": "prettier --write ."
+    "lint:style:write": "stylelint \"**/*.{css,scss}\" --fix"
   },
   "husky": {
     "hooks": {
@@ -36,12 +39,14 @@
     "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.9",
     "classnames": "^2.5.1",
+    "concurrently": "^9.1.2",
     "i18next": "^24.2.1",
     "i18next-browser-languagedetector": "^8.0.2",
     "i18next-http-backend": "^3.0.1",
     "luxon": "^3.5.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "motion": "^12.4.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-i18next": "^15.4.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.1",
@@ -78,6 +83,7 @@
     "css-loader": "^7.1.2",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-i18next": "^6.1.1",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.3",
@@ -90,6 +96,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "json-server": "^0.17.4",
     "lint-staged": "^15.3.0",
+    "loki": "^0.35.1",
     "mini-css-extract-plugin": "^2.9.2",
     "prettier": "^3.4.2",
     "prettier-eslint-cli": "^8.0.1",
@@ -115,5 +122,20 @@
     "extends": [
       "plugin:storybook/recommended"
     ]
+  },
+  "loki": {
+    "configurations": {
+      "chrome.laptop": {
+        "target": "chrome.docker",
+        "width": 1366,
+        "height": 768,
+        "deviceScaleFactor": 1,
+        "mobile": false
+      },
+      "chrome.iphone7": {
+        "target": "chrome.docker",
+        "preset": "iPhone 7"
+      }
+    }
   }
 }

@@ -11,9 +11,12 @@ export interface BuildPaths {
   output: string;
 }
 
+export type ProjectOption = 'jest' | 'storybook' | 'frontend';
+
 export interface BuildOptions {
   paths: BuildPaths;
   isDev: boolean;
   port: number;
   mode: BuildMode;
+  project: ProjectOption;
 }
