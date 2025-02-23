@@ -4,18 +4,18 @@ import { ProfileSchema } from '../types/ProfileSchema';
 import { profileActions, profileReducer } from './profileSlice';
 
 describe('profileSlice.test', () => {
-  const state = { data: undefined, isLoading: false, error: undefined, readonly: true };
+  const state = { data: undefined, isLoading: false, error: undefined, readonly: false };
 
   test('test updateProfile reducer', () => {
     const state: DeepPartial<ProfileSchema> = {
-      data: {
+      form: {
         name: '123',
       },
     };
 
     const result = profileReducer(state as ProfileSchema, profileActions.updateProfile({ name: 'asd' }));
 
-    expect(result).toEqual({ data: { name: 'asd' } });
+    expect(result).toEqual({ form: { name: 'asd' } });
   });
 
   // async reducers
@@ -24,13 +24,13 @@ describe('profileSlice.test', () => {
       type: profileFetchData.pending.type,
     });
 
-    expect(newState).toEqual({ data: undefined, isLoading: true, error: undefined, readonly: true });
+    expect(newState).toEqual({ data: undefined, isLoading: true, error: undefined, readonly: false });
   });
 
   test('profileFetchData fulfilled', () => {
     const newState = profileReducer(state as ProfileSchema, { type: profileFetchData.fulfilled.type, payload: {} });
 
-    expect(newState).toEqual({ data: {}, isLoading: false, error: undefined, readonly: true });
+    expect(newState).toEqual({ data: {}, form: {}, isLoading: false, error: undefined, readonly: false });
   });
 
   test('profileFetchData rejected', () => {
@@ -40,7 +40,7 @@ describe('profileSlice.test', () => {
       payload: {},
     });
 
-    expect(newState).toEqual({ data: undefined, isLoading: false, error: 'error', readonly: true });
+    expect(newState).toEqual({ data: undefined, isLoading: false, error: 'error', readonly: false });
   });
 
   test('updateProfileData pending', () => {
@@ -48,13 +48,13 @@ describe('profileSlice.test', () => {
       type: updateProfileData.pending.type,
     });
 
-    expect(newState).toEqual({ data: undefined, isLoading: true, error: undefined, readonly: true });
+    expect(newState).toEqual({ data: undefined, isLoading: true, error: undefined, readonly: false });
   });
 
   test('updateProfileData fulfilled', () => {
     const newState = profileReducer(state as ProfileSchema, { type: updateProfileData.fulfilled.type, payload: {} });
 
-    expect(newState).toEqual({ data: {}, isLoading: false, error: undefined, readonly: true });
+    expect(newState).toEqual({ data: {}, form: {}, isLoading: false, error: undefined, readonly: false });
   });
 
   test('updateProfileData rejected', () => {
@@ -64,6 +64,6 @@ describe('profileSlice.test', () => {
       payload: {},
     });
 
-    expect(newState).toEqual({ data: undefined, isLoading: false, error: 'error', readonly: true });
+    expect(newState).toEqual({ data: undefined, form: undefined, isLoading: false, error: 'error', readonly: false });
   });
 });

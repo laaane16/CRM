@@ -2,6 +2,10 @@ import { AsyncThunkAction, Dispatch } from '@reduxjs/toolkit';
 import { StateSchema } from '../../../app/providers';
 import axios, { AxiosStatic } from 'axios';
 
+interface Options {
+  getState: () => DeepPartial<StateSchema>;
+}
+
 type ActionCreatorType<Returned, Arg, RejectValue> = (
   arg: Arg,
 ) => AsyncThunkAction<Returned, Arg, { rejectValue: RejectValue }>;
@@ -21,9 +25,9 @@ export class TestAsyncThunk<Returned, Arg, RejectValue> {
     this.getState = jest.fn();
     this.api = mockedAxios;
   }
-  callThunk = async (arg: Arg) => {
+  callThunk = async (arg: Arg, options?: Options) => {
     const action = this.actionCreator(arg);
-    const result = await action(this.dispatch, this.getState, { api: this.api });
+    const result = await action(this.dispatch, options?.getState || this.getState, { api: this.api });
     return result;
   };
 }
