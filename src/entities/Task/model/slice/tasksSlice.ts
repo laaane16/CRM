@@ -19,18 +19,19 @@ const tasksSlice = createSlice({
   reducers: {},
 
   extraReducers: (builder) => {
-    builder.addCase(fetchTasksByUserId.pending, (state) => {
-      state.isLoading = true;
-      state.error = undefined;
-    });
-    builder.addCase(fetchTasksByUserId.fulfilled, (state, action: PayloadAction<ITask[]>) => {
-      state.isLoading = false;
-      tasksAdapter.setAll(state, action.payload);
-    });
-    builder.addCase(fetchTasksByUserId.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = action.error;
-    });
+    builder
+      .addCase(fetchTasksByUserId.pending, (state) => {
+        state.isLoading = true;
+        state.error = undefined;
+      })
+      .addCase(fetchTasksByUserId.fulfilled, (state, action: PayloadAction<ITask[]>) => {
+        state.isLoading = false;
+        tasksAdapter.setAll(state, action.payload);
+      })
+      .addCase(fetchTasksByUserId.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error;
+      });
   },
 });
 

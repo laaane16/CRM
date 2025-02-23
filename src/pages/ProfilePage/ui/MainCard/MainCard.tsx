@@ -43,7 +43,7 @@ const MainCard: FC<Props> = ({ isLoading, data, error, className, canEdit }) => 
   const readonly = useSelector(getProfileReadonly);
 
   const mainInfoClasses = cn(styles.mainInfo, className, {
-    [styles.editorMode]: readonly,
+    [styles.editorMode]: !readonly,
     [styles.hasError]: Boolean(error),
   });
 
@@ -117,26 +117,26 @@ const MainCard: FC<Props> = ({ isLoading, data, error, className, canEdit }) => 
           <ul className={styles.mainInfoList}>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-call`, styles.mainInfoItemIcon)} />
-              {readonly ? <Input onChange={onChangeNumber} value={data?.number || ''} /> : data?.number}
+              {!readonly ? <Input onChange={onChangeNumber} value={data?.number || ''} /> : data?.number}
             </li>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-alternate-mail`, styles.mainInfoItemIcon)} />
-              {readonly ? <Input onChange={onChangeMail} value={data?.mail || ''} /> : data?.mail}
+              {!readonly ? <Input onChange={onChangeMail} value={data?.mail || ''} /> : data?.mail}
             </li>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-verify-bordered`, styles.mainInfoItemIcon)} />
-              {readonly ? <Input onChange={onChangeMainPost} value={data?.post.main || ''} /> : data?.post.main}
+              {!readonly ? <Input onChange={onChangeMainPost} value={data?.post.main || ''} /> : data?.post.main}
             </li>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-verify-bordered`, styles.mainInfoItemIcon)} />
-              {readonly ? <Input onChange={onChangeExtraPost} value={data?.post.extra || ''} /> : data?.post.extra}
+              {!readonly ? <Input onChange={onChangeExtraPost} value={data?.post.extra || ''} /> : data?.post.extra}
             </li>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-map`, styles.mainInfoItemIcon)} />
-              {readonly ? <Input onChange={onChangeAddress} value={data?.address || ''} /> : data?.address}
+              {!readonly ? <Input onChange={onChangeAddress} value={data?.address || ''} /> : data?.address}
             </li>
           </ul>
-          {readonly ? (
+          {!readonly ? (
             <>
               <Button className={styles.saveButton} size={ButtonSizes.SMALL} onClick={offEditorMode}>
                 Сохранить

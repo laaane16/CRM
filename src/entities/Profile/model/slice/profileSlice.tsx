@@ -9,7 +9,7 @@ const initialState: ProfileSchema = {
   form: undefined,
   isLoading: false,
   error: undefined,
-  readonly: false,
+  readonly: true,
 };
 
 const profileSlice = createSlice({
@@ -25,12 +25,12 @@ const profileSlice = createSlice({
     },
 
     onEditorMode: (state) => {
-      state.readonly = true;
+      state.readonly = false;
     },
 
     cancelEdit: (state) => {
       state.form = state.data;
-      state.readonly = false;
+      state.readonly = true;
     },
   },
 
@@ -54,7 +54,7 @@ const profileSlice = createSlice({
 
       .addCase(updateProfileData.fulfilled, (state, action: PayloadAction<IProfile>) => {
         state.isLoading = false;
-        state.readonly = false;
+        state.readonly = true;
         state.data = action.payload;
         state.form = action.payload;
       })

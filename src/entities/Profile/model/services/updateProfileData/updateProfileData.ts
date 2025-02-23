@@ -5,12 +5,11 @@ import { ThunkConfig } from '../../../../../app/providers';
 import { validateProfileData } from '../validateProfileData/validateProfileData';
 import { getProfileForm } from '../../selectors/getProfileForm/getProfileForm';
 import { getProfileData } from '../../selectors/getProfileData/getProfileData';
-import { profileActions } from '../../slice/profileSlice';
 
 const updateProfileData = createAsyncThunk<IProfile, IProfile, ThunkConfig<string>>(
   'profile/updateProfileData',
-  async (arg, thunkAPI) => {
-    const { extra, rejectWithValue, getState, dispatch } = thunkAPI;
+  async (_, thunkAPI) => {
+    const { extra, rejectWithValue, getState } = thunkAPI;
 
     const form = getProfileForm(getState());
     const data = getProfileData(getState());
@@ -30,7 +29,7 @@ const updateProfileData = createAsyncThunk<IProfile, IProfile, ThunkConfig<strin
         throw new Error(...errors);
       }
 
-      const response = await extra.api.put(`/profiles/${arg.userId}`, arg);
+      const response = await extra.api.put(`/profiles/${form.userId}`, form);
 
       if (response.status !== 200) {
         throw new Error('error with update');

@@ -29,7 +29,7 @@ export const fetchTasksByUserId = createAsyncThunk<ITask[], FetchTasksByUserIdPr
       return response.data;
     } catch (e) {
       console.log(e);
-      rejectWithValue('error');
+      return rejectWithValue('error');
     }
   },
 );
