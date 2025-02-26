@@ -1,12 +1,11 @@
 import { Action, EnhancedStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
+import { AxiosInstance } from 'axios';
+
 import { UserSchema } from '../../../../../entities/User';
 import { LoginSchema } from '../../../../../features/AuthByUsername';
 import { ProfileSchema } from '../../../../../entities/Profile';
-import { AxiosInstance } from 'axios';
 import { TasksSchema } from '../../../../../entities/Task/model/types/TaskSchema';
-import { AppDispatch } from './AppDispatch';
-import { UseDispatch, useDispatch } from 'react-redux';
-import { useAppDispatch } from '../../../../../shared/lib';
+import { PeoplesSchema } from '../../../../../pages/PeoplePage/model/types/PeoplesSchema';
 
 export interface StateSchema {
   user: UserSchema;
@@ -15,6 +14,7 @@ export interface StateSchema {
   login?: LoginSchema;
   profile?: ProfileSchema;
   tasks?: TasksSchema;
+  peoples?: PeoplesSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;
