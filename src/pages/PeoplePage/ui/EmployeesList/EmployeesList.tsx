@@ -36,7 +36,6 @@ const reducers = {
 const EmployeesList: FC<Props> = ({ className }) => {
   const wrapRef = useRef<HTMLDivElement>(null) as RefObject<HTMLDivElement>;
   const elRef = useRef<HTMLDivElement>(null) as RefObject<HTMLDivElement>;
-  console.log(wrapRef.current);
   const { pathname } = useLocation();
 
   useEffect(() => {
