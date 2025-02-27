@@ -15,6 +15,7 @@ const initialState = peoplesAdapter.getInitialState<PeoplesSchema>({
   isLoading: false,
   page: 1,
   limit: 9,
+  _inited: false,
 });
 
 export const peoplesSelectors = peoplesAdapter.getSelectors<StateSchema>((state) => state.peoples || initialState);
@@ -40,6 +41,7 @@ const peoplePageSlice = createSlice({
         state.page += 1;
         peoplesAdapter.addMany(state, action.payload);
         state.hasMore = action.payload.length === state.limit;
+        state._inited = true;
       })
 
       .addCase(fetchPeoplesList.rejected, (state, action) => {

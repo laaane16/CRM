@@ -13,25 +13,32 @@ export type ReducersList = {
 interface Props {
   reducers: ReducersList;
   children: ReactNode;
+  removeAfterUnmount?: boolean;
 }
 
-const DynamicModuleLoader: FC<Props> = ({ children, reducers }) => {
+const DynamicModuleLoader: FC<Props> = ({ children, reducers, removeAfterUnmount = true }) => {
   const store = useStore() as ReduxStoreWithManager;
   const dispatch = useAppDispatch();
+  const mountedReducers = store.reducerManager.getReducerMap();
 
   useEffect(() => {
     Object.entries(reducers).forEach(([name, reducer]) => {
-      store.reducerManager.add(name as StateSchemaKey, reducer);
-      // for debug
-      dispatch({ type: `@INIT ${name} reducer` });
+      const typedName = name as StateSchemaKey;
+      if (!mountedReducers[typedName]) {
+        store.reducerManager.add(name as StateSchemaKey, reducer);
+        // for debug
+        dispatch({ type: `@INIT ${name} reducer` });
+      }
     });
 
     return () => {
-      Object.entries(reducers).forEach(([name]) => {
-        store.reducerManager.remove(name as StateSchemaKey);
-        // for debug
-        dispatch({ type: `@DESTROY ${name} reducer` });
-      });
+      if (removeAfterUnmount) {
+        Object.entries(reducers).forEach(([name]) => {
+          store.reducerManager.remove(name as StateSchemaKey);
+          // for debug
+          dispatch({ type: `@DESTROY ${name} reducer` });
+        });
+      }
     };
   }, []);
 

@@ -18,6 +18,7 @@ import { getPeoplesIsLoading } from '../../model/selectors/getPeoplesIsLoading/g
 import { getPeoplesView } from '../../model/selectors/getPeoplesView/getPeoplesView';
 import { getPeoplesLimit } from '../../model/selectors/getPeoplesLimit/getPeoplesLimit';
 import { IView } from '../../model/types/PeoplesSchema';
+import { getPeoplesInit } from '../../model/selectors/getPeoplesInit/getPeoplesInit';
 
 interface Props {
   className?: string;
@@ -34,10 +35,13 @@ const EmployeesList: FC<Props> = ({ className }) => {
   const peoples = useSelector(peoplesSelectors.selectAll);
   const view = useSelector(getPeoplesView);
   const limit = useSelector(getPeoplesLimit);
+  const _inited = useSelector(getPeoplesInit);
 
   useEffect(() => {
-    dispatch(peoplesActions.initState());
-    dispatch(fetchPeoplesList());
+    if (!_inited) {
+      dispatch(peoplesActions.initState());
+      dispatch(fetchPeoplesList());
+    }
   }, []);
 
   const listClasses = cn(styles.list, styles[view]);
@@ -56,7 +60,7 @@ const EmployeesList: FC<Props> = ({ className }) => {
   const cardView = view === IView.GRID ? EmployeesCardView.LARGE : EmployeesCardView.SMALL;
 
   return (
-    <DynamicModuleLoader reducers={reducers}>
+    <DynamicModuleLoader removeAfterUnmount={false} reducers={reducers}>
       <div ref={wrapRef} className={className}>
         <ul className={listClasses}>
           {peoples.map((people) => (

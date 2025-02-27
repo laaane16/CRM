@@ -15,4 +15,5 @@ export interface PeoplesSchema {
   page: number;
   hasMore: boolean;
   limit: number;
+  _inited: boolean;
 }
