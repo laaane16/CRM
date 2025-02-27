@@ -1,4 +1,4 @@
-import { FC, RefObject, useEffect, useRef } from 'react';
+import { FC, RefObject, UIEvent, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import cn from 'classnames';
 
@@ -19,6 +19,10 @@ import { getPeoplesView } from '../../model/selectors/getPeoplesView/getPeoplesV
 import { getPeoplesLimit } from '../../model/selectors/getPeoplesLimit/getPeoplesLimit';
 import { IView } from '../../model/types/PeoplesSchema';
 import { getPeoplesInit } from '../../model/selectors/getPeoplesInit/getPeoplesInit';
+import { saveScrollActions } from '../../../../features/saveScrollPosition/model/slice/saveScrollSlice';
+import { useLocation } from 'react-router-dom';
+import { getScrollPositionByPath } from '../../../../features/saveScrollPosition/model/selectors/getScrollPosition/getScrollPosition';
+import { StateSchema } from '../../../../app/providers';
 
 interface Props {
   className?: string;
@@ -29,6 +33,19 @@ const reducers = {
 };
 
 const EmployeesList: FC<Props> = ({ className }) => {
+  const wrapRef = useRef<HTMLDivElement>(null) as RefObject<HTMLDivElement>;
+  const elRef = useRef<HTMLDivElement>(null) as RefObject<HTMLDivElement>;
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (!_inited) {
+      dispatch(peoplesActions.initState());
+      dispatch(fetchPeoplesList());
+    }
+    wrapRef.current.scrollTop = scrollPosition;
+  }, []);
+
   const dispatch = useAppDispatch();
 
   const isLoading = useSelector(getPeoplesIsLoading);
@@ -36,18 +53,13 @@ const EmployeesList: FC<Props> = ({ className }) => {
   const view = useSelector(getPeoplesView);
   const limit = useSelector(getPeoplesLimit);
   const _inited = useSelector(getPeoplesInit);
+  const scrollPosition = useSelector((state: StateSchema) => getScrollPositionByPath(state, pathname));
 
-  useEffect(() => {
-    if (!_inited) {
-      dispatch(peoplesActions.initState());
-      dispatch(fetchPeoplesList());
-    }
-  }, []);
+  const onScroll = (e: UIEvent<HTMLDivElement>): void => {
+    dispatch(saveScrollActions.saveScroll({ path: pathname, scroll: e.currentTarget.scrollTop }));
+  };
 
   const listClasses = cn(styles.list, styles[view]);
-
-  const wrapRef = useRef<HTMLDivElement>(null) as RefObject<HTMLDivElement>;
-  const elRef = useRef<HTMLDivElement>(null) as RefObject<HTMLDivElement>;
 
   useInfiniteScroll({
     wrapRef,
@@ -61,7 +73,7 @@ const EmployeesList: FC<Props> = ({ className }) => {
 
   return (
     <DynamicModuleLoader removeAfterUnmount={false} reducers={reducers}>
-      <div ref={wrapRef} className={className}>
+      <div ref={wrapRef} onScroll={onScroll} className={className}>
         <ul className={listClasses}>
           {peoples.map((people) => (
             <EmployeesCard className={styles.card} key={people.id} data={people} view={cardView} />

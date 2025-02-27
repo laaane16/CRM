@@ -6,9 +6,11 @@ import { LoginSchema } from '../../../../../features/AuthByUsername';
 import { ProfileSchema } from '../../../../../entities/Profile';
 import { TasksSchema } from '../../../../../entities/Task/model/types/TaskSchema';
 import { PeoplesSchema } from '../../../../../pages/PeoplePage/model/types/PeoplesSchema';
+import { SaveScrollSchema } from '../../../../../features/saveScrollPosition/model/types/SaveScrollSchema';
 
 export interface StateSchema {
   user: UserSchema;
+  saveScroll: SaveScrollSchema;
 
   //Async reducers
   login?: LoginSchema;
