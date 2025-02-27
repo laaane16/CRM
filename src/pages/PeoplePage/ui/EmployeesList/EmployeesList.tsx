@@ -23,6 +23,7 @@ import { saveScrollActions } from '../../../../features/saveScrollPosition/model
 import { useLocation } from 'react-router-dom';
 import { getScrollPositionByPath } from '../../../../features/saveScrollPosition/model/selectors/getScrollPosition/getScrollPosition';
 import { StateSchema } from '../../../../app/providers';
+import { useTrottle } from '../../../../shared/lib/hooks/useTrottle';
 
 interface Props {
   className?: string;
@@ -35,7 +36,7 @@ const reducers = {
 const EmployeesList: FC<Props> = ({ className }) => {
   const wrapRef = useRef<HTMLDivElement>(null) as RefObject<HTMLDivElement>;
   const elRef = useRef<HTMLDivElement>(null) as RefObject<HTMLDivElement>;
-
+  console.log(wrapRef.current);
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -69,11 +70,13 @@ const EmployeesList: FC<Props> = ({ className }) => {
     },
   });
 
+  const throttlingSaveScroll = useTrottle(onScroll, 500);
+
   const cardView = view === IView.GRID ? EmployeesCardView.LARGE : EmployeesCardView.SMALL;
 
   return (
     <DynamicModuleLoader removeAfterUnmount={false} reducers={reducers}>
-      <div ref={wrapRef} onScroll={onScroll} className={className}>
+      <div ref={wrapRef} onScroll={throttlingSaveScroll} className={className}>
         <ul className={listClasses}>
           {peoples.map((people) => (
             <EmployeesCard className={styles.card} key={people.id} data={people} view={cardView} />
