@@ -13,7 +13,7 @@ const initialState = peoplesAdapter.getInitialState<PeoplesSchema>({
   view: IView.LIST,
   hasMore: true,
   isLoading: false,
-  page: 1,
+  page: 0,
   limit: 9,
   _inited: false,
 });
@@ -36,12 +36,18 @@ const peoplePageSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPeoplesList.fulfilled, (state, action: PayloadAction<IEmployee[]>) => {
+      .addCase(fetchPeoplesList.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.page += 1;
-        peoplesAdapter.addMany(state, action.payload);
+
         state.hasMore = action.payload.length === state.limit;
         state._inited = true;
+        if (action.meta.arg.replace) {
+          state.page = 1;
+          peoplesAdapter.setAll(state, action.payload);
+        } else {
+          state.page += 1;
+          peoplesAdapter.addMany(state, action.payload);
+        }
       })
 
       .addCase(fetchPeoplesList.rejected, (state, action) => {
@@ -52,6 +58,9 @@ const peoplePageSlice = createSlice({
       .addCase(fetchPeoplesList.pending, (state, action) => {
         state.isLoading = true;
         state.error = undefined;
+        if (action.meta.arg.replace) {
+          peoplesAdapter.removeAll(state);
+        }
       });
   },
 });

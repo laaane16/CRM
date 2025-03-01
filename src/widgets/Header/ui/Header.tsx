@@ -1,16 +1,14 @@
 import { FC, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import cn from 'classnames';
 
 import * as styles from './Header.module.scss';
 
-import { Button } from '../../../shared/ui';
+import { Button, Tooltip } from '../../../shared/ui';
 import { ButtonSizes } from '../../../shared/ui';
-import { useAppDispatch } from '../../../shared/lib/hooks/useAppDispatch';
-import { userActions } from '../../../entities/User';
-import { AppPaths, AppRoutes } from '../../../shared/lib/router/routes';
 import { useTranslation } from 'react-i18next';
 import { ThemeContext, Themes } from '../../../shared/theme';
 import { THEME_LOCALSTORAGE_KEY } from '../../../shared/constants/localstorage';
+import { ArrowPosition } from '../../../shared/ui/Tooltip/Tooltip';
 
 interface Props {
   className?: string;
@@ -18,8 +16,6 @@ interface Props {
 
 const Header: FC<Props> = () => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const { theme, setTheme } = useContext(ThemeContext);
 
@@ -48,12 +44,10 @@ const Header: FC<Props> = () => {
       </Button>
       <Button size={ButtonSizes.SMALL}>{t('header.addEmployee')}</Button>
       <Button size={ButtonSizes.SMALL}>{t('header.getEmployee')}</Button>
-      <span
-        style={{ border: '1px solid black', borderRadius: '50%', width: '15px', height: '15px', display: 'block' }}
-      ></span>
-      <span
-        style={{ border: '1px solid black', borderRadius: '50%', width: '15px', height: '15px', display: 'block' }}
-      ></span>
+      <span className={cn(styles.icon, 'icon-settings')}></span>
+      <Tooltip className={styles.tooltip} arrowPosition={ArrowPosition.BOTTOM}>
+        <span className={cn(styles.icon, 'icon-info')}></span>
+      </Tooltip>
     </header>
   );
 };

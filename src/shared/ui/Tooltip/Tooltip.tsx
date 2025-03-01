@@ -14,15 +14,15 @@ interface Props {
   style?: object;
   className?: string;
   children: ReactNode;
-  title: string;
+  title?: string;
   arrowPosition?: ArrowPosition;
 }
 
 const Tooltip: FC<Props> = ({ style, className, children, title, arrowPosition = ArrowPosition.TOP }) => {
-  const tooltipClasses = cn(className, styles.tooltip, [styles[arrowPosition]]);
+  const tooltipClasses = cn(styles.tooltip, [styles[arrowPosition]]);
 
   return (
-    <div style={style} className={styles.container}>
+    <div style={style} className={cn(className, styles.container)}>
       <p className={tooltipClasses}>{title}</p>
       {children}
     </div>

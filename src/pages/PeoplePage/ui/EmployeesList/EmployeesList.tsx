@@ -41,7 +41,7 @@ const EmployeesList: FC<Props> = ({ className }) => {
   useEffect(() => {
     if (!_inited) {
       dispatch(peoplesActions.initState());
-      dispatch(fetchPeoplesList());
+      dispatch(fetchPeoplesList({ replace: false }));
     }
     wrapRef.current.scrollTop = scrollPosition;
   }, []);
