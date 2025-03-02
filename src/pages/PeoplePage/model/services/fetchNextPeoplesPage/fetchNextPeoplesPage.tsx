@@ -6,7 +6,6 @@ export const fetchNextPeoplesPage = createAsyncThunk<void, undefined, ThunkConfi
   'peoples/fetchNextPeoplesPage',
   (arg, { dispatch, getState }) => {
     const peoplesState = getState();
-    const currentPage = peoplesState.peoples?.page || 1;
     const isLoading = peoplesState.peoples?.isLoading;
     const hasMore = peoplesState.peoples?.hasMore;
 
@@ -14,7 +13,7 @@ export const fetchNextPeoplesPage = createAsyncThunk<void, undefined, ThunkConfi
       return;
     }
 
-    dispatch(fetchPeoplesList(currentPage));
+    dispatch(fetchPeoplesList({ replace: false }));
 
     return;
   },
