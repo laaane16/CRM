@@ -33,20 +33,28 @@ const peoplePageSlice = createSlice({
       state.view = view || IView.GRID;
       state.limit = view === IView.GRID ? 12 : 18;
     },
+    setSearch: (state, action) => {
+      state.search = action.payload;
+    },
+    setSort: (state, action) => {
+      const { field, order } = action.payload;
+
+      state.sortField = field;
+      state.order = order;
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPeoplesList.fulfilled, (state, action) => {
         state.isLoading = false;
-
         state.hasMore = action.payload.length === state.limit;
         state._inited = true;
         if (action.meta.arg.replace) {
-          state.page = 1;
           peoplesAdapter.setAll(state, action.payload);
+          state.page = 1;
         } else {
-          state.page += 1;
           peoplesAdapter.addMany(state, action.payload);
+          state.page += 1;
         }
       })
 
@@ -58,6 +66,7 @@ const peoplePageSlice = createSlice({
       .addCase(fetchPeoplesList.pending, (state, action) => {
         state.isLoading = true;
         state.error = undefined;
+
         if (action.meta.arg.replace) {
           peoplesAdapter.removeAll(state);
         }

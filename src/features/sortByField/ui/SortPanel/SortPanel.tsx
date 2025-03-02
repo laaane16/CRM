@@ -3,11 +3,12 @@ import { FC } from 'react';
 import * as styles from './SortPanel.module.scss';
 
 import SortField from '../SortField/SortField';
-import { OrderType } from '../../../../shared/types/OrderType';
+import { OrderType } from '../../../../shared/types/Order';
 
-interface ISort {
+export interface ISort {
   title: string;
-  value: OrderType;
+  field: string;
+  order: OrderType | '';
 }
 
 interface Props {
@@ -17,19 +18,11 @@ interface Props {
 }
 
 const SortPanel: FC<Props> = ({ fields, onChangeSort }) => {
-  const handleChangeSort = (sort: ISort) => {
-    if (sort.value === 'asc') {
-      onChangeSort({ ...sort, value: 'desc' });
-    } else {
-      onChangeSort({ ...sort, value: 'asc' });
-    }
-  };
-
   return (
     <ul className={styles.sortPanelList}>
       {fields.map((field) => (
-        <li onClick={() => handleChangeSort(field)} key={field.title}>
-          <SortField title={field.title} value={field.value} />
+        <li onClick={() => onChangeSort(field)} key={field.title}>
+          <SortField title={field.title} order={field.order} />
         </li>
       ))}
     </ul>

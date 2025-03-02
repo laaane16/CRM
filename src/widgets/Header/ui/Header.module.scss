@@ -14,12 +14,7 @@
 }
 
 .icon {
+  cursor: pointer;
   font-size: 24px;
   color: var(--secondary-color);
-}
-
-.tooltip {
-  position: relative;
-  top: 2px;
-  display: inline-block;
 }

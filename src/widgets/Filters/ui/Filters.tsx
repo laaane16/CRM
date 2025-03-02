@@ -1,9 +1,14 @@
-import { FC, useState } from 'react';
-import cn from 'classnames';
+import { FC, useEffect, useState } from 'react';
 
-import { Accordeon, Input, Search } from '../../../shared/ui';
+import { Accordeon, Search } from '../../../shared/ui';
 
 import * as styles from './Filters.module.scss';
+import { useDebounce } from '../../../shared/lib/hooks/useDebounce';
+import { useAppDispatch } from '../../../shared/lib';
+import { peoplesActions } from '../../../pages/PeoplePage/model/slice/peoplePageSlice';
+import { fetchPeoplesList } from '../../../pages/PeoplePage/model/services/fetchPeoplesList/fetchPeoplesList';
+import { useSelector } from 'react-redux';
+import { StateSchema } from '../../../app/providers';
 
 interface Props {
   className?: string;
@@ -11,6 +16,23 @@ interface Props {
 
 const Filters: FC<Props> = () => {
   const [search, setSearch] = useState('');
+
+  const dispatch = useAppDispatch();
+  const searchFromStore = useSelector((state: StateSchema) => state.peoples?.search) || '';
+
+  useEffect(() => {
+    setSearch(searchFromStore);
+  }, [searchFromStore]);
+
+  const debouncedSearchChange = useDebounce((value: string) => {
+    dispatch(peoplesActions.setSearch(value));
+    dispatch(fetchPeoplesList({ replace: true }));
+  }, 300);
+
+  const handleSearchChange = (value: string) => {
+    setSearch(value);
+    debouncedSearchChange(value);
+  };
 
   const listData = [
     {
@@ -54,7 +76,7 @@ const Filters: FC<Props> = () => {
 
   return (
     <aside className={styles.filters}>
-      <Search className={styles.search} value={search} onChange={setSearch} />
+      <Search className={styles.search} value={search} onChange={handleSearchChange} />
       <div>
         <h3 className={styles.title}>Настройки фильтра</h3>
         <span className={`${styles.filterIcon} icon-filter`}></span>

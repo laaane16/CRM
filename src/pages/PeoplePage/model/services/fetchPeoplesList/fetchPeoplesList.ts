@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { IEmployee } from '../../../../../entities/Employee/ui/EmployeesCard/EmployeesCard';
 import { ThunkConfig } from '../../../../../app/providers';
+import { addQueryParams } from '../../../../../shared/utils/addQueryParams/addQueryParams';
 
 interface FetchPeoplesListProps {
   replace: boolean;
@@ -8,12 +9,18 @@ interface FetchPeoplesListProps {
 
 export const fetchPeoplesList = createAsyncThunk<IEmployee[], FetchPeoplesListProps, ThunkConfig<string>>(
   'peoples/fetchPeoplesList',
-  async (arg, { rejectWithValue, extra, getState }) => {
+  async ({ replace }, { rejectWithValue, extra, getState }) => {
+    const state = getState();
+    const peoplesState = state.peoples;
+
+    const limit = peoplesState?.limit;
+    const page = replace ? 1 : peoplesState?.page;
+    const search = peoplesState?.search;
+    const sort = peoplesState?.sortField;
+    const order = peoplesState?.order;
+
     try {
-      const state = getState();
-      const limit = state.peoples?.limit;
-      const curPage = state.peoples?.page ?? 0;
-      const nextPage = arg.replace ? 1 : curPage + 1;
+      addQueryParams({ search, sort, order });
 
       const sortFields = state.sort?.entities['/people'].map((item) => item.title);
       const preparingSort = sortFields?.join(',');
@@ -27,8 +34,9 @@ export const fetchPeoplesList = createAsyncThunk<IEmployee[], FetchPeoplesListPr
         params: {
           _page: nextPage,
           _limit: limit,
-          _sort: preparingSort || '',
-          _order: preparingOrder || '',
+          _sort: sort || '',
+          _order: order || '',
+          q: search || '',
         },
       });
 

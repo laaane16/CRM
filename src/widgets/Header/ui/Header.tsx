@@ -5,10 +5,11 @@ import * as styles from './Header.module.scss';
 
 import { Button, Tooltip } from '../../../shared/ui';
 import { ButtonSizes } from '../../../shared/ui';
+import { useAppDispatch } from '../../../shared/lib/hooks/useAppDispatch';
 import { useTranslation } from 'react-i18next';
 import { ThemeContext, Themes } from '../../../shared/theme';
 import { THEME_LOCALSTORAGE_KEY } from '../../../shared/constants/localstorage';
-import { ArrowPosition } from '../../../shared/ui/Tooltip/Tooltip';
+import cn from 'classnames';
 
 interface Props {
   className?: string;
@@ -44,10 +45,8 @@ const Header: FC<Props> = () => {
       </Button>
       <Button size={ButtonSizes.SMALL}>{t('header.addEmployee')}</Button>
       <Button size={ButtonSizes.SMALL}>{t('header.getEmployee')}</Button>
-      <span className={cn(styles.icon, 'icon-settings')}></span>
-      <Tooltip className={styles.tooltip} arrowPosition={ArrowPosition.BOTTOM}>
-        <span className={cn(styles.icon, 'icon-info')}></span>
-      </Tooltip>
+      <span className={cn('icon-settings', styles.icon)}></span>
+      <span className={cn('icon-info', styles.icon)}></span>
     </header>
   );
 };

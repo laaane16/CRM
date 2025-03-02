@@ -3,16 +3,16 @@ import cn from 'classnames';
 
 import * as styles from './SortField.module.scss';
 
-import { OrderType } from '../../../../shared/types/OrderType';
+import { OrderType } from '../../../../shared/types/Order';
 
 interface Props {
   title: string;
   className?: string;
-  value: OrderType;
+  order: OrderType | '';
 }
 
-const SortField: FC<Props> = ({ title, className, value }) => {
-  const iconClasses = cn('icon-read-more', styles.icon, { [styles.top]: value === 'asc' });
+const SortField: FC<Props> = ({ title, className, order }) => {
+  const iconClasses = cn('icon-read-more', styles.icon, { [styles.top]: order === 'asc' });
 
   return (
     <div className={styles.sortField}>

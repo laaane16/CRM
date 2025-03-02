@@ -39,10 +39,6 @@ const EmployeesList: FC<Props> = ({ className }) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    if (!_inited) {
-      dispatch(peoplesActions.initState());
-      dispatch(fetchPeoplesList({ replace: false }));
-    }
     wrapRef.current.scrollTop = scrollPosition;
   }, []);
 
@@ -52,7 +48,6 @@ const EmployeesList: FC<Props> = ({ className }) => {
   const peoples = useSelector(peoplesSelectors.selectAll);
   const view = useSelector(getPeoplesView);
   const limit = useSelector(getPeoplesLimit);
-  const _inited = useSelector(getPeoplesInit);
   const scrollPosition = useSelector((state: StateSchema) => getScrollPositionByPath(state, pathname));
 
   const onScroll = (e: UIEvent<HTMLDivElement>): void => {
