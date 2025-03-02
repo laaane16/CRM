@@ -8,7 +8,7 @@ import cn from 'classnames';
 interface Props {
   className?: string;
   value: string;
-  onChange: Dispatch<SetStateAction<string>>;
+  onChange: (value: string) => void;
 }
 
 const Search: FC<Props> = ({ value, onChange, className }) => {

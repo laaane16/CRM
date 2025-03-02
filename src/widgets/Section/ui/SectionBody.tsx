@@ -8,12 +8,7 @@ interface Props {
 }
 
 const SectionBody: FC<Props> = ({ children }) => {
-  return (
-    <div className={styles.container}>
-      <div className={styles.sort}></div>
-      {children}
-    </div>
-  );
+  return <div className={styles.container}>{children}</div>;
 };
 
 export default SectionBody;

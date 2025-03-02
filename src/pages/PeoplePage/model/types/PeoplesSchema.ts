@@ -1,5 +1,6 @@
 import { SerializedError } from '@reduxjs/toolkit';
 import { IEmployee } from '../../../../entities/Employee/ui/EmployeesCard/EmployeesCard';
+import { OrderType } from '../../../../shared/types/Order';
 
 export enum IView {
   GRID = 'grid',
@@ -15,5 +16,9 @@ export interface PeoplesSchema {
   page: number;
   hasMore: boolean;
   limit: number;
+  search?: string;
+  sortField?: string;
+  order?: OrderType;
+
   _inited: boolean;
 }
