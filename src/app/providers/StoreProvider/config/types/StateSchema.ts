@@ -7,12 +7,14 @@ import { ProfileSchema } from '../../../../../entities/Profile';
 import { TasksSchema } from '../../../../../entities/Task/model/types/TaskSchema';
 import { PeoplesSchema } from '../../../../../pages/PeoplePage/model/types/PeoplesSchema';
 import { SaveScrollSchema } from '../../../../../features/saveScrollPosition/model/types/SaveScrollSchema';
+import { SortSchema } from '../../../../../features/sortByField/model/types/types';
 
 export interface StateSchema {
   user: UserSchema;
   saveScroll: SaveScrollSchema;
 
   //Async reducers
+  sort?: SortSchema;
   login?: LoginSchema;
   profile?: ProfileSchema;
   tasks?: TasksSchema;

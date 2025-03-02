@@ -10,7 +10,7 @@ interface Props {
 const SectionBody: FC<Props> = ({ children }) => {
   return (
     <div className={styles.container}>
-      <div className={styles.sort}></div>
+      {/* <div className={styles.sort}></div> */}
       {children}
     </div>
   );
