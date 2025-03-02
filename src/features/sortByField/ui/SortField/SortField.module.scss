@@ -1,0 +1,25 @@
+.sortField {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: color 0.1s ease-in;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+
+.title {
+  display: inline-block;
+  width: max-content;
+}
+
+.icon {
+  display: inline-block;
+  transition: transform 0.1s ease-in-out;
+
+  &.top {
+    transform: rotate(180deg);
+  }
+}

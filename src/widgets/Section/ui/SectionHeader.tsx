@@ -2,6 +2,12 @@ import { FC } from 'react';
 import cn from 'classnames';
 
 import * as styles from './SectionHeader.module.scss';
+import { useAppDispatch } from '../../../shared/lib';
+import { useSelector } from 'react-redux';
+import { getPeoplesView } from '../../../pages/PeoplePage/model/selectors/getPeoplesView/getPeoplesView';
+import { peoplesActions, peoplesReducer } from '../../../pages/PeoplePage/model/slice/peoplePageSlice';
+import { EmployeesCardView } from '../../../entities/Employee/ui/EmployeesCard/EmployeesCard';
+import { IView } from '../../../pages/PeoplePage/model/types/PeoplesSchema';
 
 interface Props {
   className?: string;
@@ -16,7 +22,11 @@ const data: { title: string; count: number }[] = [
   { title: 'Запросы', count: 10 },
 ];
 
-const SectionHeader: FC<Props> = () => {
+const SectionHeader: FC<Props> = ({ className }) => {
+  const dispatch = useAppDispatch();
+
+  const listView = useSelector(getPeoplesView);
+
   return (
     <div className={styles.header}>
       <ul className={styles.list}>
@@ -27,9 +37,15 @@ const SectionHeader: FC<Props> = () => {
           </li>
         ))}
       </ul>
-      <div className={styles.gridToggle}>
-        <span className={styles.toggleItem}>L</span>
-        <span className={cn(styles.toggleItem, styles.toggleItemDefault)}>C</span>
+      <div className={styles.viewToggle}>
+        <span
+          onClick={() => dispatch(peoplesActions.setView(IView.LIST))}
+          className={cn(styles.toggleItem, 'icon-list', { [styles.active]: IView.LIST === listView })}
+        />
+        <span
+          onClick={() => dispatch(peoplesActions.setView(IView.GRID))}
+          className={cn(styles.toggleItem, 'icon-grid', { [styles.active]: IView.GRID === listView })}
+        />
       </div>
     </div>
   );

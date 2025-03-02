@@ -19,8 +19,6 @@ const Sidebar: FC<Props> = () => {
   const userId = useSelector(getUserId);
   const avatar = useSelector(getUserAvatar);
 
-  console.log(avatar);
-
   const navigate = useNavigate();
 
   const onLogoutClick = () => {

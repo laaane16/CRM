@@ -1,0 +1,133 @@
+.wrap {
+  position: relative;
+  background-color: var(--light-gray-color);
+  border-radius: 16px;
+  width: 100%;
+  cursor: pointer;
+  transition-property: transform background-color;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.1s;
+
+  &:hover {
+    transform: scale(1.01);
+    background-color: var(--disabled-color);
+  }
+}
+
+.small {
+  padding: calc(var(--PADDING-BASE) * 4) calc(var(--PADDING-BASE) * 5);
+  display: flex;
+  align-items: center;
+
+  .avatar {
+    margin-right: 16px;
+  }
+
+  .infoBox {
+    width: 204px;
+    margin-right: 32px;
+  }
+
+  .name {
+    line-height: 1.5;
+    color: var(--secondary-color);
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .post {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--dark-gray-color);
+
+    span {
+      color: var(--secondary-color);
+      font-size: 16px;
+    }
+  }
+
+  .extraBox {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .companyAvatar {
+    margin-right: 16px;
+  }
+
+  .companyInfoBox {
+    display: inline-block;
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    width: 284px;
+  }
+
+  .companyTitle {
+    margin-bottom: 4px;
+    display: block;
+    color: var(--secondary-color);
+    line-height: 1.5;
+  }
+
+  .employment {
+    display: block;
+    background-color: var(--medium-gray-color);
+    width: max-content;
+    padding: 1px 8px;
+    border-radius: 50px;
+    color: var(--secondary-color);
+  }
+}
+
+.large {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: calc(var(--PADDING-BASE) * 8) calc(var(--PADDING-BASE) * 4);
+
+  .avatar {
+    margin-bottom: 10px;
+  }
+
+  .name {
+    color: var(--secondary-color);
+  }
+
+  .tg {
+    line-height: 1.5;
+    color: var(--dark-gray-color);
+    margin-bottom: 16px;
+  }
+
+  .post {
+    color: var(--secondary-color);
+
+    span {
+      display: inline-block;
+      transform: translateY(2px);
+      margin-right: 8px;
+    }
+  }
+
+  .companyTitle {
+    color: var(--dark-gray-color);
+    margin-bottom: 8px;
+  }
+
+  .employment {
+    display: block;
+    background-color: var(--medium-gray-color);
+    width: max-content;
+    padding: 1px 8px;
+    border-radius: 50px;
+    color: var(--secondary-color);
+  }
+}
