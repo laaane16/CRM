@@ -13,6 +13,7 @@ const initialState = peoplesAdapter.getInitialState<PeoplesSchema>({
   view: IView.LIST,
   hasMore: true,
   isLoading: false,
+  filters: [],
   page: 1,
   limit: 9,
   _inited: false,
@@ -24,6 +25,15 @@ const peoplePageSlice = createSlice({
   name: 'peoples',
   initialState,
   reducers: {
+    setFilter: (state, action) => {
+      state.filters?.push(action.payload);
+    },
+    setFilters: (state, action) => {
+      state.filters?.push(...action.payload);
+    },
+    removeFilter: (state, action) => {
+      state.filters = state.filters?.filter((i) => i.value !== action.payload.value);
+    },
     setView: (state, action) => {
       state.view = action.payload;
       localStorage.setItem(PEOPLES_VIEW_LOCALSTORAGE_KEY, action.payload);

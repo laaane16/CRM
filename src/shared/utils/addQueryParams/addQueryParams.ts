@@ -1,11 +1,11 @@
 const getQueryParams = (params: object) => {
-  const searchParams = new URLSearchParams(window.location.search);
+  const searchParams = new URLSearchParams('');
 
   Object.entries(params).forEach(([name, value]) => {
-    value !== undefined && searchParams.set(name, value);
+    value !== undefined && searchParams.set(name, Array.isArray(value) ? value.join(',') : value);
   });
 
-  return searchParams.toString();
+  return decodeURIComponent(searchParams.toString());
 };
 
 export const addQueryParams = (params: object) => {

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 
 import { Accordeon, Search } from '../../../shared/ui';
 
@@ -9,6 +9,8 @@ import { peoplesActions } from '../../../pages/PeoplePage/model/slice/peoplePage
 import { fetchPeoplesList } from '../../../pages/PeoplePage/model/services/fetchPeoplesList/fetchPeoplesList';
 import { useSelector } from 'react-redux';
 import { StateSchema } from '../../../app/providers';
+import { IFilter } from '../../../pages/PeoplePage/model/types/PeoplesSchema';
+import { getFiltersData } from '../configs/config';
 
 interface Props {
   className?: string;
@@ -19,10 +21,15 @@ const Filters: FC<Props> = () => {
 
   const dispatch = useAppDispatch();
   const searchFromStore = useSelector((state: StateSchema) => state.peoples?.search) || '';
+  const selectedFilters = useSelector((state: StateSchema) => state.peoples?.filters);
+
+  const { pathname } = window.location;
 
   useEffect(() => {
     setSearch(searchFromStore);
   }, [searchFromStore]);
+
+  const listData = useMemo(() => getFiltersData(pathname), []);
 
   const debouncedSearchChange = useDebounce((value: string) => {
     dispatch(peoplesActions.setSearch(value));
@@ -34,45 +41,14 @@ const Filters: FC<Props> = () => {
     debouncedSearchChange(value);
   };
 
-  const listData = [
-    {
-      Component: () => (
-        <span className={styles.component}>
-          <span className={styles.circle}></span>
-          <span className={`${styles.componentTitle} secondary regular`}>Global Solutions</span>
-          <span className={`${styles.count} secondary bold`}>10</span>
-        </span>
-      ),
-    },
-    {
-      Component: () => (
-        <span className={styles.component}>
-          <span className={styles.circle}></span>
-          <span className={`${styles.componentTitle} secondary regular`}>Global Solutions</span>
-          <span className={`${styles.count} secondary bold`}>10</span>
-        </span>
-      ),
-    },
-    {
-      Component: () => (
-        <span className={styles.component}>
-          <span className={styles.circle}></span>
-          <span className={`${styles.componentTitle} secondary regular`}>Global Solutions</span>
-          <span className={`${styles.count} secondary bold`}>10</span>
-        </span>
-      ),
-    },
-    {
-      Component: () => (
-        <span className={styles.component}>
-          <span className={styles.circle}></span>
-          <span className={`${styles.componentTitle} secondary regular`}>Global Solutions</span>
-          <span className={`${styles.count} secondary bold`}>10</span>
-        </span>
-      ),
-    },
-  ];
-  const Component = () => <span></span>;
+  const onSelect = (filter: IFilter): void => {
+    if (selectedFilters?.find((f) => f.value === filter.value)) {
+      dispatch(peoplesActions.removeFilter(filter));
+    } else {
+      dispatch(peoplesActions.setFilter(filter));
+    }
+    dispatch(fetchPeoplesList({ replace: true }));
+  };
 
   return (
     <aside className={styles.filters}>
@@ -80,12 +56,7 @@ const Filters: FC<Props> = () => {
       <div>
         <h3 className={styles.title}>Настройки фильтра</h3>
         <span className={`${styles.filterIcon} icon-filter`}></span>
-        <Accordeon title="Рубрики" items={listData} />
-        {/* <ul>
-          {listData.map((item, index) => (
-            <li className={styles.listItem} key={index}></li>
-          ))}
-        </ul> */}
+        <Accordeon selectedItems={selectedFilters || []} onSelect={onSelect} title="Рубрики" items={listData} />
       </div>
     </aside>
   );
