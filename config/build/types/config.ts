@@ -9,6 +9,8 @@ export interface BuildPaths {
   src: string;
   entry: string;
   output: string;
+  locales: string;
+  buildLocales: string;
 }
 
 export type ProjectOption = 'jest' | 'storybook' | 'frontend';

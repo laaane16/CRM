@@ -2,6 +2,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import webpack from 'webpack';
+import CopyPlugin from 'copy-webpack-plugin';
 
 import { BuildPaths, ProjectOption } from './types/config';
 
@@ -26,6 +27,10 @@ export const buildPlugins = (
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
       chunkFilename: 'css/[name].[contenthash:8].css',
+    }),
+
+    new CopyPlugin({
+      patterns: [{ from: paths.locales, to: paths.buildLocales }],
     }),
   ];
 
