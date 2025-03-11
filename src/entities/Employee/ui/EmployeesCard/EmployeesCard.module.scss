@@ -8,10 +8,10 @@
   transition-timing-function: ease-in-out;
   transition-duration: 0.1s;
 
-  &:hover {
-    transform: scale(1.01);
-    background-color: var(--disabled-color);
-  }
+  // &:hover {
+  //   transform: scale(1.01);
+  //   background-color: var(--disabled-color);
+  // }
 }
 
 .small {

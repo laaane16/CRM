@@ -11,6 +11,10 @@ export const useInfiniteScroll = ({ wrapRef, elRef, callback }: UseInfiniteScrol
     const wrap = wrapRef.current;
     const element = elRef.current;
 
+    if (!wrap || !element) {
+      return;
+    }
+
     const options = {
       root: wrap,
       rootMargin: '0px',
@@ -30,5 +34,5 @@ export const useInfiniteScroll = ({ wrapRef, elRef, callback }: UseInfiniteScrol
         observer.disconnect();
       }
     };
-  }, []);
+  }, [wrapRef, elRef]);
 };
