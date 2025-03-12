@@ -1,21 +1,25 @@
-import { FC, useState } from 'react';
+import { FC, ReactNode, useState } from 'react';
 import cn from 'classnames';
 
 import * as styles from './Accordeon.module.scss';
 import { AnimatePresence, motion } from 'motion/react';
+import { IFilter } from '../../../pages/PeoplePage/model/types/PeoplesSchema';
 
-interface Item {
-  Component: FC;
+interface Item extends IFilter {
+  item: ReactNode;
 }
 
 interface Props {
   className?: string;
   title?: string;
   items: Item[];
+  selectedItems: IFilter[];
+  onSelect: (filter: IFilter) => void;
 }
 
-const Accordeon: FC<Props> = ({ className, title, items }) => {
+const Accordeon: FC<Props> = ({ className, title, onSelect, items, selectedItems }) => {
   const [isOpen, setIsOpen] = useState(false);
+
   const arrowClasses = cn(styles.arrowIcon, 'icon-top', {
     [styles.isOpen]: isOpen,
   });
@@ -38,9 +42,15 @@ const Accordeon: FC<Props> = ({ className, title, items }) => {
               transition={{ duration: 0.3, ease: 'easeInOut' }}
               className={styles.items}
             >
-              {items.map((item, index) => (
-                <li className={styles.item} key={index}>
-                  <item.Component />
+              {items.map((i, index) => (
+                <li
+                  onClick={() => onSelect({ value: i.value, field: i.field })}
+                  className={cn(styles.item, {
+                    [styles.selected]: selectedItems.findIndex((item) => item.value === i.value) !== -1,
+                  })}
+                  key={i.value}
+                >
+                  {i.item}
                 </li>
               ))}
             </motion.ul>

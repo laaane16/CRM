@@ -18,9 +18,16 @@ export const fetchPeoplesList = createAsyncThunk<IEmployee[], FetchPeoplesListPr
     const search = peoplesState?.search;
     const sort = peoplesState?.sortField;
     const order = peoplesState?.order;
+    const filters = peoplesState?.filters;
+
+    const prepareFilters: Record<string, string[]> = {};
+
+    filters?.forEach((i) =>
+      prepareFilters[i.field] ? prepareFilters[i.field].push(i.value) : (prepareFilters[i.field] = [i.value]),
+    );
 
     try {
-      addQueryParams({ search, sort, order });
+      addQueryParams({ search, sort, order, ...prepareFilters });
 
       const response = await extra.api.get('/peoples', {
         params: {
@@ -29,6 +36,7 @@ export const fetchPeoplesList = createAsyncThunk<IEmployee[], FetchPeoplesListPr
           _sort: sort || '',
           _order: order || '',
           q: search || '',
+          ...prepareFilters,
         },
       });
 
@@ -38,6 +46,7 @@ export const fetchPeoplesList = createAsyncThunk<IEmployee[], FetchPeoplesListPr
 
       return response.data;
     } catch (e) {
+      console.log(e);
       return rejectWithValue('error');
     }
   },

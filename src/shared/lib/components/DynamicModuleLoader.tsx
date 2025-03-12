@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect } from 'react';
+import { FC, memo, ReactNode, useEffect } from 'react';
 import { useStore } from 'react-redux';
 
 import { ReduxStoreWithManager } from '../../../app/providers';
@@ -45,4 +45,4 @@ const DynamicModuleLoader: FC<Props> = ({ children, reducers, removeAfterUnmount
   return <>{children}</>;
 };
 
-export default DynamicModuleLoader;
+export default memo(DynamicModuleLoader);

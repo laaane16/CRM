@@ -16,6 +16,8 @@ export default (env: BuildEnv) => {
     entry: path.resolve(__dirname, 'src', 'app', 'appEntry.tsx'),
     output: path.resolve(__dirname, 'dist'),
     html: path.resolve(__dirname, 'public', 'index.html'),
+    locales: path.resolve(__dirname, 'public', 'locales'),
+    buildLocales: path.resolve(__dirname, 'dist', 'locales'),
   };
 
   const config: Configuration = buildWebpackConfiguration({ mode: MODE, port: PORT, isDev, paths, project });
