@@ -7,7 +7,7 @@ import { StateSchema } from '../types/StateSchema';
 import { saveScrollReducer } from '../../../../../features/saveScrollPosition/model/slice/saveScrollSlice';
 import { rtkApi } from '../../../../../shared/api/rtkApi';
 
-export const createStore = () => {
+export const createStore = (initialState?: StateSchema) => {
   const rootReducers: ReducersMapObject<StateSchema> = {
     user: userReducer,
     saveScroll: saveScrollReducer,
@@ -18,6 +18,7 @@ export const createStore = () => {
 
   const store = configureStore<StateSchema>({
     reducer: reducerManager.reduce,
+    preloadedState: initialState,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     middleware: (getDefaultMiddleware) =>

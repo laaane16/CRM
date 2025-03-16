@@ -94,7 +94,7 @@ const MainCard: FC<Props> = ({ isLoading, data, error, className, canEdit }) => 
 
   // TODO: marker should return from profile data
   return (
-    <div className={mainInfoClasses}>
+    <div data-testid="main-card" className={mainInfoClasses}>
       {isLoading ? (
         <>
           <Skeleton className={styles.skeleton} width="100%" height="220px" />
