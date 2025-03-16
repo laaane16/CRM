@@ -5,11 +5,11 @@
     // gap: 8px;
 
     .card {
-      box-sizing: border-box;
+      width: calc(100% - 10px);
     }
 
     .cardSkeleton {
-      width: 100%;
+      width: calc(100% - 10px);
       height: 80px;
     }
   }

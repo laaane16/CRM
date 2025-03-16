@@ -18,10 +18,10 @@
     "storybook": "storybook dev -p 6006 --debug-webpack",
     "build-storybook": "storybook build",
     "format": "prettier --write .",
-    "lint": "eslint ./",
-    "lint:write": "eslint ./ --fix",
-    "lint:style": "stylelint \"**/*.{css,scss}\"",
-    "lint:style:write": "stylelint \"**/*.{css,scss}\" --fix"
+    "lint": "eslint .",
+    "lint:write": "eslint . --fix",
+    "lint:style": "stylelint \"./**/*.{css,scss}\"",
+    "lint:style:write": "stylelint \"./**/*.{css,scss}\" --fix"
   },
   "husky": {
     "hooks": {
@@ -49,9 +49,9 @@
     "react-i18next": "^15.4.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.1",
+    "react-virtualized-auto-sizer": "^1.0.25",
     "react-window": "^1.8.11",
-    "recharts": "^2.15.1",
-    "uninstall": "^0.0.0"
+    "recharts": "^2.15.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",
