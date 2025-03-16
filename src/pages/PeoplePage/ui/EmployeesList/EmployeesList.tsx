@@ -14,6 +14,7 @@ import {
   GridOnScrollProps,
 } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
+import { Link } from 'react-router-dom';
 
 import * as styles from './EmployeesList.module.scss';
 
@@ -86,7 +87,9 @@ const EmployeesList: FC<Props> = ({ className }) => {
         {isLoading ? (
           <Skeleton height="100%" className={cn(styles.card, styles.cardSkeleton)} />
         ) : (
-          <EmployeesCard className={styles.card} data={data[index]} view={cardView} />
+          <Link to={`/profile/${data[index].id}`}>
+            <EmployeesCard className={styles.card} data={data[index]} view={cardView} />
+          </Link>
         )}
       </div>
     );
@@ -105,7 +108,9 @@ const EmployeesList: FC<Props> = ({ className }) => {
         {isLoading ? (
           <Skeleton height="100%" className={cn(styles.card, styles.cardSkeleton)} />
         ) : (
-          <EmployeesCard className={styles.card} data={data[rowIndex + columnIndex]} view={cardView} />
+          <Link to={`/profile/${data[rowIndex + columnIndex].id}`}>
+            <EmployeesCard className={styles.card} data={data[columnIndex + rowIndex * 3]} view={cardView} />
+          </Link>
         )}
       </div>
     );

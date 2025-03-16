@@ -1,3 +1,4 @@
+export { default as Avatar, AvatarSizes } from './Avatar/Avatar';
 export { default as MainLayout } from './Layouts/MainLayout/MainLayout';
 export { default as Button } from './Button/Button';
 export { default as Loader } from './Loader/Loader';
@@ -11,6 +12,7 @@ export { default as Dropdown } from './Dropdown/Dropdown';
 export { default as Message } from './Message/Message';
 export { default as Search } from './Search/Search';
 export { default as Accordeon } from './Accordeon/Accordeon';
+export { default as Skeleton } from './Skeleton/Skeleton';
 
 export { Theme as ButtonTheme } from './Button/Button';
 export { Sizes as ButtonSizes } from './Button/Button';

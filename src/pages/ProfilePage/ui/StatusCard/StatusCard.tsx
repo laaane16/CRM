@@ -14,8 +14,16 @@ interface IData {
 
 interface Props {
   className?: string;
-  data: IData[];
 }
+
+const statusData: IData[] = [
+  { name: 'A', value: 48, color: '#16212B' },
+  { name: 'B', value: 16, color: '#2C3E50' },
+  { name: 'C', value: 16, color: '#5C7080' },
+  { name: 'D', value: 7, color: '#8A9BA8' },
+  { name: 'E', value: 9, color: '#B0BEC5' },
+  { name: 'F', value: 3, color: '#CFD8DC' },
+];
 
 const listData = [
   { value: 'Завершенные' },
@@ -26,8 +34,8 @@ const listData = [
   { value: 'Планируемы' },
 ];
 
-const StatusCard: FC<Props> = ({ className, data }) => {
-  const total = useMemo(() => data.reduce((sum, entry) => sum + entry.value, 0), [data]);
+const StatusCard: FC<Props> = ({ className }) => {
+  const total = useMemo(() => statusData.reduce((sum, entry) => sum + entry.value, 0), [statusData]);
 
   const { t } = useTranslation();
 
@@ -44,8 +52,8 @@ const StatusCard: FC<Props> = ({ className, data }) => {
         ))}
       </ul>
       <PieChart className={styles.chart} width={200} height={200}>
-        <Pie data={data} cx="50%" cy="50%" innerRadius={60} outerRadius={100} fill="#8884d8" dataKey="value">
-          {data.map((entry, index) => (
+        <Pie data={statusData} cx="50%" cy="50%" innerRadius={60} outerRadius={100} fill="#8884d8" dataKey="value">
+          {statusData.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.color} />
           ))}
           <LabelList dataKey="value" position="inside" fill="#fff" />

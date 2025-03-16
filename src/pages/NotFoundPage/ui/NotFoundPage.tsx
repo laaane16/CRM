@@ -11,12 +11,12 @@ const NotFoundPage: FC = () => {
   const { t } = useTranslation('not-found');
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <h1>{t('not-found')}</h1>
       <Link className={cn(styles.link, 'secondary medium')} to={AppPaths[AppRoutes.MAIN]}>
         {t('nav-to-main-page')}
       </Link>
-    </div>
+    </main>
   );
 };
 
