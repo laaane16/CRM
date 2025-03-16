@@ -36,7 +36,7 @@ const Button: FC<Props> = ({
     [styles[theme]]: true,
   };
 
-  const btnClasses = cn(styles.btn, mods, [className]);
+  const btnClasses = cn(styles.btn, mods, className);
 
   const getInvertedColor = (theme: Theme) => {
     switch (theme) {

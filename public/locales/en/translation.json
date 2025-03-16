@@ -4,6 +4,7 @@
     "title": "People",
     "getEmployee": "Get Employee",
     "addEmployee": "Add",
-    "exit": "Exit"
+    "exit": "Exit",
+    "changeTheme": "Change Theme"
   }
 }
