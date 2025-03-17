@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Header: FC<Props> = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('translation');
 
   const { theme, setTheme } = useContext(ThemeContext);
 

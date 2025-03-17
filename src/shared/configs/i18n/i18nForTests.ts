@@ -1,15 +1,17 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import i18n from './i18n';
 
-i18n.use(initReactI18next).init({
-  lng: 'ru',
-  fallbackLng: 'ru',
-  debug: false,
-
-  interpolation: {
-    escapeValue: false, // not needed for react!!
+const newInstance = i18n.createInstance(
+  {
+    lng: 'ru',
+    fallbackLng: 'ru',
+    ns: ['file1', 'file2'],
+    defaultNS: 'file1',
+    debug: true,
   },
-  resources: { ru: { translations: {} } },
-});
+  (err, t) => {
+    if (err) return console.log('something went wrong loading', err);
+    t('key'); // -> same as i18next.t
+  },
+);
 
-export default i18n;
+export default newInstance;
