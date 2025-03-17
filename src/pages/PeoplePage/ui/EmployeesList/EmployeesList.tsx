@@ -108,9 +108,11 @@ const EmployeesList: FC<Props> = ({ className }) => {
         {isLoading ? (
           <Skeleton height="100%" className={cn(styles.card, styles.cardSkeleton)} />
         ) : (
-          <Link to={`/profile/${data[rowIndex + columnIndex].id}`}>
-            <EmployeesCard className={styles.card} data={data[columnIndex + rowIndex * 3]} view={cardView} />
-          </Link>
+          rowIndex * 3 + columnIndex < data.length && (
+            <Link to={`/profile/${data[rowIndex * 3 + columnIndex].id}`}>
+              <EmployeesCard className={styles.card} data={data[columnIndex + rowIndex * 3]} view={cardView} />
+            </Link>
+          )
         )}
       </div>
     );
