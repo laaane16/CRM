@@ -7,8 +7,9 @@ import { StateSchema } from '../types/StateSchema';
 import { saveScrollReducer } from '../../../../../features/saveScrollPosition/model/slice/saveScrollSlice';
 import { rtkApi } from '../../../../../shared/api/rtkApi';
 
-export const createStore = (initialState?: StateSchema) => {
+export const createStore = (initialState?: StateSchema, asyncReducers?: ReducersMapObject<StateSchema>) => {
   const rootReducers: ReducersMapObject<StateSchema> = {
+    ...asyncReducers,
     user: userReducer,
     saveScroll: saveScrollReducer,
     [rtkApi.reducerPath]: rtkApi.reducer,
