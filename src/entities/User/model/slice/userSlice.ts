@@ -6,6 +6,7 @@ const initialState: UserSchema = {
   id: null,
   username: '',
   avatar: '',
+  roles: [],
 };
 
 const userSlice = createSlice({
@@ -20,19 +21,21 @@ const userSlice = createSlice({
         state.id = parseData.id;
         state.username = parseData.username;
         state.avatar = parseData.avatar;
+        state.roles = parseData.roles;
       } else {
         console.log('ПОЛЬЗОВАТЕЛЬ НЕ АВТОРИЗОВАН');
       }
     },
     setAuthData: (state, action: PayloadAction<UserSchema>) => {
-      const { id, username, avatar } = action.payload;
+      const { id, username, avatar, roles } = action.payload;
       state.id = id;
       state.username = username;
       state.avatar = avatar;
+      state.roles = roles;
     },
     logout: (state) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      state = { id: null, username: '', avatar: '' };
+      state = { id: null, username: '', avatar: '', roles: [] };
       localStorage.removeItem(USER_LOCALSTORAGE_KEY);
     },
   },
