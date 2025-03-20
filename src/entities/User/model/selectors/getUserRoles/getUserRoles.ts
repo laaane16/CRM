@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { StateSchema } from '../../../../../app/providers';
-import { checkAvailable } from '../../../../../app/providers/router/ui/AppRouter';
+import { checkAvailableByRole } from '../../../../../shared/utils';
 
 import { IRole } from '../../types/types';
 
@@ -14,6 +14,6 @@ export const getAvailableByRole = createSelector(
     },
   ],
   (roles, neededRoles) => {
-    return checkAvailable(roles, neededRoles);
+    return checkAvailableByRole(roles, neededRoles);
   },
 );

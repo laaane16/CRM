@@ -7,7 +7,8 @@ import { MainLayout, PageLoader } from '../../../../shared/ui';
 import { Header } from '../../../../widgets/Header';
 import { Sidebar } from '../../../../widgets/Sidebar';
 import { getUserId, IRole } from '../../../../entities/User';
-import { getUserRoles } from '../../../../entities/User/model/selectors/getUserRoles/getUserRoles';
+import { getUserRoles } from '../../../../entities/User';
+import { checkAvailableByRole } from '../../../../shared/utils';
 
 const AdminPage = lazy(() => import('../../../../pages/AdminPage'));
 const ForbiddenPage = lazy(() => import('../../../../pages/ForbiddenPage'));
@@ -64,20 +65,10 @@ const AppRoutesConfig: Record<AppRoutes, IAppRouteConfig> = {
   },
 };
 
-export const checkAvailable = (userRoles: IRole[], roles: IRole[]) => {
-  const isAvailable = userRoles.some((i) => {
-    const isAvailable = roles.includes(i);
-    if (isAvailable) {
-      return true;
-    }
-  });
-  return isAvailable;
-};
-
 const getRouteElement = (route: IAppRouteConfig, userId: number | null, userRoles: IRole[]) => {
   let content = null;
   if (userId) {
-    if (route.roles && !checkAvailable(userRoles, route.roles)) {
+    if (route.roles && !checkAvailableByRole(userRoles, route.roles)) {
       content = <Navigate to="/forbidden" />;
     } else if (route.layout === 'main') {
       content = (
