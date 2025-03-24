@@ -1,9 +1,10 @@
+import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
+import ForkTsCheckerPlugin from 'fork-ts-checker-webpack-plugin';
 
 import { BuildPaths, ProjectOption } from './types/config';
 
@@ -38,6 +39,8 @@ export const buildPlugins = (
       exclude: /node_modules/,
       failOnError: true,
     }),
+
+    new ForkTsCheckerPlugin(),
   ];
 
   if (isDev) {
