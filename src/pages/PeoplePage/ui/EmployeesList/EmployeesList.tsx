@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useRef, UIEvent, RefObject, Ref } from 'react';
+import { FC, memo, useEffect, useRef, UIEvent, RefObject, Ref, useState, forwardRef, CSSProperties } from 'react';
 import { useSelector } from 'react-redux';
 import cn from 'classnames';
 import { useLocation } from 'react-router-dom';
@@ -13,6 +13,8 @@ import {
   ListOnScrollProps,
   GridOnScrollProps,
 } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
+import { Link } from 'react-router-dom';
 
 import * as styles from './EmployeesList.module.scss';
 
@@ -76,11 +78,18 @@ const EmployeesList: FC<Props> = ({ className }) => {
   // eslint-disable-next-line
   const Row = memo(({ index, style, data }: ListChildComponentProps) => {
     return (
-      <div style={style}>
+      <div
+        style={{
+          ...style,
+          top: Number(style.top) + index * 10,
+        }}
+      >
         {isLoading ? (
           <Skeleton height="100%" className={cn(styles.card, styles.cardSkeleton)} />
         ) : (
-          <EmployeesCard className={styles.card} data={data[index]} view={cardView} />
+          <Link to={`/profile/${data[index].id}`}>
+            <EmployeesCard className={styles.card} data={data[index]} view={cardView} />
+          </Link>
         )}
       </div>
     );
@@ -89,11 +98,21 @@ const EmployeesList: FC<Props> = ({ className }) => {
   // eslint-disable-next-line
   const Cell = memo(({ rowIndex, columnIndex, style, data }: GridChildComponentProps) => {
     return (
-      <div style={style}>
+      <div
+        style={{
+          ...style,
+          top: Number(style.top) + rowIndex * 10,
+          left: Number(style.left) + (columnIndex % 3) * 10,
+        }}
+      >
         {isLoading ? (
           <Skeleton height="100%" className={cn(styles.card, styles.cardSkeleton)} />
         ) : (
-          <EmployeesCard className={styles.card} data={data[rowIndex + columnIndex]} view={cardView} />
+          rowIndex * 3 + columnIndex < data.length && (
+            <Link to={`/profile/${data[rowIndex * 3 + columnIndex].id}`}>
+              <EmployeesCard className={styles.card} data={data[columnIndex + rowIndex * 3]} view={cardView} />
+            </Link>
+          )
         )}
       </div>
     );
@@ -101,39 +120,43 @@ const EmployeesList: FC<Props> = ({ className }) => {
 
   return (
     <DynamicModuleLoader removeAfterUnmount={false} reducers={reducers}>
-      {view === IView.LIST ? (
-        <FixedSizeList
-          initialScrollOffset={scrollPosition}
-          ref={wrapListRef}
-          onScroll={trottleScroll}
-          onItemsRendered={onRowsRendered}
-          itemCount={itemCount}
-          itemData={peoples}
-          height={600}
-          className={styles.list}
-          itemSize={80}
-          width={1000}
-        >
-          {Row}
-        </FixedSizeList>
-      ) : (
-        <FixedSizeGrid
-          initialScrollTop={scrollPosition}
-          ref={wrapGridRef}
-          onScroll={trottleScroll}
-          onItemsRendered={onCellsRendered}
-          rowCount={itemCount / 3}
-          rowHeight={270}
-          columnCount={3}
-          columnWidth={300}
-          itemData={peoples}
-          height={600}
-          className={styles.list}
-          width={1000}
-        >
-          {Cell}
-        </FixedSizeGrid>
-      )}
+      <AutoSizer>
+        {({ height, width }) => {
+          return view === IView.LIST ? (
+            <FixedSizeList
+              initialScrollOffset={scrollPosition}
+              ref={wrapListRef}
+              onScroll={trottleScroll}
+              onItemsRendered={onRowsRendered}
+              itemCount={itemCount}
+              itemData={peoples}
+              height={height}
+              className={styles.list}
+              itemSize={80}
+              width={width}
+            >
+              {Row}
+            </FixedSizeList>
+          ) : (
+            <FixedSizeGrid
+              initialScrollTop={scrollPosition}
+              ref={wrapGridRef}
+              onScroll={trottleScroll}
+              onItemsRendered={onCellsRendered}
+              rowCount={itemCount / 3}
+              rowHeight={270}
+              columnCount={3}
+              columnWidth={width / 3 - 10}
+              itemData={peoples}
+              height={height}
+              className={styles.list}
+              width={width}
+            >
+              {Cell}
+            </FixedSizeGrid>
+          );
+        }}
+      </AutoSizer>
     </DynamicModuleLoader>
   );
 };

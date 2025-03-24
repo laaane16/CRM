@@ -7,6 +7,7 @@ interface Props {
   view?: LoaderView;
   size?: LoaderSize;
   className?: string;
+  color?: string;
 }
 
 export enum LoaderView {
@@ -19,8 +20,8 @@ export enum LoaderSize {
   SMALL = 'small',
 }
 
-const Loader: FC<Props> = ({ className, view = LoaderView.SPIN, size = LoaderSize.LARGE }) => {
-  const loaderClasses = cn(className, styles[view], styles[`${view}_${size}`]);
+const Loader: FC<Props> = ({ className, view = LoaderView.SPIN, size = LoaderSize.LARGE, color = '' }) => {
+  const loaderClasses = cn(className, styles[view], styles[`${view}_${size}`], styles[color]);
 
   return <span className={loaderClasses}></span>;
 };

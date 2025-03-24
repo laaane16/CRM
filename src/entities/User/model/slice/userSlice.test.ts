@@ -6,15 +6,16 @@ describe('userSlice.test', () => {
     id: null,
     username: '',
     avatar: '',
+    roles: [],
   };
 
   test('test initAuthData reducer', () => {
     const mockGetItem = jest.spyOn(Storage.prototype, 'getItem');
 
-    mockGetItem.mockReturnValue(JSON.stringify({ id: 1, username: 'test', avatar: '' }));
+    mockGetItem.mockReturnValue(JSON.stringify({ id: 1, username: 'test', avatar: '', roles: ['admin'] }));
     const result = userReducer(state as UserSchema, userActions.initAuthState());
 
-    expect(result).toEqual({ id: 1, username: 'test', avatar: '' });
+    expect(result).toEqual({ id: 1, username: 'test', avatar: '', roles: ['admin'] });
   });
 
   test('test initAuthData reducer while no data in localstorage', () => {
@@ -27,9 +28,12 @@ describe('userSlice.test', () => {
   });
 
   test('test setAuthData reducer', () => {
-    const result = userReducer(state as UserSchema, userActions.setAuthData({ id: 1, username: 'test', avatar: '' }));
+    const result = userReducer(
+      state as UserSchema,
+      userActions.setAuthData({ id: 1, username: 'test', avatar: '', roles: ['admin'] }),
+    );
 
-    expect(result).toEqual({ id: 1, username: 'test', avatar: '' });
+    expect(result).toEqual({ id: 1, username: 'test', avatar: '', roles: ['admin'] });
   });
 
   test('test logout reducer', () => {
@@ -38,6 +42,6 @@ describe('userSlice.test', () => {
     const result = userReducer(state as UserSchema, userActions.logout());
 
     expect(mockedRemoveItem).toHaveBeenCalled();
-    expect(result).toEqual({ id: null, username: '', avatar: '' });
+    expect(result).toEqual({ id: null, username: '', avatar: '', roles: [] });
   });
 });

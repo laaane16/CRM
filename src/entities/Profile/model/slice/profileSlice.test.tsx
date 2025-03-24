@@ -1,4 +1,3 @@
-import { data } from 'react-router-dom';
 import { profileFetchData } from '../services/profileFetchData/profileFetchData';
 import updateProfileData from '../services/updateProfileData/updateProfileData';
 import { ProfileSchema } from '../types/ProfileSchema';

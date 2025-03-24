@@ -4,6 +4,8 @@
     "title": "Люди",
     "getEmployee": "Запросить сотрудника",
     "addEmployee": "Добавить",
-    "exit": "Выход"
+    "exit": "Выход",
+    "changeTheme": "Сменить тему",
+    "admin": "Админ"
   }
 }

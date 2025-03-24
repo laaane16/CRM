@@ -18,3 +18,9 @@
   font-size: 24px;
   color: var(--secondary-color);
 }
+
+.languageBtn {
+  border: 0;
+  background-color: transparent;
+  min-width: max-content !important;
+}

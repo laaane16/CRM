@@ -94,7 +94,7 @@ const MainCard: FC<Props> = ({ isLoading, data, error, className, canEdit }) => 
 
   // TODO: marker should return from profile data
   return (
-    <div className={mainInfoClasses}>
+    <div data-testid="main-card" className={mainInfoClasses}>
       {isLoading ? (
         <>
           <Skeleton className={styles.skeleton} width="100%" height="220px" />
@@ -107,8 +107,9 @@ const MainCard: FC<Props> = ({ isLoading, data, error, className, canEdit }) => 
           <span className={styles.marker}>штатный</span>
           {canEdit && (
             <Dropdown
+              data-testid="MainCard.EditorModeDropdown"
               onClick={handleDropdownClick}
-              menu={[{ value: 'edit', label: 'Редактировать профиль' }]}
+              menu={[{ value: 'edit', 'data-testid': 'MainCard.onEditorMode', label: 'Редактировать профиль' }]}
               className={styles.extra}
             >
               <Ellipsis />
@@ -117,31 +118,65 @@ const MainCard: FC<Props> = ({ isLoading, data, error, className, canEdit }) => 
           <ul className={styles.mainInfoList}>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-call`, styles.mainInfoItemIcon)} />
-              {!readonly ? <Input onChange={onChangeNumber} value={data?.number || ''} /> : data?.number}
+              {!readonly ? (
+                <Input data-testid="MainCard.InputNumber" onChange={onChangeNumber} value={data?.number || ''} />
+              ) : (
+                data?.number
+              )}
             </li>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-alternate-mail`, styles.mainInfoItemIcon)} />
-              {!readonly ? <Input onChange={onChangeMail} value={data?.mail || ''} /> : data?.mail}
+              {!readonly ? (
+                <Input data-testid="MainCard.InputMail" onChange={onChangeMail} value={data?.mail || ''} />
+              ) : (
+                data?.mail
+              )}
             </li>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-verify-bordered`, styles.mainInfoItemIcon)} />
-              {!readonly ? <Input onChange={onChangeMainPost} value={data?.post.main || ''} /> : data?.post.main}
+              {!readonly ? (
+                <Input data-testid="MainCard.InputMainPost" onChange={onChangeMainPost} value={data?.post.main || ''} />
+              ) : (
+                data?.post.main
+              )}
             </li>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-verify-bordered`, styles.mainInfoItemIcon)} />
-              {!readonly ? <Input onChange={onChangeExtraPost} value={data?.post.extra || ''} /> : data?.post.extra}
+              {!readonly ? (
+                <Input
+                  data-testid="MainCard.InputExtraPost"
+                  onChange={onChangeExtraPost}
+                  value={data?.post.extra || ''}
+                />
+              ) : (
+                data?.post.extra
+              )}
             </li>
             <li className={mainInfoItemClasses}>
               <span className={cn(`icon-map`, styles.mainInfoItemIcon)} />
-              {!readonly ? <Input onChange={onChangeAddress} value={data?.address || ''} /> : data?.address}
+              {!readonly ? (
+                <Input data-testid="MainCard.InputAddress" onChange={onChangeAddress} value={data?.address || ''} />
+              ) : (
+                data?.address
+              )}
             </li>
           </ul>
           {!readonly ? (
             <>
-              <Button className={styles.saveButton} size={ButtonSizes.SMALL} onClick={offEditorMode}>
+              <Button
+                data-testid="MainCard.SaveButton"
+                className={styles.saveButton}
+                size={ButtonSizes.SMALL}
+                onClick={offEditorMode}
+              >
                 Сохранить
               </Button>
-              <Button className={styles.cancelEditButton} size={ButtonSizes.SMALL} onClick={onCancelEdit}>
+              <Button
+                data-testid="MainCard.CancelButton"
+                className={styles.cancelEditButton}
+                size={ButtonSizes.SMALL}
+                onClick={onCancelEdit}
+              >
                 Отмена
               </Button>
             </>

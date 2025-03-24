@@ -13,9 +13,15 @@ const loginSlice = createSlice({
   reducers: {
     setUsername: (state, action: PayloadAction<string>) => {
       state.username = action.payload;
+      if (state.error) {
+        state.error = undefined;
+      }
     },
     setPassword: (state, action: PayloadAction<string>) => {
       state.password = action.payload;
+      if (state.error) {
+        state.error = undefined;
+      }
     },
   },
   extraReducers: (builder) => {
