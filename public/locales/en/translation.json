@@ -5,6 +5,7 @@
     "getEmployee": "Get Employee",
     "addEmployee": "Add",
     "exit": "Exit",
-    "changeTheme": "Change Theme"
+    "changeTheme": "Change Theme",
+    "admin": "Admin"
   }
 }

@@ -5,6 +5,7 @@
     "getEmployee": "Запросить сотрудника",
     "addEmployee": "Добавить",
     "exit": "Выход",
-    "changeTheme": "Сменить тему"
+    "changeTheme": "Сменить тему",
+    "admin": "Админ"
   }
 }

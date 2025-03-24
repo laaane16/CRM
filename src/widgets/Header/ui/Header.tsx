@@ -8,6 +8,10 @@ import { THEME_LOCALSTORAGE_KEY } from '../../../shared/constants';
 import i18n from '../../../shared/configs/i18n/i18n';
 
 import * as styles from './Header.module.scss';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getAvailableByRole } from '../../../entities/User/model/selectors/getUserRoles/getUserRoles';
+import { StateSchema } from '../../../app/providers';
 interface Props {
   className?: string;
 }
@@ -16,6 +20,7 @@ const Header: FC<Props> = () => {
   const { t } = useTranslation('translation');
 
   const { theme, setTheme } = useContext(ThemeContext);
+  const isUserAvailable = useSelector((state: StateSchema) => getAvailableByRole(state, ['admin']));
 
   const onChangeTheme = () => {
     switch (theme) {
@@ -42,6 +47,7 @@ const Header: FC<Props> = () => {
       <Button size={ButtonSizes.SMALL} onClick={onChangeTheme}>
         {t('header.changeTheme')}
       </Button>
+
       <Button
         className={styles.languageBtn}
         theme={ButtonTheme.GHOST}
@@ -51,6 +57,13 @@ const Header: FC<Props> = () => {
         {i18n.language}
       </Button>
 
+      {isUserAvailable && (
+        <Link to="/admin">
+          <Button className={styles.languageBtn} theme={ButtonTheme.GHOST} size={ButtonSizes.SMALL}>
+            {t('header.admin')}
+          </Button>
+        </Link>
+      )}
       <span className={cn('icon-settings', styles.icon)}></span>
       <span className={cn('icon-info', styles.icon)}></span>
     </header>
