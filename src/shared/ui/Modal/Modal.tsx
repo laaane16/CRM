@@ -4,31 +4,22 @@ import cn from 'classnames';
 import Portal from '../Portal/Portal';
 
 import * as styles from './Modal.module.scss';
+import { useModal } from '../../lib/hooks/useModal';
 
 interface Props {
   className?: string;
   isOpen: boolean;
   content: ReactNode;
   onClose: () => void;
+  delay?: number;
 }
 
-const Modal: FC<Props> = ({ isOpen, content, onClose, className }) => {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      setVisible(true);
-    }
-  }, [isOpen]);
+const Modal: FC<Props> = ({ isOpen, content, delay, onClose, className }) => {
+  const { visible, handleClose } = useModal({ isOpen, delay, onClose });
 
   if (!isOpen) {
     return null;
   }
-
-  const handleClose = () => {
-    setVisible(false);
-    setTimeout(onClose, 300);
-  };
 
   return (
     <Portal element={document.body}>
