@@ -17,25 +17,25 @@
   }
 }
 
-.modal {
+.drawer {
   z-index: 10;
   position: absolute;
-  left: 50%;
-  top: 50%;
-  min-width: 100px;
-  min-height: 100px;
+  left: 5%;
+  top: 0;
+  width: 90%;
+  height: 80%;
   background-color: white;
-  pointer-events: all;
-  border-radius: 15px;
-  padding: 10px 15px;
-  transform: scale(0.8) translate(-50%, -50%);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 10px 15px 0 10px;
+  transform: translateY(calc(100vh));
   transition-property: opacity, transform;
   transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
   opacity: 0;
 
   &.visible {
-    transform: scale(1) translate(-50%, -50%);
+    transform: translateY(calc(100vh - 100%));
     opacity: 1;
   }
 }

@@ -1,9 +1,9 @@
-import { FC, ReactNode, useEffect, useState, memo } from 'react';
+import { FC, memo, ReactNode, useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import Portal from '../Portal/Portal';
 
-import * as styles from './Modal.module.scss';
+import * as styles from './Drawer.module.scss';
 
 interface Props {
   className?: string;
@@ -33,7 +33,7 @@ const Modal: FC<Props> = ({ isOpen, content, onClose, className }) => {
   return (
     <Portal element={document.body}>
       <div className={cn(styles.overlay, { [styles.visible]: visible })} onClick={handleClose}></div>
-      <div className={cn(styles.modal, className, { [styles.visible]: visible })}>{content}</div>
+      <div className={cn(styles.drawer, className, { [styles.visible]: visible })}>{content}</div>
     </Portal>
   );
 };

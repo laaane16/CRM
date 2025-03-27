@@ -1,13 +1,16 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
+import { isMobile } from 'react-device-detect';
 
 import { getUserId, getUsername, getUserAvatar, userActions } from '../../../entities/User';
 import { AppPaths, AppRoutes, useAppDispatch } from '../../../shared/lib';
 import Avatar, { AvatarSizes } from '../../../shared/ui/Avatar/Avatar';
 import { Tooltip } from '../../../shared/ui';
 import { ArrowPosition } from '../../../shared/ui/Tooltip/Tooltip';
+import Modal from '../../../shared/ui/Modal/Modal';
+import Drawer from '../../../shared/ui/Drawer/Drawer';
 import NotificationList from '../../../entities/Notification/ui/NotificationList/NotificationList';
 import { useGetNotificationsQuery } from '../../../entities/Notification/api/notificationApi';
 
@@ -18,6 +21,7 @@ interface Props {
 }
 
 const Sidebar: FC<Props> = () => {
+  const [visible, setVisible] = useState(false);
   const username = useSelector(getUsername);
   const dispatch = useAppDispatch();
 
@@ -121,9 +125,34 @@ const Sidebar: FC<Props> = () => {
           </Link>
         </div>
 
-        <div className={styles.navItem}>
+        <div
+          className={styles.navItem}
+          onClick={() => {
+            setVisible(true);
+          }}
+        >
           <div className={cn(styles.navLink)}>
-            <Tooltip
+            <span data-icon="true" className={`${styles.itemIcon} icon-notifications`} />
+            <div className={styles.container}>
+              <span className={styles.itemTitle}>Уведомления</span>
+            </div>
+            {isMobile ? (
+              <Drawer
+                className={styles.drawer}
+                isOpen={visible}
+                content={<NotificationList data={isLoading ? [] : data || []} className={styles.notificationList} />}
+                onClose={() => setVisible(false)}
+              />
+            ) : (
+              <Modal
+                className={styles.modal}
+                isOpen={visible}
+                content={<NotificationList data={isLoading ? [] : data || []} className={styles.notificationList} />}
+                onClose={() => setVisible(false)}
+              />
+            )}
+
+            {/* <Tooltip
               arrowPosition={ArrowPosition.RIGHT}
               className={styles.navLink}
               trigger={['click']}
@@ -137,7 +166,7 @@ const Sidebar: FC<Props> = () => {
               <div className={styles.container}>
                 <span className={styles.itemTitle}>Уведомления</span>
               </div>
-            </Tooltip>
+            </Tooltip> */}
           </div>
         </div>
       </nav>
