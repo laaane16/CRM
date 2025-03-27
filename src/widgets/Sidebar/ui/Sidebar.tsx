@@ -1,12 +1,17 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 
-import * as styles from './Sidebar.module.scss';
 import { getUserId, getUsername, getUserAvatar, userActions } from '../../../entities/User';
 import { AppPaths, AppRoutes, useAppDispatch } from '../../../shared/lib';
 import Avatar, { AvatarSizes } from '../../../shared/ui/Avatar/Avatar';
+import { Tooltip } from '../../../shared/ui';
+import { ArrowPosition } from '../../../shared/ui/Tooltip/Tooltip';
+import NotificationList from '../../../entities/Notification/ui/NotificationList/NotificationList';
+import { useGetNotificationsQuery } from '../../../entities/Notification/api/notificationApi';
+
+import * as styles from './Sidebar.module.scss';
 
 interface Props {
   className?: string;
@@ -25,6 +30,10 @@ const Sidebar: FC<Props> = () => {
     dispatch(userActions.logout());
     navigate(AppPaths[AppRoutes.LOGIN]);
   };
+
+  const { data, isLoading } = useGetNotificationsQuery(null, {
+    pollingInterval: 3000,
+  });
 
   return (
     <aside className={cn(styles.sidebar)}>
@@ -111,14 +120,25 @@ const Sidebar: FC<Props> = () => {
             </div>
           </Link>
         </div>
+
         <div className={styles.navItem}>
-          <Link className={styles.navLink} to={AppPaths[AppRoutes.MAIN]}>
-            <span data-icon="true" className={`${styles.itemIcon} icon-notifications`} />
-            <div className={styles.container}>
-              <span className={styles.itemTitle}>Уведомления</span>
-              <span className={styles.circle}></span>
-            </div>
-          </Link>
+          <div className={cn(styles.navLink)}>
+            <Tooltip
+              arrowPosition={ArrowPosition.RIGHT}
+              className={styles.navLink}
+              trigger={['click']}
+              content={
+                <div className={styles.notificationWrap}>
+                  <NotificationList data={isLoading ? [] : data || []} className={styles.notificationList} />
+                </div>
+              }
+            >
+              <span data-icon="true" className={`${styles.itemIcon} icon-notifications`} />
+              <div className={styles.container}>
+                <span className={styles.itemTitle}>Уведомления</span>
+              </div>
+            </Tooltip>
+          </div>
         </div>
       </nav>
       <div onClick={onLogoutClick} className={styles.navItem}>

@@ -65,7 +65,7 @@
 
   // border-top-left-radius: 13.5px;
   // border-bottom-left-radius: 13.5px;
-  overflow: hidden;
+  // overflow: hidden;
 
   &:not(:last-child) {
     margin-bottom: 40px;
@@ -135,4 +135,16 @@
   width: 27px;
   height: 27px;
   background-color: var(--secondary-color);
+}
+
+.notificationWrap {
+  padding: 5px 10px;
+  background-color: var(--ghost-color);
+  border-radius: 15px;
+}
+
+.notificationList {
+  width: 300px;
+  height: 300px;
+  overflow-y: scroll;
 }

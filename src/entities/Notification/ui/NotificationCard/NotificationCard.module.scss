@@ -1,0 +1,24 @@
+.notificationCard {
+  max-width: 300px;
+  padding: calc(var(--PADDING-BASE) * 4);
+  background-color: var(--ghost-color);
+  color: var(--primary-color);
+}
+
+.scrollableBlock {
+  height: 100px;
+  padding: 0 calc(var(--PADDING-BASE) * 2);
+  overflow-y: scroll;
+}
+
+.title {
+  display: inline-block;
+}
+
+.userId {
+  display: inline-block;
+}
+
+.message {
+  display: block;
+}
