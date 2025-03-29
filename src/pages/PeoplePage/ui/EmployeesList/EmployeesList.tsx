@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useRef, UIEvent, RefObject, Ref, useState, forwardRef, CSSProperties } from 'react';
+import { FC, memo, useRef, Ref } from 'react';
 import { useSelector } from 'react-redux';
 import cn from 'classnames';
 import { useLocation } from 'react-router-dom';
@@ -16,8 +16,6 @@ import {
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { Link } from 'react-router-dom';
 
-import * as styles from './EmployeesList.module.scss';
-
 import EmployeesCard, {
   EmployeesCardView,
   IEmployee,
@@ -33,6 +31,11 @@ import { getScrollPositionByPath } from '../../../../features/saveScrollPosition
 import { StateSchema } from '../../../../app/providers';
 import { saveScrollActions } from '../../../../features/saveScrollPosition/model/slice/saveScrollSlice';
 import { useTrottle } from '../../../../shared/lib/hooks/useTrottle';
+import EmployeeRating from '../../../../features/EmployeeRating/ui/EmployeeRating';
+import { useGetEmployeeRatingQuery } from '../../../../features/EmployeeRating/api/employeeRatingApi';
+
+import * as styles from './EmployeesList.module.scss';
+import { getUserId } from '../../../../entities/User';
 
 interface Props {
   className?: string;
@@ -45,6 +48,7 @@ const reducers = {
 const EmployeesList: FC<Props> = ({ className }) => {
   const wrapListRef = useRef<HTMLDivElement>(null) as Ref<FixedSizeList<IEmployee[]>>;
   const wrapGridRef = useRef<HTMLDivElement>(null) as Ref<FixedSizeGrid<IEmployee[]>>;
+  const userId = useSelector(getUserId) as number;
 
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
@@ -53,6 +57,7 @@ const EmployeesList: FC<Props> = ({ className }) => {
   const peoples = useSelector(peoplesSelectors.selectAll);
   const view = useSelector(getPeoplesView);
   const scrollPosition = useSelector((state: StateSchema) => getScrollPositionByPath(state, pathname));
+  const { data: employeeRating } = useGetEmployeeRatingQuery({ userId });
 
   const onScroll = (e: ListOnScrollProps & GridOnScrollProps): void => {
     dispatch(saveScrollActions.saveScroll({ path: pathname, scroll: e.scrollOffset || e.scrollTop }));
@@ -77,6 +82,9 @@ const EmployeesList: FC<Props> = ({ className }) => {
 
   // eslint-disable-next-line
   const Row = memo(({ index, style, data }: ListChildComponentProps) => {
+    const currentEmployeeId = data[index]?.userId;
+    const isEmployeeSelected = !!employeeRating?.find((i) => i.employeeId === currentEmployeeId);
+
     return (
       <div
         style={{
@@ -87,9 +95,17 @@ const EmployeesList: FC<Props> = ({ className }) => {
         {isLoading ? (
           <Skeleton height="100%" className={cn(styles.card, styles.cardSkeleton)} />
         ) : (
-          <Link to={`/profile/${data[index].id}`}>
-            <EmployeesCard className={styles.card} data={data[index]} view={cardView} />
-          </Link>
+          <>
+            <EmployeeRating
+              employeeId={currentEmployeeId}
+              userId={userId}
+              isSelected={isEmployeeSelected}
+              className={styles.rating}
+            />
+            <Link to={`/profile/${data[index].id}`}>
+              <EmployeesCard className={styles.card} data={data[index]} view={cardView} />
+            </Link>
+          </>
         )}
       </div>
     );
@@ -97,6 +113,9 @@ const EmployeesList: FC<Props> = ({ className }) => {
 
   // eslint-disable-next-line
   const Cell = memo(({ rowIndex, columnIndex, style, data }: GridChildComponentProps) => {
+    const currentEmployeeId = data[columnIndex + rowIndex * 3]?.userId;
+    const isEmployeeSelected = !!employeeRating?.find((i) => i.employeeId === currentEmployeeId);
+
     return (
       <div
         style={{
@@ -109,9 +128,17 @@ const EmployeesList: FC<Props> = ({ className }) => {
           <Skeleton height="100%" className={cn(styles.card, styles.cardSkeleton)} />
         ) : (
           rowIndex * 3 + columnIndex < data.length && (
-            <Link to={`/profile/${data[rowIndex * 3 + columnIndex].id}`}>
-              <EmployeesCard className={styles.card} data={data[columnIndex + rowIndex * 3]} view={cardView} />
-            </Link>
+            <>
+              <EmployeeRating
+                employeeId={currentEmployeeId}
+                userId={userId}
+                isSelected={isEmployeeSelected}
+                className={styles.rating}
+              />
+              <Link to={`/profile/${data[rowIndex * 3 + columnIndex].id}`}>
+                <EmployeesCard className={styles.card} data={data[columnIndex + rowIndex * 3]} view={cardView} />
+              </Link>
+            </>
           )
         )}
       </div>
@@ -149,7 +176,7 @@ const EmployeesList: FC<Props> = ({ className }) => {
               columnWidth={width / 3 - 10}
               itemData={peoples}
               height={height}
-              className={styles.list}
+              className={styles.grid}
               width={width}
             >
               {Cell}

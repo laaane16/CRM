@@ -1,17 +1,26 @@
 .list {
-  &.list {
-    // display: flex;
-    // flex-direction: column;
-    // gap: 8px;
+  // &.list {
+  // display: flex;
+  // flex-direction: column;
+  // gap: 8px;
+  // }
 
-    .card {
-      width: calc(100% - 10px);
-    }
+  .card {
+    width: calc(100% - 10px);
+  }
 
-    .cardSkeleton {
-      width: calc(100% - 10px);
-      height: 80px;
-    }
+  .cardSkeleton {
+    width: calc(100% - 10px);
+    height: 80px;
+  }
+
+  .rating {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 32px;
+    width: max-content;
+    z-index: 100;
   }
 }
 
@@ -29,5 +38,13 @@
   .cardSkeleton {
     width: 100%;
     min-height: 270px;
+  }
+
+  .rating {
+    position: absolute;
+    right: calc(var(--PADDING-BASE) * 8);
+    top: calc(var(--PADDING-BASE) * 4);
+    width: max-content;
+    z-index: 100;
   }
 }
