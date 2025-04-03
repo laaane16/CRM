@@ -18,12 +18,13 @@
     "test:ui": "npx loki test",
     "test:ui:ok": "npx loki approve",
     "storybook": "storybook dev -p 6006 --debug-webpack",
-    "build-storybook": "storybook build",
+    "storybook:build": "storybook build",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "lint:write": "eslint . --fix",
+    "lint:fix": "eslint . --fix",
     "lint:style": "stylelint \"./**/*.{css,scss}\"",
-    "lint:style:write": "stylelint \"./**/*.{css,scss}\" --fix"
+    "lint:style:fix": "stylelint \"./**/*.{css,scss}\" --fix",
+    "generate:slice": "node ./scripts/sliceTemplate/index.js"
   },
   "husky": {
     "hooks": {
