@@ -24,7 +24,8 @@
     "lint:fix": "eslint . --fix",
     "lint:style": "stylelint \"./**/*.{css,scss}\"",
     "lint:style:fix": "stylelint \"./**/*.{css,scss}\" --fix",
-    "generate:slice": "node ./scripts/sliceTemplate/index.js"
+    "generate:slice": "node ./scripts/sliceTemplate/index.js",
+    "postinstall": "node ./scripts/removeBabelCache/index.js"
   },
   "husky": {
     "hooks": {

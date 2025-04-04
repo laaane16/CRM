@@ -13,6 +13,8 @@ export const buildPlugins = (
   isDev: boolean,
   project: ProjectOption,
 ): webpack.WebpackPluginInstance[] => {
+  const isProd = !isDev;
+
   const plugins = [
     new webpack.ProgressPlugin(),
 
@@ -26,21 +28,19 @@ export const buildPlugins = (
       template: paths.html,
     }),
 
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash].css',
-      chunkFilename: 'css/[name].[contenthash:8].css',
-    }),
-
-    new CopyPlugin({
-      patterns: [{ from: paths.locales, to: paths.buildLocales }],
-    }),
-
     new CircularDependencyPlugin({
       exclude: /node_modules/,
       failOnError: true,
     }),
 
-    new ForkTsCheckerPlugin(),
+    new ForkTsCheckerPlugin({
+      typescript: {
+        diagnosticOptions: {
+          semantic: true,
+          syntactic: true,
+        },
+      },
+    }),
   ];
 
   if (isDev) {
@@ -49,6 +49,21 @@ export const buildPlugins = (
     plugins.push(
       new BundleAnalyzerPlugin({
         openAnalyzer: false,
+      }),
+    );
+  }
+
+  if (isProd) {
+    plugins.push(
+      new CopyPlugin({
+        patterns: [{ from: paths.locales, to: paths.buildLocales }],
+      }),
+    );
+
+    plugins.push(
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].[contenthash].css',
+        chunkFilename: 'css/[name].[contenthash:8].css',
       }),
     );
   }
