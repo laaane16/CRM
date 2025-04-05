@@ -9,7 +9,7 @@ interface Props {
 
 const AuthPage: FC<Props> = () => {
   return (
-    <main className={styles.layout}>
+    <main data-testid="auth-page" className={styles.layout}>
       <AuthForm />
     </main>
   );

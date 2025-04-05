@@ -50,7 +50,7 @@ const ProfilePage: FC<Props> = () => {
 
   return (
     <DynamicModuleLoader reducers={reducerList}>
-      <main className={styles.layout}>
+      <main data-testid="profile-page" className={styles.layout}>
         <ProfilePageHeader className={styles.header} />
         <MainCard
           canEdit={canEdit}
