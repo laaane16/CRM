@@ -9,7 +9,7 @@ import { Input, Checkbox, Button, ButtonTheme } from '../../../shared/ui';
 import { getLoginError } from '../model/selectors/getLoginError/getLoginError';
 import { getLoginPassword } from '../model/selectors/getLoginPassword/getLoginPassword';
 import { getLoginUsername } from '../model/selectors/getLoginUsername/getLoginUsername';
-import { getLoginIsLoading } from '../model/selectors/getLoginIsLoading/getLoginIsLoading';
+import { useLoginIsLoading } from '../model/selectors/getLoginIsLoading/getLoginIsLoading';
 import { loginByUsername } from '../model/services/loginByUsername';
 
 import * as styles from './AuthForm.module.scss';
@@ -31,7 +31,7 @@ const AuthForm: FC<Props> = (props) => {
   const username = useSelector(getLoginUsername);
   const password = useSelector(getLoginPassword);
   const error = useSelector(getLoginError);
-  const isLoading = useSelector(getLoginIsLoading);
+  const isLoading = useLoginIsLoading();
 
   const onChangeUsername = (value: string) => {
     dispatch(loginActions.setUsername(value));
