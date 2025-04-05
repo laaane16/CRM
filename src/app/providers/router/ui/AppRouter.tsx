@@ -2,13 +2,22 @@ import { FC, lazy, ReactNode, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { AppPaths, AppRoutes } from '../../../../shared/lib';
+import { AppRoutes } from '../../../../shared/lib';
 import { MainLayout, PageLoader } from '../../../../shared/ui';
 import { Header } from '../../../../widgets/Header';
 import { Sidebar } from '../../../../widgets/Sidebar';
 import { getUserId, IRole } from '../../../../entities/User';
 import { getUserRoles } from '../../../../entities/User';
 import { checkAvailableByRole } from '../../../../shared/utils';
+import {
+  getAdminRoutePath,
+  getForbiddenRoutePath,
+  getLoginRoutePath,
+  getMainRoutePath,
+  getNotFoundRoutePath,
+  getPeopleRoutePath,
+  getProfileRoutePath,
+} from '../../../../shared/lib/router/routes';
 
 const AdminPage = lazy(() => import('../../../../pages/AdminPage'));
 const ForbiddenPage = lazy(() => import('../../../../pages/ForbiddenPage'));
@@ -27,39 +36,39 @@ interface IAppRouteConfig {
 
 const AppRoutesConfig: Record<AppRoutes, IAppRouteConfig> = {
   [AppRoutes.MAIN]: {
-    path: AppPaths[AppRoutes.MAIN],
+    path: getMainRoutePath(),
     layout: 'main',
     element: <PeoplePage />,
   },
   [AppRoutes.PEOPLE]: {
-    path: AppPaths[AppRoutes.PEOPLE],
+    path: getPeopleRoutePath(),
     element: <PeoplePage />,
     layout: 'main',
   },
   [AppRoutes.LOGIN]: {
-    path: AppPaths[AppRoutes.LOGIN],
+    path: getLoginRoutePath(),
     element: <AuthPage />,
     layout: null,
     public: true,
   },
   [AppRoutes.PROFILE]: {
-    path: AppPaths[AppRoutes.PROFILE] + '/:id',
+    path: getProfileRoutePath(':id'),
     element: <ProfilePage />,
     layout: null,
   },
   [AppRoutes.ADMIN]: {
-    path: AppPaths[AppRoutes.ADMIN],
+    path: getAdminRoutePath(),
     element: <AdminPage />,
     layout: 'main',
     roles: ['admin'],
   },
   [AppRoutes.FORBIDDEN]: {
-    path: AppPaths[AppRoutes.FORBIDDEN],
+    path: getForbiddenRoutePath(),
     element: <ForbiddenPage />,
     layout: null,
   },
   [AppRoutes.NOT_FOUND]: {
-    path: AppPaths[AppRoutes.NOT_FOUND],
+    path: getNotFoundRoutePath(),
     element: <NotFoundPage />,
     layout: null,
   },
@@ -82,7 +91,7 @@ const getRouteElement = (route: IAppRouteConfig, userId: number | null, userRole
       content = route.element;
     }
   } else {
-    if (route.public === true || route.path === AppPaths[AppRoutes.NOT_FOUND]) {
+    if (route.public === true || route.path === getNotFoundRoutePath()) {
       content = route.element;
     } else {
       content = <Navigate to="/login" />;

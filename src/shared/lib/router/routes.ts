@@ -7,12 +7,11 @@ export enum AppRoutes {
   FORBIDDEN = 'forbidden',
   NOT_FOUND = 'notFound',
 }
-export const AppPaths = {
-  [AppRoutes.MAIN]: '/',
-  [AppRoutes.PEOPLE]: '/people',
-  [AppRoutes.LOGIN]: '/login',
-  [AppRoutes.PROFILE]: '/profile',
-  [AppRoutes.ADMIN]: '/admin',
-  [AppRoutes.FORBIDDEN]: '/forbidden',
-  [AppRoutes.NOT_FOUND]: '*',
-};
+
+export const getMainRoutePath = (): string => '/';
+export const getPeopleRoutePath = (): string => '/people';
+export const getLoginRoutePath = (): string => '/login';
+export const getProfileRoutePath = (id: string): string => `/profile/${id}`;
+export const getAdminRoutePath = (): string => '/admin';
+export const getForbiddenRoutePath = (): string => '/forbidden';
+export const getNotFoundRoutePath = (): string => '/*';

@@ -1,18 +1,26 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
+import { isMobile } from 'react-device-detect';
+
+import { getUserId, getUsername, getUserAvatar, userActions } from '../../../entities/User';
+import { AppRoutes, useAppDispatch } from '../../../shared/lib';
+import Avatar, { AvatarSizes } from '../../../shared/ui/Avatar/Avatar';
+import Modal from '../../../shared/ui/Modal/Modal';
+import Drawer from '../../../shared/ui/Drawer/Drawer';
+import NotificationList from '../../../entities/Notification/ui/NotificationList/NotificationList';
+import { useGetNotificationsQuery } from '../../../entities/Notification/api/notificationApi';
 
 import * as styles from './Sidebar.module.scss';
-import { getUserId, getUsername, getUserAvatar, userActions } from '../../../entities/User';
-import { AppPaths, AppRoutes, useAppDispatch } from '../../../shared/lib';
-import Avatar, { AvatarSizes } from '../../../shared/ui/Avatar/Avatar';
+import { getLoginRoutePath, getMainRoutePath, getProfileRoutePath } from '../../../shared/lib/router/routes';
 
 interface Props {
   className?: string;
 }
 
 const Sidebar: FC<Props> = () => {
+  const [visible, setVisible] = useState(false);
   const username = useSelector(getUsername);
   const dispatch = useAppDispatch();
 
@@ -23,8 +31,12 @@ const Sidebar: FC<Props> = () => {
 
   const onLogoutClick = () => {
     dispatch(userActions.logout());
-    navigate(AppPaths[AppRoutes.LOGIN]);
+    navigate(getLoginRoutePath());
   };
+
+  const { data, isLoading } = useGetNotificationsQuery(null, {
+    pollingInterval: 3000,
+  });
 
   return (
     <aside className={cn(styles.sidebar)}>
@@ -40,7 +52,7 @@ const Sidebar: FC<Props> = () => {
       </h1>
       <nav className={styles.nav}>
         <div className={styles.navItem}>
-          <Link className={styles.navLink} to={`${AppPaths[AppRoutes.PROFILE]}/${userId}`}>
+          <Link className={styles.navLink} to={getProfileRoutePath(String(userId))}>
             <Avatar size={AvatarSizes.SMALL} avatar={avatar} />
             <div className={styles.container}>
               <span className={styles.itemTitle}>{username}</span>
@@ -49,7 +61,7 @@ const Sidebar: FC<Props> = () => {
           </Link>
         </div>
         <div className={styles.navItem}>
-          <Link className={styles.navLink} to={AppPaths[AppRoutes.MAIN]}>
+          <Link className={styles.navLink} to={getMainRoutePath()}>
             <span data-icon="true" className={`${styles.itemIcon} icon-search`} />
             <div className={styles.container}>
               <span className={styles.itemTitle}>Поиск</span>
@@ -57,7 +69,7 @@ const Sidebar: FC<Props> = () => {
           </Link>
         </div>
         <div className={styles.navItem}>
-          <Link className={styles.navLink} to={AppPaths[AppRoutes.MAIN]}>
+          <Link className={styles.navLink} to={getMainRoutePath()}>
             <span data-icon="true" className={`${styles.itemIcon} icon-grid`} />
 
             <div className={styles.container}>
@@ -67,7 +79,7 @@ const Sidebar: FC<Props> = () => {
           </Link>
         </div>
         <div className={styles.navItem}>
-          <Link className={styles.navLink} to={AppPaths[AppRoutes.MAIN]}>
+          <Link className={styles.navLink} to={getMainRoutePath()}>
             <span data-icon="true" className={`${styles.itemIcon} icon-user `} />
             <div className={styles.container}>
               <span className={styles.itemTitle}>Люди</span>
@@ -76,7 +88,7 @@ const Sidebar: FC<Props> = () => {
           </Link>
         </div>
         <div className={styles.navItem}>
-          <Link className={styles.navLink} to={AppPaths[AppRoutes.MAIN]}>
+          <Link className={styles.navLink} to={getMainRoutePath()}>
             <span data-icon="true" className={`${styles.itemIcon} icon-verify`} />
             <div className={styles.container}>
               <span className={styles.itemTitle}>Компании</span>
@@ -85,7 +97,7 @@ const Sidebar: FC<Props> = () => {
           </Link>
         </div>
         <div className={styles.navItem}>
-          <Link className={styles.navLink} to={AppPaths[AppRoutes.MAIN]}>
+          <Link className={styles.navLink} to={getMainRoutePath()}>
             <span className={styles.itemIcon}></span>
             <div className={styles.container}>
               <span className={styles.itemTitle}>Товары</span>
@@ -94,7 +106,7 @@ const Sidebar: FC<Props> = () => {
           </Link>
         </div>
         <div className={styles.navItem}>
-          <Link className={styles.navLink} to={AppPaths[AppRoutes.MAIN]}>
+          <Link className={styles.navLink} to={getMainRoutePath()}>
             <span data-icon="true" className={`${styles.itemIcon} icon-chat`} />
             <div className={styles.container}>
               <span className={styles.itemTitle}>Чат</span>
@@ -103,7 +115,7 @@ const Sidebar: FC<Props> = () => {
           </Link>
         </div>
         <div className={styles.navItem}>
-          <Link className={styles.navLink} to={AppPaths[AppRoutes.MAIN]}>
+          <Link className={styles.navLink} to={getMainRoutePath()}>
             <span data-icon="true" className={`${styles.itemIcon} icon-bookmark`} />
             <div className={styles.container}>
               <span className={styles.itemTitle}>Закладки</span>
@@ -111,18 +123,54 @@ const Sidebar: FC<Props> = () => {
             </div>
           </Link>
         </div>
-        <div className={styles.navItem}>
-          <Link className={styles.navLink} to={AppPaths[AppRoutes.MAIN]}>
+
+        <div
+          className={styles.navItem}
+          onClick={() => {
+            setVisible(true);
+          }}
+        >
+          <div className={cn(styles.navLink)}>
             <span data-icon="true" className={`${styles.itemIcon} icon-notifications`} />
             <div className={styles.container}>
               <span className={styles.itemTitle}>Уведомления</span>
-              <span className={styles.circle}></span>
             </div>
-          </Link>
+            {isMobile ? (
+              <Drawer
+                className={styles.drawer}
+                isOpen={visible}
+                content={<NotificationList data={isLoading ? [] : data || []} className={styles.notificationList} />}
+                onClose={() => setVisible(false)}
+              />
+            ) : (
+              <Modal
+                className={styles.modal}
+                isOpen={visible}
+                content={<NotificationList data={isLoading ? [] : data || []} className={styles.notificationList} />}
+                onClose={() => setVisible(false)}
+              />
+            )}
+
+            {/* <Tooltip
+              arrowPosition={ArrowPosition.RIGHT}
+              className={styles.navLink}
+              trigger={['click']}
+              content={
+                <div className={styles.notificationWrap}>
+                  <NotificationList data={isLoading ? [] : data || []} className={styles.notificationList} />
+                </div>
+              }
+            >
+              <span data-icon="true" className={`${styles.itemIcon} icon-notifications`} />
+              <div className={styles.container}>
+                <span className={styles.itemTitle}>Уведомления</span>
+              </div>
+            </Tooltip> */}
+          </div>
         </div>
       </nav>
       <div onClick={onLogoutClick} className={styles.navItem}>
-        <Link className={styles.navLink} to={AppPaths[AppRoutes.MAIN]}>
+        <Link className={styles.navLink} to={getMainRoutePath()}>
           <span data-icon="true" className={`${styles.itemIcon} icon-next`} />
           <div className={styles.container}>
             <span className={styles.itemTitle}>Выйти</span>

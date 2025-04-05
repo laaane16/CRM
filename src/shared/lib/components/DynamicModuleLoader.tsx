@@ -3,11 +3,11 @@ import { useStore } from 'react-redux';
 
 import { ReduxStoreWithManager } from '../../../app/providers';
 import { Reducer } from '@reduxjs/toolkit';
-import { StateSchemaKey } from '../../../app/providers/StoreProvider/config/types/StateSchema';
+import { StateSchema } from '../../../app/providers/StoreProvider/config/types/StateSchema';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 
 export type ReducersList = {
-  [name in StateSchemaKey]?: Reducer;
+  [name in keyof StateSchema]?: Reducer<NonNullable<StateSchema[name]>>;
 };
 
 interface Props {
@@ -23,9 +23,9 @@ const DynamicModuleLoader: FC<Props> = ({ children, reducers, removeAfterUnmount
 
   useEffect(() => {
     Object.entries(reducers).forEach(([name, reducer]) => {
-      const typedName = name as StateSchemaKey;
+      const typedName = name as keyof StateSchema;
       if (!mountedReducers[typedName]) {
-        store.reducerManager.add(name as StateSchemaKey, reducer);
+        store.reducerManager.add(name as keyof StateSchema, reducer);
         // for debug
         dispatch({ type: `@INIT ${name} reducer` });
       }
@@ -34,7 +34,7 @@ const DynamicModuleLoader: FC<Props> = ({ children, reducers, removeAfterUnmount
     return () => {
       if (removeAfterUnmount) {
         Object.entries(reducers).forEach(([name]) => {
-          store.reducerManager.remove(name as StateSchemaKey);
+          store.reducerManager.remove(name as keyof StateSchema);
           // for debug
           dispatch({ type: `@DESTROY ${name} reducer` });
         });

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
-import { AppPaths, AppRoutes } from '../../../shared/lib';
+import { getMainRoutePath } from '../../../shared/lib/router/routes';
 
 import * as styles from './ForbiddenPage.module.scss';
 
@@ -17,7 +17,7 @@ const ForbiddenPage: FC<Props> = (props) => {
   return (
     <main className={styles.container}>
       <h1>{t('forbidden')}</h1>
-      <Link className={cn(styles.link, 'secondary medium')} to={AppPaths[AppRoutes.MAIN]}>
+      <Link className={cn(styles.link, 'secondary medium')} to={getMainRoutePath()}>
         {t('nav-to-main-page')}
       </Link>
     </main>

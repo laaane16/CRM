@@ -65,7 +65,7 @@
 
   // border-top-left-radius: 13.5px;
   // border-bottom-left-radius: 13.5px;
-  overflow: hidden;
+  // overflow: hidden;
 
   &:not(:last-child) {
     margin-bottom: 40px;
@@ -98,7 +98,7 @@
   background-color: var(--secondary-color);
 
   &[data-icon='true'] {
-    z-index: 1000;
+    z-index: 1;
     text-align: center;
     font-size: 24px;
     background-color: transparent;
@@ -135,4 +135,19 @@
   width: 27px;
   height: 27px;
   background-color: var(--secondary-color);
+}
+
+.notificationList {
+  width: 100%;
+  height: 100%;
+}
+
+.modal {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.drawer {
+  height: 60%;
+  overflow-y: scroll;
 }

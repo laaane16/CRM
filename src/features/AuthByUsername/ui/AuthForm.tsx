@@ -3,16 +3,17 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { AppPaths, AppRoutes, DynamicModuleLoader, ReducersList, useAppDispatch } from '../../../shared/lib';
+import { DynamicModuleLoader, ReducersList, useAppDispatch } from '../../../shared/lib';
 import { loginActions, loginReducer } from '../model/slice/loginSlice';
 import { Input, Checkbox, Button, ButtonTheme } from '../../../shared/ui';
 import { getLoginError } from '../model/selectors/getLoginError/getLoginError';
 import { getLoginPassword } from '../model/selectors/getLoginPassword/getLoginPassword';
 import { getLoginUsername } from '../model/selectors/getLoginUsername/getLoginUsername';
-import { getLoginIsLoading } from '../model/selectors/getLoginIsLoading/getLoginIsLoading';
+import { useLoginIsLoading } from '../model/selectors/getLoginIsLoading/getLoginIsLoading';
 import { loginByUsername } from '../model/services/loginByUsername';
 
 import * as styles from './AuthForm.module.scss';
+import { getMainRoutePath } from '../../../shared/lib/router/routes';
 
 interface Props {
   className?: string;
@@ -30,7 +31,7 @@ const AuthForm: FC<Props> = (props) => {
   const username = useSelector(getLoginUsername);
   const password = useSelector(getLoginPassword);
   const error = useSelector(getLoginError);
-  const isLoading = useSelector(getLoginIsLoading);
+  const isLoading = useLoginIsLoading();
 
   const onChangeUsername = (value: string) => {
     dispatch(loginActions.setUsername(value));
@@ -43,7 +44,7 @@ const AuthForm: FC<Props> = (props) => {
   const onClickEntry = async () => {
     const response = await dispatch(loginByUsername({ username, password }));
     if (response.meta.requestStatus === 'fulfilled') {
-      navigate(AppPaths[AppRoutes.MAIN]);
+      navigate(getMainRoutePath());
     }
   };
 

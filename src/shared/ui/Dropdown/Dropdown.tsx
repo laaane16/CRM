@@ -24,7 +24,6 @@ const Dropdown: FC<Props> = ({ children, className, onOpen, onClick, menu, 'data
   const wrapClasses = cn(styles.wrap, className);
 
   const handleSelectOpen = () => {
-    console.log('12312312321321');
     setIsOpen((curState) => !curState);
     onOpen && onOpen();
   };
