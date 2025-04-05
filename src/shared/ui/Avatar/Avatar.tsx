@@ -1,7 +1,10 @@
 import { FC } from 'react';
 import cn from 'classnames';
 
+import AppImage from '../AppImage/AppImage';
+
 import * as styles from './Avatar.module.scss';
+import Loader, { LoaderSize } from '../Loader/Loader';
 
 export enum AvatarSizes {
   LARGE = 'large',
@@ -23,7 +26,14 @@ const Avatar: FC<Props> = ({ avatar, size = AvatarSizes.MEDIUM, className, withI
     [styles[size]]: true,
   });
 
-  return avatar ? <img className={avatarStyles} src={avatar} alt="avatar" /> : <span className={avatarStyles}></span>;
+  return (
+    <AppImage
+      fallbackLoading={<Loader size={LoaderSize.SMALL} />}
+      fallbackError={<span className={avatarStyles}></span>}
+      src={avatar}
+      alt="avatar"
+    />
+  );
 };
 
 export default Avatar;
