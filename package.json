@@ -38,7 +38,7 @@
     "*.json": "prettier"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.5.0",
+    "@reduxjs/toolkit": "^2.6.1",
     "axios": "^1.7.9",
     "classnames": "^2.5.1",
     "i18next": "^24.2.1",
