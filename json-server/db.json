@@ -1,0 +1,700 @@
+{
+  "users": [
+    {
+      "id": -1,
+      "username": "user",
+      "password": "password",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": -2,
+      "username": "admin",
+      "password": "admin",
+      "avatar": "",
+      "roles": ["admin"]
+    },
+    {
+      "id": 1,
+      "username": "stanislav_popov",
+      "password": "default",
+      "avatar": "",
+      "roles": ["admin"]
+    },
+    {
+      "id": 2,
+      "username": "anna_smirnova",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 3,
+      "username": "ivan_kuznetsov",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 4,
+      "username": "maria_ivanova",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 5,
+      "username": "dmitry_orlov",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 6,
+      "username": "ekaterina_sokolova",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 7,
+      "username": "alex_frolov",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 8,
+      "username": "olga_petrova",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 9,
+      "username": "viktor_alekseev",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 10,
+      "username": "natalia_morozova",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 11,
+      "username": "konstantin_vas",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 12,
+      "username": "tatiana_belova",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 13,
+      "username": "artem_sidorov",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 14,
+      "username": "elena_grigorieva",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 15,
+      "username": "max_kniazev",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 16,
+      "username": "alisa_safronova",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 17,
+      "username": "grigory_zaicev",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    },
+    {
+      "id": 18,
+      "username": "oksana_ryabova",
+      "password": "default",
+      "avatar": "",
+      "roles": ["user"]
+    }
+  ],
+  "profiles": [
+    {
+      "id": 1,
+      "userId": 1,
+      "name": "Станислав Попов",
+      "telegram": "@stanislav_popov",
+      "age": 34,
+      "number": "+79876543210",
+      "mail": "stanislav.popov@mail.com",
+      "post": {
+        "main": "Системный администратор",
+        "extra": ""
+      },
+      "address": "Москва, ул. Ленина, д. 5",
+      "avatar": "",
+      "createdAt": "10.05.2019",
+      "updatedAt": "12.01.2024"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "name": "Анна Смирнова",
+      "telegram": "@anna_smirnova",
+      "age": 29,
+      "number": "+79123456789",
+      "mail": "anna.smirnova@mail.com",
+      "post": {
+        "main": "Бизнес-аналитик",
+        "extra": ""
+      },
+      "address": "Санкт-Петербург, пр. Невский, д. 15",
+      "avatar": "",
+      "createdAt": "22.08.2020",
+      "updatedAt": "15.03.2024"
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "name": "Иван Кузнецов",
+      "telegram": "@ivan_kuznetsov",
+      "age": 31,
+      "number": "+79051234567",
+      "mail": "ivan.kuznetsov@mail.com",
+      "post": {
+        "main": "Разработчик Python",
+        "extra": ""
+      },
+      "address": "Новосибирск, ул. Советская, д. 8",
+      "avatar": "",
+      "createdAt": "05.12.2021",
+      "updatedAt": "20.02.2024"
+    },
+    {
+      "id": 4,
+      "userId": 4,
+      "name": "Мария Иванова",
+      "telegram": "@maria_ivanova",
+      "age": 28,
+      "number": "+79991234567",
+      "mail": "maria.ivanova@mail.com",
+      "post": {
+        "main": "Дизайнер UX/UI",
+        "extra": ""
+      },
+      "address": "Екатеринбург, ул. Кирова, д. 3",
+      "avatar": "",
+      "createdAt": "18.06.2018",
+      "updatedAt": "25.12.2023"
+    },
+    {
+      "id": 5,
+      "userId": 5,
+      "name": "Дмитрий Орлов",
+      "telegram": "@dmitry_orlov",
+      "age": 36,
+      "number": "+79263332211",
+      "mail": "dmitry.orlov@mail.com",
+      "post": {
+        "main": "DevOps-инженер",
+        "extra": ""
+      },
+      "address": "Казань, ул. Баумана, д. 7",
+      "avatar": "",
+      "createdAt": "11.03.2022",
+      "updatedAt": "05.02.2024"
+    },
+    {
+      "id": 6,
+      "userId": 6,
+      "name": "Екатерина Соколова",
+      "telegram": "@ekaterina_sokolova",
+      "age": 30,
+      "number": "+79504445566",
+      "mail": "ekaterina.sokolova@mail.com",
+      "post": {
+        "main": "Продуктовый менеджер",
+        "extra": ""
+      },
+      "address": "Самара, ул. Гагарина, д. 10",
+      "avatar": "",
+      "createdAt": "09.07.2017",
+      "updatedAt": "18.01.2024"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Разработать API для нового сервиса",
+      "priority": "Высокий",
+      "deadline": "2025-03-15"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "title": "Создать макет главной страницы",
+      "priority": "Средний",
+      "deadline": "2025-02-28"
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "title": "Подготовить презентацию для клиентов",
+      "priority": "Низкий",
+      "deadline": "2025-04-10"
+    },
+    {
+      "id": 4,
+      "userId": 4,
+      "title": "Собрать аналитику по продажам",
+      "priority": "Высокий",
+      "deadline": "2025-03-05"
+    },
+    {
+      "id": 5,
+      "userId": 1,
+      "title": "Рефакторинг кода в модуле аутентификации",
+      "priority": "Средний",
+      "deadline": "2025-03-20"
+    },
+    {
+      "id": 6,
+      "userId": 2,
+      "title": "Проанализировать пользовательский опыт",
+      "priority": "Высокий",
+      "deadline": "2025-02-25"
+    },
+    {
+      "id": 7,
+      "userId": 3,
+      "title": "Настроить CRM систему",
+      "priority": "Средний",
+      "deadline": "2025-03-30"
+    },
+    {
+      "id": 8,
+      "userId": 4,
+      "title": "Разработать отчет по ключевым метрикам",
+      "priority": "Низкий",
+      "deadline": "2025-04-15"
+    }
+  ],
+  "peoples": [
+    {
+      "id": 1,
+      "userId": 1,
+      "name": "Станислав Попов",
+      "post": {
+        "main": "Системный администратор"
+      },
+      "avatar": "",
+      "company": {
+        "id": 1,
+        "avatar": "",
+        "title": "Bpium"
+      },
+      "employment": "совмещение",
+      "tg": "@stanislav_popov"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "name": "Анна Смирнова",
+      "post": {
+        "main": "Бизнес-аналитик"
+      },
+      "avatar": "",
+      "company": {
+        "id": 2,
+        "avatar": "",
+        "title": "TechCorp"
+      },
+      "employment": "полная занятость",
+      "tg": "@anna_smirnova"
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "name": "Иван Кузнецов",
+      "post": {
+        "main": "Разработчик Python"
+      },
+      "avatar": "",
+      "company": {
+        "id": 3,
+        "avatar": "",
+        "title": "DevSoft"
+      },
+      "employment": "удаленная работа",
+      "tg": "@ivan_kuznetsov"
+    },
+    {
+      "id": 4,
+      "userId": 4,
+      "name": "Мария Иванова",
+      "post": {
+        "main": "Дизайнер UX/UI"
+      },
+      "avatar": "",
+      "company": {
+        "id": 4,
+        "avatar": "",
+        "title": "InfoSys"
+      },
+      "employment": "совмещение",
+      "tg": "@maria_ivanova"
+    },
+    {
+      "id": 5,
+      "userId": 5,
+      "name": "Дмитрий Орлов",
+      "post": {
+        "main": "DevOps-инженер"
+      },
+      "avatar": "",
+      "company": {
+        "id": 5,
+        "avatar": "",
+        "title": "NetWork"
+      },
+      "employment": "полная занятость",
+      "tg": "@dmitry_orlov"
+    },
+    {
+      "id": 6,
+      "userId": 6,
+      "name": "Екатерина Соколова",
+      "post": {
+        "main": "Продуктовый менеджер"
+      },
+      "avatar": "",
+      "company": {
+        "id": 1,
+        "avatar": "",
+        "title": "Bpium"
+      },
+      "employment": "удаленная работа",
+      "tg": "@ekaterina_sokolova"
+    },
+    {
+      "id": 7,
+      "userId": 7,
+      "name": "Александр Фролов",
+      "post": {
+        "main": "Frontend-разработчик"
+      },
+      "avatar": "",
+      "company": {
+        "id": 2,
+        "avatar": "",
+        "title": "TechCorp"
+      },
+      "employment": "совмещение",
+      "tg": "@alex_frolov"
+    },
+    {
+      "id": 8,
+      "userId": 8,
+      "name": "Ольга Петрова",
+      "post": {
+        "main": "Тестировщик QA"
+      },
+      "avatar": "",
+      "company": {
+        "id": 3,
+        "avatar": "",
+        "title": "DevSoft"
+      },
+      "employment": "полная занятость",
+      "tg": "@olga_petrova"
+    },
+    {
+      "id": 9,
+      "userId": 9,
+      "name": "Виктор Алексеев",
+      "post": {
+        "main": "Инженер по безопасности"
+      },
+      "avatar": "",
+      "company": {
+        "id": 4,
+        "avatar": "",
+        "title": "InfoSys"
+      },
+      "employment": "удаленная работа",
+      "tg": "@viktor_alekseev"
+    },
+    {
+      "id": 10,
+      "userId": 10,
+      "name": "Наталья Морозова",
+      "post": {
+        "main": "Маркетолог"
+      },
+      "avatar": "",
+      "company": {
+        "id": 5,
+        "avatar": "",
+        "title": "NetWork"
+      },
+      "employment": "полная занятость",
+      "tg": "@natalia_morozova"
+    },
+    {
+      "id": 11,
+      "userId": 11,
+      "name": "Константин Васильев",
+      "post": {
+        "main": "Руководитель отдела разработки"
+      },
+      "avatar": "",
+      "company": {
+        "id": 1,
+        "avatar": "",
+        "title": "Bpium"
+      },
+      "employment": "полная занятость",
+      "tg": "@konstantin_vas"
+    },
+    {
+      "id": 12,
+      "userId": 12,
+      "name": "Татьяна Белова",
+      "post": {
+        "main": "Рекрутер"
+      },
+      "avatar": "",
+      "company": {
+        "id": 2,
+        "avatar": "",
+        "title": "TechCorp"
+      },
+      "employment": "удаленная работа",
+      "tg": "@tatiana_belova"
+    },
+    {
+      "id": 13,
+      "userId": 13,
+      "name": "Артем Сидоров",
+      "post": {
+        "main": "Android-разработчик"
+      },
+      "avatar": "",
+      "company": {
+        "id": 3,
+        "avatar": "",
+        "title": "DevSoft"
+      },
+      "employment": "совмещение",
+      "tg": "@artem_sidorov"
+    },
+    {
+      "id": 14,
+      "userId": 14,
+      "name": "Елена Григорьева",
+      "post": {
+        "main": "HR-менеджер"
+      },
+      "avatar": "",
+      "company": {
+        "id": 4,
+        "avatar": "",
+        "title": "InfoSys"
+      },
+      "employment": "полная занятость",
+      "tg": "@elena_grigorieva"
+    },
+    {
+      "id": 15,
+      "userId": 15,
+      "name": "Максим Князев",
+      "post": {
+        "main": "Data Scientist"
+      },
+      "avatar": "",
+      "company": {
+        "id": 5,
+        "avatar": "",
+        "title": "NetWork"
+      },
+      "employment": "удаленная работа",
+      "tg": "@max_kniazev"
+    },
+    {
+      "id": 16,
+      "userId": 16,
+      "name": "Алиса Сафронова",
+      "post": {
+        "main": "Product Owner"
+      },
+      "avatar": "",
+      "company": {
+        "id": 1,
+        "avatar": "",
+        "title": "Bpium"
+      },
+      "employment": "полная занятость",
+      "tg": "@alisa_safronova"
+    },
+    {
+      "id": 17,
+      "userId": 17,
+      "name": "Григорий Зайцев",
+      "post": {
+        "main": "Разработчик C++"
+      },
+      "avatar": "",
+      "company": {
+        "id": 2,
+        "avatar": "",
+        "title": "TechCorp"
+      },
+      "employment": "совмещение",
+      "tg": "@grigory_zaicev"
+    },
+    {
+      "id": 18,
+      "userId": 18,
+      "name": "Оксана Рябова",
+      "post": {
+        "main": "PR-специалист"
+      },
+      "avatar": "",
+      "company": {
+        "id": 3,
+        "avatar": "",
+        "title": "DevSoft"
+      },
+      "employment": "полная занятость",
+      "tg": "@oksana_ryabova"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Новое сообщение",
+      "message": "У вас новое сообщение от Анны.",
+      "status": "new"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "title": "Обновление системы",
+      "message": "Доступно новое обновление.",
+      "status": "new"
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "title": "Напоминание",
+      "message": "Не забудьте о встрече в 15:00.",
+      "status": "read"
+    },
+    {
+      "id": 4,
+      "userId": 4,
+      "title": "Уведомление о платеже",
+      "message": "Ваш платеж успешно проведен.",
+      "status": "read"
+    },
+    {
+      "id": 5,
+      "userId": 5,
+      "title": "Скидка 20%",
+      "message": "Только сегодня скидки на все!",
+      "status": "new"
+    },
+    {
+      "id": 6,
+      "userId": 6,
+      "title": "Вход в аккаунт",
+      "message": "Обнаружен вход с нового устройства.",
+      "status": "new"
+    },
+    {
+      "id": 7,
+      "userId": 7,
+      "title": "Доставка оформлена",
+      "message": "Ваш заказ передан в службу доставки.",
+      "status": "new"
+    },
+    {
+      "id": 8,
+      "userId": 8,
+      "title": "Друзья рядом",
+      "message": "Ваш друг Алексей находится неподалеку.",
+      "status": "read"
+    },
+    {
+      "id": 9,
+      "userId": 9,
+      "title": "Новый комментарий",
+      "message": "Кто-то оставил комментарий под вашим постом.",
+      "status": "new"
+    },
+    {
+      "id": 10,
+      "userId": 0,
+      "title": "Завершение подписки",
+      "message": "Ваша подписка истекает через 3 дня.",
+      "status": "new"
+    }
+  ],
+  "employees-rating": [
+    {
+      "id": 1,
+      "userId": 1,
+      "employeeId": 1
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "employeeId": 2
+    },
+    {
+      "userId": 1,
+      "employeeId": 3,
+      "id": 5
+    },
+    {
+      "userId": 1,
+      "employeeId": 5,
+      "id": 6
+    },
+    {
+      "userId": 1,
+      "employeeId": 4,
+      "id": 7
+    },
+    {
+      "userId": 1,
+      "employeeId": 4,
+      "id": 8
+    }
+  ]
+}
