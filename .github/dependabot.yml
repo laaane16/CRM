@@ -1,0 +1,6 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/' # если package.json в корне
+    schedule:
+      interval: 'weekly'
