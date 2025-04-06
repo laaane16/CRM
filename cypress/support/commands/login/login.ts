@@ -1,4 +1,4 @@
-import { USER_LOCALSTORAGE_KEY } from '../../../src/shared/constants';
+import { USER_LOCALSTORAGE_KEY } from '../../../../src/shared/constants';
 
 export const login = (username: string, password: string) => {
   cy.request({
@@ -10,5 +10,6 @@ export const login = (username: string, password: string) => {
     },
   }).then(({ body }) => {
     window.localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(body));
+    return body;
   });
 };
