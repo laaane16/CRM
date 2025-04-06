@@ -23,6 +23,7 @@ import { getUserId } from '../../../entities/User';
 
 import * as styles from './ProfilePage.module.scss';
 import ProfilePageHeader from './ProfilePageHeader/ProfilePageHeader';
+import { getFeatureFlag } from '../../../shared/lib/featureFlags/featureFlags';
 
 interface Props {
   className?: string;
@@ -39,6 +40,7 @@ const ProfilePage: FC<Props> = () => {
   const error = useSelector(getProfileError);
   const userId = useSelector(getUserId);
   const { userId: profileId } = useSelector(getProfileData) || {};
+  const isStatusCardEnabled = getFeatureFlag('isStatusCardEnabled');
 
   const { id } = useParams();
 
@@ -59,7 +61,7 @@ const ProfilePage: FC<Props> = () => {
           data={form}
           error={error}
         />
-        <StatusCard className={styles.statusCard} />
+        {isStatusCardEnabled && <StatusCard className={styles.statusCard} />}
         <TasksCard className={styles.tasksCard} />
         <WorkCard className={styles.workCard} />
         <DocsCard className={styles.docsCard} />

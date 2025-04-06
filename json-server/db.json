@@ -5,180 +5,143 @@
       "username": "user",
       "password": "password",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": -2,
       "username": "admin",
       "password": "admin",
       "avatar": "",
-      "roles": [
-        "admin"
-      ]
+      "roles": ["admin"],
+      "featureFlags": {
+        "isStatusCardEnabled": true
+      }
     },
     {
       "id": 1,
       "username": "stanislav_popov",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "admin"
-      ]
+      "roles": ["admin"]
     },
     {
       "id": 2,
       "username": "anna_smirnova",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 3,
       "username": "ivan_kuznetsov",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 4,
       "username": "maria_ivanova",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 5,
       "username": "dmitry_orlov",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 6,
       "username": "ekaterina_sokolova",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 7,
       "username": "alex_frolov",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 8,
       "username": "olga_petrova",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 9,
       "username": "viktor_alekseev",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 10,
       "username": "natalia_morozova",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 11,
       "username": "konstantin_vas",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 12,
       "username": "tatiana_belova",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 13,
       "username": "artem_sidorov",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 14,
       "username": "elena_grigorieva",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 15,
       "username": "max_kniazev",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 16,
       "username": "alisa_safronova",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 17,
       "username": "grigory_zaicev",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     {
       "id": 18,
       "username": "oksana_ryabova",
       "password": "default",
       "avatar": "",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     }
   ],
   "profiles": [
