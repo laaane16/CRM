@@ -53,7 +53,7 @@ const PeoplePage: FC<Props> = () => {
   };
 
   return (
-    <main className={styles.container}>
+    <main data-testid="main-page" className={styles.container}>
       <Filters />
       <Section>
         <SectionHeader />

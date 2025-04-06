@@ -15,7 +15,7 @@ const ForbiddenPage: FC<Props> = (props) => {
   const { t } = useTranslation('forbidden-page');
 
   return (
-    <main className={styles.container}>
+    <main data-testid="forbidden-page" className={styles.container}>
       <h1>{t('forbidden')}</h1>
       <Link className={cn(styles.link, 'secondary medium')} to={getMainRoutePath()}>
         {t('nav-to-main-page')}

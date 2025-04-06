@@ -116,7 +116,7 @@ const MainCard: FC<Props> = ({ isLoading, data, error, className, canEdit }) => 
             </Dropdown>
           )}
           <ul className={styles.mainInfoList}>
-            <li className={mainInfoItemClasses}>
+            <li data-testid="MainCard.NumberValue" className={mainInfoItemClasses}>
               <span className={cn(`icon-call`, styles.mainInfoItemIcon)} />
               {!readonly ? (
                 <Input data-testid="MainCard.InputNumber" onChange={onChangeNumber} value={data?.number || ''} />

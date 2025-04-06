@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserSchema } from '../types/types';
 import { USER_LOCALSTORAGE_KEY } from '../../../../shared/constants/localstorage';
+import { setFeatureFlags } from '../../../../shared/lib/featureFlags/featureFlags';
 
 const initialState: UserSchema = {
   id: null,
@@ -22,16 +23,16 @@ const userSlice = createSlice({
         state.username = parseData.username;
         state.avatar = parseData.avatar;
         state.roles = parseData.roles;
-      } else {
-        console.log('ПОЛЬЗОВАТЕЛЬ НЕ АВТОРИЗОВАН');
+        parseData.featureFlags && setFeatureFlags(parseData.featureFlags);
       }
     },
     setAuthData: (state, action: PayloadAction<UserSchema>) => {
-      const { id, username, avatar, roles } = action.payload;
+      const { id, username, avatar, roles, featureFlags } = action.payload;
       state.id = id;
       state.username = username;
       state.avatar = avatar;
       state.roles = roles;
+      featureFlags && setFeatureFlags(featureFlags);
     },
     logout: (state) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

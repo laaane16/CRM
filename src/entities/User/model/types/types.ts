@@ -1,3 +1,5 @@
+import { IFeatureFlags } from '../../../../shared/types/IFeatureFlags';
+
 export type IRole = 'admin' | 'user';
 
 export interface UserSchema {
@@ -5,4 +7,5 @@ export interface UserSchema {
   username: string;
   avatar: string;
   roles: IRole[];
+  featureFlags?: IFeatureFlags;
 }
