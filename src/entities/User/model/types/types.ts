@@ -1,6 +1,11 @@
+import { Themes } from '../../../../shared/theme';
 import { IFeatureFlags } from '../../../../shared/types/IFeatureFlags';
 
 export type IRole = 'admin' | 'user';
+
+export interface IJsonSettings {
+  theme: Themes;
+}
 
 export interface UserSchema {
   id: number | null;
@@ -8,4 +13,6 @@ export interface UserSchema {
   avatar: string;
   roles: IRole[];
   featureFlags?: IFeatureFlags;
+  jsonSettings?: IJsonSettings;
+  isJsonSettingsLoading?: boolean;
 }

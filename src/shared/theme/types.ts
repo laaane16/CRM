@@ -7,6 +7,6 @@ export enum Themes {
 }
 
 export interface ThemeContextProps {
-  theme?: string;
-  setTheme?: Dispatch<SetStateAction<string>>;
+  theme?: Themes;
+  setTheme?: Dispatch<SetStateAction<Themes>>;
 }

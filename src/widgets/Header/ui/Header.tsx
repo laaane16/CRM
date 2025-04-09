@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 
 import { Button, ButtonSizes, ButtonTheme } from '../../../shared/ui';
 import { ThemeContext, Themes } from '../../../shared/theme';
-import { THEME_LOCALSTORAGE_KEY } from '../../../shared/constants';
 import i18n from '../../../shared/configs/i18n/i18n';
 
 import * as styles from './Header.module.scss';
@@ -12,29 +11,36 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getAvailableByRole } from '../../../entities/User/model/selectors/getUserRoles/getUserRoles';
 import { StateSchema } from '../../../app/providers';
+import { setUserJsonSettings } from '../../../entities/User/model/services/setUserJsonSettings';
+import { useAppDispatch } from '../../../shared/lib';
+import { getUserId } from '../../../entities/User';
 interface Props {
   className?: string;
 }
 
 const Header: FC<Props> = () => {
   const { t } = useTranslation('translation');
-
+  const dispatch = useAppDispatch();
   const { theme, setTheme } = useContext(ThemeContext);
   const isUserAvailable = useSelector((state: StateSchema) => getAvailableByRole(state, ['admin']));
+  const userId = useSelector(getUserId) as number;
 
   const onChangeTheme = () => {
     switch (theme) {
       case Themes.LIGHT:
         setTheme && setTheme(Themes.DARK);
-        localStorage.setItem(THEME_LOCALSTORAGE_KEY, Themes.DARK);
+        dispatch(setUserJsonSettings({ userId, jsonSettings: { theme: Themes.DARK } }));
+        // localStorage.setItem(THEME_LOCALSTORAGE_KEY, Themes.DARK);
         break;
       case Themes.DARK:
         setTheme && setTheme(Themes.PINK);
-        localStorage.setItem(THEME_LOCALSTORAGE_KEY, Themes.PINK);
+        dispatch(setUserJsonSettings({ userId, jsonSettings: { theme: Themes.PINK } }));
+        // localStorage.setItem(THEME_LOCALSTORAGE_KEY, Themes.PINK);
         break;
       default:
         setTheme && setTheme(Themes.LIGHT);
-        localStorage.setItem(THEME_LOCALSTORAGE_KEY, Themes.LIGHT);
+        dispatch(setUserJsonSettings({ userId, jsonSettings: { theme: Themes.LIGHT } }));
+        // localStorage.setItem(THEME_LOCALSTORAGE_KEY, Themes.LIGHT);
         break;
     }
   };
